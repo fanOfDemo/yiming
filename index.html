@@ -192,129 +192,6 @@
 
       <div class="body-wrap">
   
-    <article id="post-android技术群聊记录" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/24/android技术群聊记录/" class="article-date">
-  	<time datetime="2016-02-24T13:39:32.000Z" itemprop="datePublished">2月 24 2016</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/android技术群聊记录/">android技术群聊记录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Jecon  20:29:36<br>我发了<br>Jecon  20:29:50<br>一份是淘宝的架构演变<br>Jecon  20:30:00<br>一份是目前我们所从事的架构<br>Jecon  21:05:55<br>看我的文档就可以了<br>Jecon  21:06:07<br>那份是基于阿里、腾讯的架构研究出来的</p>
-<p>变异猪?  21:12:43<br>@Jecon 阿里的插件用osgi的作用是什么，怎么感觉作用不是特别大<br>变异猪?  21:13:01<br>插件框架<br>Jecon  21:17:02<br>OSGI 没啥用<br>Jecon  21:17:04<br>没法隔离<br>Jecon  21:17:18<br>从逻辑层上实现模块化<br>Jecon  21:17:23<br>OSGI<br>Jecon  21:17:30<br>但是真正运作起来<br>Jecon  21:17:39<br>子模块一旦崩溃<br>Jecon  21:17:43<br>影响到主程<br>广州-rui  21:17:47<br>boss直聘的app做的不咋的<br>Jecon  21:17:49<br>详细请看ATLAS<br>Jecon  21:18:06<br>github上已改名为<br>Jecon  21:18:09<br>ACDD<br>Jecon  21:18:31<br>osgi是一种架构模式<br>Jecon  21:18:40<br>模块化重组<br>Jecon  21:19:34<br>模块卸载、模块更新、模块安装<br>Jecon  21:19:50<br>有没有看到URI路由<br>Jecon  21:19:53<br>就那个<br>Jecon  21:21:03<br>URI路由的好处是：<br>如果你是模块化的构建方式。每个模块下一个Activity 多个fragment的模式后，当外界要启动一个模块时，只要通过action直接启动该activity<br>Jecon  21:21:32<br>而无需指定Activity的类名或service的类名<br>Jecon  21:21:36<br>这样会好点<br>Jecon  21:21:53<br>一般来说，我们一旦形成了多进程的执行方式下<br>Jecon  21:22:09<br>这块可以看下Launcher实现的原理<br>Jecon  21:22:45<br>一般来说，我们一旦形成了多进程的执行方式下，在我们不知道插件的类名，这时候，通过intent filter的方式直接启动该插件<br>变异猪?  21:23:00<br>如果插件也能支持intent启动<br>变异猪?  21:23:10<br>那uri是不是可以不需要了？<br>Jecon  21:23:15<br>目前我们的框架是支持的<br>Jecon  21:23:30<br>加入URI是为了保证<br>Jecon  21:23:49<br>类似阿里的做法，当浏览器跳转该URI的时候，也能打开我们的插件<br>勇敢的少年啊。  21:23:59<br>droidplugin  可以支持intent启动啊<br>Jecon  21:24:10<br>也就是宿主进程和插件进程之间的配套关系<br>顿文  21:24:19</p>
-<ul>
-<li>-一次打完不行<br>Jecon  21:24:28<br>不行<br>Jecon  21:24:36<br>如果是产品多元化的话<br>变异猪?  21:24:37<br>intent在解析插件manifest的时候其实就可以知道了，所以我自己用的时候是用intent启动插件的activity，就看不明白阿里用uri的具体原因<br>Jecon  21:24:42<br>一次打完不行<br>勇敢的少年啊。  21:25:04<br>我最近也做了这个功能，定了协议浏览器转跳url的时候打开我们的应用<br>顿文  21:25:08<br>uri的作用很多呀<br>Jecon  21:25:16<br>uri的作用很多的<br>Jecon  21:25:25<br>比如数据更新<br>顿文  21:25:27<br>浏览器访问www.taobao.com 就可以直接打开本地的淘宝app了<br>Jecon  21:25:32<br>嗯<br>Jecon  21:25:36<br>对的 类似这个<br>顿文  21:25:48<br>我博客也写过<br>Jecon  21:25:55<br>插件之间的交互<br>Jecon  21:26:05<br>也是通过URI的方式进行数据传输<br>顿文  21:26:11<br>类似夸进程通信<br>Jecon  21:26:23<br>对<br>Jecon  21:26:30<br>intent的跨进程通信<br>Jecon  21:26:58<br>比如我一个产品初期有10个功能<br>顿文  21:26:59<br>uri很好的，一般习惯加上，域名+类名<br>Jecon  21:27:13<br>当产品衍生后<br>Jecon  21:27:21<br>延伸<br>Jecon  21:27:32<br>功能就不只那些了<br>Jecon  21:28:11<br>插件化的好处就是。单一安装、 无安装情况下。各进程之间互相协作<br>顿文  21:28:11<br>对呀对呀<br>顿文  21:28:13<br>同意<br>Jecon  21:28:30<br>跟静默安装一个原理<br>顿文  21:28:55<br>虽然 我不同意这种行为<br>ぃ卓越李四ぃAlex  21:29:01<br>apk<br>顿文  21:29:01<br>静默安装<br>Jecon  21:29:06<br>media route有研究过吗<br>勇敢的少年啊。  21:29:09<br>这样做也可以不用知道具体的activity名就可以调起相关功能模块<br>ぃ卓越李四ぃAlex  21:29:15<br>apk不安装 怎么把data注册进去<br>Jecon  21:29:17<br>就是通过URI的方式指派<br>Jecon  21:29:25<br>URI的方式调用内部接口<br>Jecon  21:29:49<br>为了保证整体架构的完整性<br>Jecon  21:30:11<br>从URI这方面着手，形成路由<br>ぃ卓越李四ぃAlex  21:30:16<br>那个action的方式，是要注册到系统了才可以吧<br>顿文  21:30:29<br>不需要的- -<br>ぃ卓越李四ぃAlex  21:30:47<br>apk不安装，他能对action起作用？<br>变异猪?  21:30:47<br>action可以在内部启动插件的<br>顿文  21:30:51<br>具体的想不起来了<br>顿文  21:30:56<br>不需要的<br>变异猪?  21:30:59<br>外部启动插件的就不行<br>Jecon  21:31:26</li>
-</ul>
-<p>ぃ卓越李四ぃAlex  21:31:42<br>apk是主程序 插件A,插件B是动态下载下来的<br>Jecon  21:31:48<br>不能直接启动<br>顿文  21:31:52<br>当时看了下插件的源码 确实是不需要安装的 是代理<br>Jecon  21:31:55<br>要通过HOOK<br>顿文  21:32:00<br>代理的模式运行<br>Jecon  21:32:09<br>动态代理<br>Jecon  21:32:21<br>把SystemServer上层的service服务<br>Jecon  21:32:28<br>全部代理过来<br>顿文  21:32:31<br>其实是 获取到 该activity的所有资源 然后在主程序上面代理运行 这个原理<br>Jecon  21:32:39<br>没那么简单<br>ぃ卓越李四ぃAlex  21:32:47<br>@顿文 不是那样的<br>顿文  21:33:07<br>可能我记的有出入。。。<br>ぃ卓越李四ぃAlex  21:33:09<br>hook的方式是可以的<br>顿文  21:33:10<br>记不起来了<br>Jecon  21:33:13<br>这东西没这么简单<br>ぃ卓越李四ぃAlex  21:33:22<br>是的<br>Jecon  21:33:24<br>你要去研究Launcher层的<br>ぃ卓越李四ぃAlex  21:33:48<br>classloader可以加载dex中的class<br>变异猪?  21:33:55<br>觉得可以分两部分：1.SystemServer在app进程的aidl proxy端进行动态代理，也就是hook<br>顿文  21:33:53<br>那个我没研究过惹<br>ぃ卓越李四ぃAlex  21:33:58<br>但是不代表你想干啥就能直接干啥- -<br>变异猪?  21:34:09<br>2.给app进程加一个LoadedApk<br>变异猪?  21:34:47<br>相当于shareuserid<br>Jecon  21:34:59<br>对的<br>Jecon  21:35:06<br>但是用了Launcher以后<br>Jecon  21:35:29<br>是不需要ShareUserId这方面了<br>ぃ卓越李四ぃAlex  21:35:30<br>我也觉得最后是进程上动态代理的<br>ぃ卓越李四ぃAlex  21:35:38<br>ShareUserId 感觉不安全<br>顿文  21:35:41</p>
-<ul>
-<li>-刚刚你又说不是<br>Jecon  21:35:43<br>Launcher本身就是调用包管理服务<br>Jecon  21:35:50<br>动态加载classLoader<br>顿文  21:35:53<br>launcher 是指 快捷方式？！<br>ぃ卓越李四ぃAlex  21:35:57<br>不是在主程序上代理呀<br>Jecon  21:36:00<br>。。。<br>Jecon  21:36:04<br>android Launcher<br>Jecon  21:36:06<br>百度<br>ぃ卓越李四ぃAlex  21:36:11<br>aidl是进程接口<br>顿文  21:36:11<br>原谅我不知道<br>Jecon  21:36:16<br>framework层上的<br>….  21:36:20<br><a href="https://github.com/bunnyblue/ACDD" target="_blank" rel="external">https://github.com/bunnyblue/ACDD</a><br>变异猪?  21:36:19<br>只是类似于是，原理有点像，但不是真正的ShareUserId<br>ぃ卓越李四ぃAlex  21:36:21<br>launcher就是启动器<br>Jecon  21:36:22<br>就是桌面<br>Jecon  21:36:25<br>系统桌面<br>ぃ卓越李四ぃAlex  21:36:28<br>对 桌面<br>Jecon  21:36:40<br>比如熊猫桌面这类的<br>Jecon  21:36:45<br>小米桌面<br>顿文  21:37:02<br>表达有问题 就是指那个意思<br>Jecon  21:37:24<br>android本身就是沙盒行为<br>Jecon  21:37:27<br>插件化模式<br>Jecon  21:37:38<br>每个APK都是Launcher的一个插件<br>顿文  21:37:50<br>哇<br>ぃ卓越李四ぃAlex  21:37:58<br>其实这样说的话，插件化 和 桌面去启动别的app<br>ぃ卓越李四ぃAlex  21:38:03<br>还真的是很类似<br>ぃ卓越李四ぃAlex  21:38:05<br>豁然开朗啊<br>顿文  21:38:07<br>这么一说 就突然间觉得确实是这样的<br>顿文  21:38:09<br>对呀<br>变异猪?  21:38:11<br>看了osgi，感觉android的原理跟osgi其实原理就是一样的<br>Jecon  21:38:12<br>不是类似<br>Jecon  21:38:17<br>是本身就是<br>Jecon  21:38:25<br>可以看Launcher源码就知道了<br>ぃ卓越李四ぃAlex  21:38:30<br>而且 widget 这个东西其实就是在跨进程了<br>勇敢的少年啊。  21:38:36<br>但是桌面上启动app的话，不是得安装才可以吗<br>顿文  21:38:40<br>不写成博客。。。。浪费了<br>Jecon  21:38:50<br>安装<br>Jecon  21:39:00<br>也是从本地classloader出来<br>顿文  21:39:09<br>安装其实就是把包名写入那个叫什么东西来着。。。。<br>Jecon  21:39:23<br>读取本地APK路径装载到包管理服务<br>变异猪?  21:39:26<br>packagemanager里面的源码都有叫bundle的，osgi的一个模块就骄傲bundle<br>ぃ卓越李四ぃAlex  21:39:36<br>桌面的app列表 只是系统本身的一个数据库而已吧<br>Jecon  21:39:48<br>由包管理服务将APK装入<br>ぃ卓越李四ぃAlex  21:39:51<br>并不代表启动的时候一定是要经过安装的<br>ぃ卓越李四ぃAlex  21:39:57<br>对<br>Jecon  21:40:04<br>Launcher启动时<br>Jecon  21:40:08<br>就是初始化系统桌面<br>Jecon  21:40:10<br>这时候<br>Jecon  21:40:16<br>从system目录下<br>Jecon  21:40:19<br>装载apk<br>Jecon  21:40:24<br>初始化完成<br>勇敢的少年啊。  21:40:34<br>那就hook系统api对插件的生命周期进行调度？<br>Jecon  21:40:37<br>显示了系统桌面上所有的APP<br>Jecon  21:40:39<br>对<br>Jecon  21:40:44<br>hook是接管<br>顿文  21:41:01<br>啊。。。我都来不及百度hook是什么了<br>ぃ卓越李四ぃAlex  21:41:06<br>其实hook我感觉也有点不靠谱<br>Jecon  21:41:06<br>间接接管了插件，重置插件的生命周期<br>Jecon  21:41:20<br>目前,hook是最靠谱的东西了<br>我记得那几个插件化的框架里，有几个是没有用hook技术的<br>Jecon  21:41:53<br>我项目已经接入QQ、微信、滴滴、支付宝<br>Jecon  21:41:58<br>游戏<br>Jecon  21:42:03<br>运作正常<br>勇敢的少年啊。  21:42:12<br>按我的理解hook其实就是替换系统api<br>Jecon  21:42:17<br>就是后台进程过多的时候<br>Jecon  21:42:22<br>HOOK<br>Jecon  21:42:29<br>不是替换系统API<br>变异猪?  21:42:30<br>云测结果怎么样？<br>变异猪?  21:42:30<br>云测结果怎么样？<br>Jecon  21:42:40<br>是接管系统的API 的方法<br>Jecon  21:42:47<br>代理过去<br>勇敢的少年啊。  21:42:50<br>接管？<br>ぃ卓越李四ぃAlex  21:42:50<br>hook有点拦截了的意思<br>Jecon  21:43:00<br>从SystemServer上层<br>ぃ卓越李四ぃAlex  21:43:09<br>系统api正常运行着<br>勇敢的少年啊。  21:43:22<br>动态代理呗<br>Jecon  21:43:27<br>全部代理<br>Jecon  21:43:28<br>对<br>ぃ卓越李四ぃAlex  21:43:49<br>我知道hook这个玩意的时候，还是Windows开发的时候 ，不然我估计也和顿文一样一头雾水<br>Jecon  21:43:51<br>Android为了安全性<br>Jecon  21:44:02<br>要求<br>Jecon  21:45:06<br>包管理在解包过程中，遍历所有的插件，判定该插件是否拥有权限<br>Jecon  21:46:02<br>这个。要怎么说呢。一句话说不完，反正你去看Launcher源码<br>Jecon  21:46:05<br>就全知道了</li>
-</ul>
-<p>hook 好像有点像反射。。。。又好像有点像 动态代理。。<br>顿文  21:47:42<br>刚刚百度的<br>Jecon  21:47:44<br>boolean startActivitySafely(View v, Intent intent, Object tag) {<br>boolean success = false;<br>try {<br>success = startActivity(v, intent, tag);<br>} catch (ActivityNotFoundException e) {<br>Toast.makeText(this, R.string.activity_not_found, Toast.LENGTH_SHORT).show();<br>Log.e(TAG, “Unable to launch. tag=” + tag + “ intent=” + intent, e);<br>}<br>return success;<br>}<br>变异猪?  21:48:11<br>在acdd里面的hook其实就是动态代理<br>Jecon  21:48:39<br>嗯<br>Jecon  21:48:47<br>ACDD HOOK不完全<br>Boolean  21:48:51<br>我的天。。你们在说什么<br>顿文  21:48:51<br>别急。。让我翻上墙<br>Jecon  21:48:55<br>ACDD 靠的是更改SO<br>Jecon  21:48:59<br>SO<br>Boolean  21:49:03<br>全部看了一遍，一头雾水<br>勇敢的少年啊。  21:49:09<br>反射 +动态代理可以实现很简单的对系统api的hook<br>顿文  21:49:40<br>居然炸出了<br>变异猪?  21:50:24<br>@Jecon 但是acdd的classloader是不是没解决pluing和host的类冲突问题<br>勇敢的少年啊。  21:51:42<br>可以参看 droidplugin里面hook模块的相关代码<br>ぃ卓越李四ぃAlex  21:52:18<br>早早就fork了，一直没看<br>ぃ卓越李四ぃAlex  21:52:21<br>我也是懒得够了<br>勇敢的少年啊。  21:52:27<br>@ぃ卓越李四ぃAlex<br>ぃ卓越李四ぃAlex  21:52:36<br>恩<br>Jecon  21:53:34<br>嗯<br>Jecon  21:53:39<br>ACDD这个不靠谱<br>Jecon  21:53:48<br>ACDD采用分区方式<br>Jecon  21:53:51<br>但是没做好<br>Jecon  21:54:06<br>分区完 还是在同一个进程里面<br>顿文  21:54:11<br>SO 这个是linux内核的东西？<br>ぃ卓越李四ぃAlex  21:54:14<br>传统意义上的hook 应该都在C层才对吧<br>Jecon  21:54:19<br>对<br>Jecon  21:54:19<br>对<br>Jecon  21:54:24<br>所以<br>Jecon  21:54:32<br>你们应该去研究launcher<br>Jecon  21:54:40<br>而不是droidplugin或者<br>Jecon  21:54:41<br>acdd<br>ぃ卓越李四ぃAlex  21:54:47<br>动态代理的话 其实并不算是真正意义上的hook<br>Jecon  21:54:48<br>或者其它插件化的思路<br>Jecon  21:54:52<br>全错的<br>Jecon  21:54:53<br>嗯<br>Jecon  21:55:12<br>研究launcher即可<br>ぃ卓越李四ぃAlex  21:55:24<br>jecon你的插件化是用的第三方么<br>ぃ卓越李四ぃAlex  21:55:26<br>还是自己写的<br>变异猪?  21:55:31<br>c层的hook不是太稳定<br>ぃ卓越李四ぃAlex  21:55:39<br>我记得你好像之前说过用的是360哪个<br>ぃ卓越李四ぃAlex  21:55:41<br>那个<br>Jecon  21:55:41<br>基于Launcher改的<br>Jecon  21:55:44<br>嗯</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/02/hello-world/" class="article-date">
-  	<time datetime="2016-02-02T02:50:44.000Z" itemprop="datePublished">2月 2 2016</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/02/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-用android studio将assets打包到jar文件的方法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -452,6 +329,121 @@ public <span class="type">void</span> testMothed(<span class="type">String</span
       
         <p>感谢以下大神的研究，顺利完成悬浮控件开发任务</p>
 <p><a href="http://www.jianshu.com/p/167fd5f47d5c" target="_blank" rel="external">http://www.jianshu.com/p/167fd5f47d5c</a><br><a href="http://www.jianshu.com/p/634cd056b90c" target="_blank" rel="external">http://www.jianshu.com/p/634cd056b90c</a><br><a href="http://www.liaohuqiu.net/cn/posts/android-windows-manager/" target="_blank" rel="external">http://www.liaohuqiu.net/cn/posts/android-windows-manager/</a><br><a href="https://github.com/pengjianbo/FloatViewFinal" target="_blank" rel="external">https://github.com/pengjianbo/FloatViewFinal</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/17/换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app/" class="article-date">
+  	<time datetime="2015-11-17T15:54:48.000Z" itemprop="datePublished">11月 17 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/17/换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app/">换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>app的名字想了半天也不知道叫啥，于是随大流就叫简悦吧<br>  [简悦]  (<a href="https://github.com/fanOfDemo/jianyue" target="_blank" rel="external">https://github.com/fanOfDemo/jianyue</a>)</p>
+<p>数据使用的是聚合数据的免费API，之所以选择聚合是因为聚合最近有大量的API正在免费，方便后期扩展功能吧</p>
+<p>框架及基础功能完善后大概会提交了我们的装逼协会<a href="https://github.com/XXApple" target="_blank" rel="external">XXApple</a>中</p>
+<p>框架方面主要使用的都是比较流行但国内企业又尝试不多的框架</p>
+<p><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">rxjava</a><br><a href="https://github.com/square/retrofit" target="_blank" rel="external">retrofit2.0</a><br><a href="https://github.com/square/okhttp" target="_blank" rel="external">okhttp</a><br><a href="http://developer.android.com/" target="_blank" rel="external">design</a><br><a href="https://github.com/bumptech/glide" target="_blank" rel="external">glide</a><br><a href="https://github.com/square/leakcanary" target="_blank" rel="external">leakcanary</a></p>
+<p>今天只是记录一下，最近可怜的初尝逃离北上广的滋味，年纪轻轻就吃到了苦头也不知是好是坏，生活残酷，大家加油吧</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-比swift的playgroundg更加强大的android代码即使预览功能" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/27/比swift的playgroundg更加强大的android代码即使预览功能/" class="article-date">
+  	<time datetime="2015-10-27T04:53:37.000Z" itemprop="datePublished">10月 27 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/27/比swift的playgroundg更加强大的android代码即使预览功能/">比swift的playground更加强大的android代码即使预览功能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JRebel for Android android studio插件 </p>
+<p>代码修改时，跳过编译安装和运行，立刻看到代码改变后的效果</p>
+<p>JRebel for Android可以跳过编译安装运行等步骤， 直接挑出你的app中已改变的代码或资源文件，不用改变app的任何状态立刻看出效果</p>
+<p>Skip build, install and run<br>JRebel for Android picks up changes to your application and skips the build, install and run steps. Make code or resource file changes and see the effect immediately. All this without changing the state of the application.</p>
+<p>Tweak app UI in real-time<br>Modify resources in real-time on one device or more. Make sure that your app looks and feels perfect. Changing project code is immediately reflected on the device.</p>
 
       
     </div>
