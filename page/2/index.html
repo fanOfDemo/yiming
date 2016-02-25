@@ -192,11 +192,11 @@
 
       <div class="body-wrap">
   
-    <article id="post-如何有效避免fragment失去状态" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/27/如何有效避免fragment失去状态/" class="article-date">
-  	<time datetime="2015-07-27T02:30:41.000Z" itemprop="datePublished">7月 27 2015</time>
+      <a href="/2015/11/17/换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app/" class="article-date">
+  	<time datetime="2015-11-17T15:54:48.000Z" itemprop="datePublished">11月 17 2015</time>
 </a>
     </div>
   
@@ -209,7 +209,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/27/如何有效避免fragment失去状态/">如何有效避免fragment失去状态</a>
+      <a class="article-title" href="/2015/11/17/换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app/">换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app</a>
     </h1>
   
 
@@ -218,14 +218,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="如何有效避免fragment失去状态">如何有效避免fragment失去状态</h1><p>最近开发公司项目首页使用了<code>fragment</code>，在程序进入后台，<code>fragment</code>寄托的<code>activity</code>被后台杀死，再次进入恢复时无法恢复碎片<code>fragment</code>，导致<code>fragment</code>下的所有事件失效问题：</p>
-<ul>
-<li><p><strong>避免在<code>onResume</code>中执行<code>fragment</code>的提交操作，如果必须在<code>onResume</code>中执行，建议在<code>fragmentActivity</code>或者<code>actionbarActivity</code>或者<code>AppCompatActivity</code>下的<code>onPostResume</code>方法中执行<code>commit()</code>方法</strong></p>
-</li>
-<li><p><strong>如果当前activity中只有一个<code>fragment</code>，建议弃用<code>fragment</code>，直接将布局写在当前<code>activity</code>的<code>layout</code>下，从而避免API上的bug增加代码维护困难</strong></p>
-</li>
-</ul>
-<p>参考：<a href="http://blog.jobbole.com/66117/" target="_blank" rel="external">http://blog.jobbole.com/66117/</a></p>
+        <p>app的名字想了半天也不知道叫啥，于是随大流就叫简悦吧<br>  [简悦]  (<a href="https://github.com/fanOfDemo/jianyue" target="_blank" rel="external">https://github.com/fanOfDemo/jianyue</a>)</p>
+<p>数据使用的是聚合数据的免费API，之所以选择聚合是因为聚合最近有大量的API正在免费，方便后期扩展功能吧</p>
+<p>框架及基础功能完善后大概会提交了我们的装逼协会<a href="https://github.com/XXApple" target="_blank" rel="external">XXApple</a>中</p>
+<p>框架方面主要使用的都是比较流行但国内企业又尝试不多的框架</p>
+<p><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">rxjava</a><br><a href="https://github.com/square/retrofit" target="_blank" rel="external">retrofit2.0</a><br><a href="https://github.com/square/okhttp" target="_blank" rel="external">okhttp</a><br><a href="http://developer.android.com/" target="_blank" rel="external">design</a><br><a href="https://github.com/bumptech/glide" target="_blank" rel="external">glide</a><br><a href="https://github.com/square/leakcanary" target="_blank" rel="external">leakcanary</a></p>
+<p>今天只是记录一下，最近可怜的初尝逃离北上广的滋味，年纪轻轻就吃到了苦头也不知是好是坏，生活残酷，大家加油吧</p>
 
       
     </div>
@@ -252,11 +250,11 @@
 
 
   
-    <article id="post-Toolbar的高级使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-比swift的playgroundg更加强大的android代码即使预览功能" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/23/Toolbar的高级使用/" class="article-date">
-  	<time datetime="2015-07-23T00:07:18.000Z" itemprop="datePublished">7月 23 2015</time>
+      <a href="/2015/10/27/比swift的playgroundg更加强大的android代码即使预览功能/" class="article-date">
+  	<time datetime="2015-10-27T04:53:37.000Z" itemprop="datePublished">10月 27 2015</time>
 </a>
     </div>
   
@@ -269,7 +267,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/23/Toolbar的高级使用/">Toolbar的高级使用</a>
+      <a class="article-title" href="/2015/10/27/比swift的playgroundg更加强大的android代码即使预览功能/">比swift的playground更加强大的android代码即使预览功能</a>
     </h1>
   
 
@@ -278,70 +276,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Toolbar的高级使用">Toolbar的高级使用</h1><p>随着<code>android studio</code>的盛行，<code>eclipse</code>退出历史舞台，<code>material design</code>已日渐流行，本文简单介绍一下<code>toolbar</code>的基本使用方法</p>
-<p>下面是本人封装后的<code>toolbar</code>代码块<br>此处本人使用自定义的title，<code>setDisplayShowTitleEnabled</code>为<code>false</code>   ：</p>
-<pre><code>private void initToolbar<span class="params">()</span> {
-toolbar = <span class="params">(Toolbar)</span> findViewById<span class="params">(R.id.toolbar)</span>;
-<span class="keyword">if</span> <span class="params">(toolbar == null)</span>
-    return;
-title = <span class="params">(AppCompatTextView)</span> findViewById<span class="params">(R.id.title)</span>
-<span class="comment">//setup width of custom title to match in parent toolbar</span>
-toolbar.postDelayed<span class="params">(new Runnable<span class="params">()</span> {
-    @Override
-    public void run<span class="params">()</span> {
-        int maxWidth = toolbar.getWidth<span class="params">()</span>;
-        int titleWidth = title.getWidth<span class="params">()</span>;
-        int iconWidth = maxWidth - titleWidth;
+        <p>JRebel for Android android studio插件 </p>
+<p>代码修改时，跳过编译安装和运行，立刻看到代码改变后的效果</p>
+<p>JRebel for Android可以跳过编译安装运行等步骤， 直接挑出你的app中已改变的代码或资源文件，不用改变app的任何状态立刻看出效果</p>
+<p>Skip build, install and run<br>JRebel for Android picks up changes to your application and skips the build, install and run steps. Make code or resource file changes and see the effect immediately. All this without changing the state of the application.</p>
+<p>Tweak app UI in real-time<br>Modify resources in real-time on one device or more. Make sure that your app looks and feels perfect. Changing project code is immediately reflected on the device.</p>
 
-    if <span class="params">(iconWidth &gt; <span class="number">0</span>)</span> {
-        //icons <span class="params">(drawer, menu)</span> are on left and right side
-        int width = maxWidth - titleWidth * <span class="number">2</span>;
-        title.setMinimumWidth<span class="params">(width)</span>;
-        title.getLayoutParams<span class="params">()</span>.width = width;
-        }
-    }
-}, <span class="number">0</span>)</span>;
-toolbar.setTitle<span class="params">(null)</span>;
-setSupportActionBar<span class="params">(toolbar)</span>; getSupportActionBar<span class="params">()</span>.setDisplayShowHomeEnabled<span class="params">(<span class="literal">true</span>)</span>;    getSupportActionBar<span class="params">()</span>.setDisplayHomeAsUpEnabled<span class="params">(<span class="literal">true</span>)</span>; getSupportActionBar<span class="params">()</span>.setDisplayShowTitleEnabled<span class="params">(<span class="literal">false</span>)</span>;
-setNavigationIconColor<span class="params">(Color.WHITE, toolbar)</span>;
-toolbar.setNavigationOnClickListener<span class="params">(new View.OnClickListener<span class="params">()</span> {
-    @Override
-    public void onClick<span class="params">(View v)</span> {
-        onBackPressed<span class="params">()</span>;
-        }
-    })</span>;
-initColor<span class="params">()</span>;
-}
-</code></pre><p>initColor是一个恢复toolbar背景颜色的代码，主要用于在toolbar背景色透明度变化的界面下回到其他界面用于恢复</p>
-<pre><code>private void initColor<span class="params">()</span> {
-    <span class="keyword">if</span> <span class="params">(toolbar != null)</span> {
-        ColorDrawable background = <span class="params">(ColorDrawable)</span> toolbar.getBackground<span class="params">()</span>;
-        background.setAlpha<span class="params">(<span class="number">255</span>)</span>;
-    }
-}
-</code></pre><p>这段代码看懂了，也知道怎么动态改变toolbar的背景色了吧</p>
-<p>上文中AppCompatTextView需要在  <code>compile &#39;com.android.support:appcompat-v7:22.1.1&#39;</code> 即google自家库<code>appcompat-v7</code>22.0.0以上版本，此版本下<code>ActionBarActivity</code> 已过时，使用<code>AppCompatActivity</code>替代可以很好的兼容使用<code>Toolbar</code></p>
-<p>最后贴出本人使用的toolbar布局文件：</p>
-<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
-&lt;android.support.v7.widget.Toolbar
-<span class="variable">style=</span><span class="string">"@style/ToolBarStyle"</span>     xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
-android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
-android:<span class="variable">layout_height=</span><span class="string">"?attr/actionBarSize"</span>
-android:<span class="variable">background=</span><span class="string">"@color/green"</span>
-android:<span class="variable">minHeight=</span><span class="string">"?attr/actionBarSize"</span>
-&gt;
-
-&lt;android.support.v7.widget.AppCompatTextView
-    android:<span class="variable">id=</span><span class="string">"@+id/title"</span>
-    android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_gravity=</span><span class="string">"center"</span>
-    android:<span class="variable">gravity=</span><span class="string">"center"</span>
-    android:<span class="variable">text=</span><span class="string">"@string/app_name"</span>
-    android:<span class="variable">textColor=</span><span class="string">"@color/white"</span>
-    android:<span class="variable">textSize=</span><span class="string">"@dimen/text_navigation"</span>/&gt;
-&lt;/android.support.v7.widget.Toolbar&gt;
-</code></pre>
       
     </div>
     
@@ -367,11 +307,11 @@ android:<span class="variable">minHeight=</span><span class="string">"?attr/acti
 
 
   
-    <article id="post-使用swipebacklayout实现ios右滑退出效果及注意事项" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-现在的大学学习小组在学啥？" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/22/使用swipebacklayout实现ios右滑退出效果及注意事项/" class="article-date">
-  	<time datetime="2015-07-22T03:47:05.000Z" itemprop="datePublished">7月 22 2015</time>
+      <a href="/2015/10/13/现在的大学学习小组在学啥？/" class="article-date">
+  	<time datetime="2015-10-13T03:57:16.000Z" itemprop="datePublished">10月 13 2015</time>
 </a>
     </div>
   
@@ -384,7 +324,7 @@ android:<span class="variable">minHeight=</span><span class="string">"?attr/acti
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/22/使用swipebacklayout实现ios右滑退出效果及注意事项/">使用swipebacklayout实现ios右滑退出效果及注意事项</a>
+      <a class="article-title" href="/2015/10/13/现在的大学学习小组在学啥？/">现在的大学学习小组在学啥？</a>
     </h1>
   
 
@@ -393,57 +333,108 @@ android:<span class="variable">minHeight=</span><span class="string">"?attr/acti
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="使用swipebacklayout实现ios右滑退出效果及注意事项">使用swipebacklayout实现ios右滑退出效果及注意事项</h1><p>android和ios的趋同化，导致android需要实现大量API未提供的功能，<br>本文简单介绍一个简单流畅的swipebacklayout第三方库的使用</p>
-<p>首先在你的gradle中引用：<br>    <code>compile&#39;me.imid.swipebacklayout.lib:library:1.0.0&#39;</code><br>最新版</p>
-<blockquote>
-<p>1 在你的activity基类中实现：</p>
-</blockquote>
-<pre><code><span class="escape">`S</span>wipeBackActivityBase<span class="escape">`接</span>口
-</code></pre><blockquote>
-<p>2   申明一个helper类</p>
-</blockquote>
-<pre><code><span class="keyword">private</span> SwipeBackActivityHelper mHelper;
-</code></pre><blockquote>
-<p>3 初始化基类，并设置为右滑：</p>
-</blockquote>
-<pre><code><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">initSwipeBackLayout</span><span class="params">()</span> </span>{
-    mHelper = <span class="keyword">new</span> SwipeBackActivityHelper(<span class="keyword">this</span>);
-    mHelper.onActivityCreate();
-    getSwipeBackLayout().setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
-}
-</code></pre><blockquote>
-<p>4 实现 SwipeBackActivityBase接口</p>
-</blockquote>
-<pre><code><span class="annotation">@Override</span>
-<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onPostCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
-    <span class="keyword">super</span>.onPostCreate(savedInstanceState);
-    mHelper.onPostCreate();
-}
+        <p>大学老师组织的计算机学习小组的任务————刷题<br><a href="http://acm.zju.edu.cn/" target="_blank" rel="external">http://acm.zju.edu.cn/</a></p>
+<p><a href="http://acm.hdu.edu.cn/" target="_blank" rel="external">http://acm.hdu.edu.cn/</a></p>
 
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function">View <span class="title">findViewById</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
-    View v = <span class="keyword">super</span>.findViewById(id);
-    <span class="keyword">if</span> (v == <span class="keyword">null</span> &amp;&amp; mHelper != <span class="keyword">null</span>)
-    <span class="function"><span class="keyword">return</span> mHelper.<span class="title">findViewById</span><span class="params">(id)</span></span>;
-    <span class="keyword">return</span> v;
-}
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
 
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function">SwipeBackLayout <span class="title">getSwipeBackLayout</span><span class="params">()</span> </span>{
-    <span class="function"><span class="keyword">return</span> mHelper.<span class="title">getSwipeBackLayout</span><span class="params">()</span></span>;
-}
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
 
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setSwipeBackEnable</span><span class="params">(<span class="keyword">boolean</span> enable)</span> </span>{
-    getSwipeBackLayout().setEnableGesture(enable);
-}
 
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">scrollToFinishActivity</span><span class="params">()</span> </span>{
-    Utils.convertActivityToTranslucent(getActivity());
-    getSwipeBackLayout().scrollToFinishActivity();
+
+
+
+
+
+
+
+  
+    <article id="post-内存泄露引发的血案" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/11/内存泄露引发的血案/" class="article-date">
+  	<time datetime="2015-10-11T08:10:15.000Z" itemprop="datePublished">10月 11 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/11/内存泄露引发的血案/">使用弱引用解决内存泄露问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下面是使用弱引用解决一个内存泄露的办法，过去这类自定义管理activity的代码在百度搜索结果中盛行，不知大部分这种用法都会导致内存泄露，导致android手机卡顿，产生不好的用户体验，</p>
+<pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">MultiDexApplication</span> {</span>
+
+    <span class="keyword">private</span> <span class="type">LinkedList</span>&lt;<span class="type">Activity</span>&gt; activityListTmp = <span class="keyword">new</span> <span class="type">LinkedList</span>&lt;&gt;();
+    <span class="keyword">private</span> <span class="type">LinkedList</span>&lt;<span class="type">WeakReference</span>&lt;<span class="type">Activity</span>&gt;&gt; activityList = <span class="keyword">new</span> <span class="type">LinkedList</span>&lt;&gt;();
+    <span class="keyword">private</span> static <span class="type">MyApplication</span> instance;
+   <span class="comment">// 单例</span>
+    public static <span class="type">MyApplication</span> getInstance() {
+        <span class="keyword">if</span> (<span class="literal">null</span> == instance) {
+           instance = <span class="keyword">new</span> <span class="type">MyApplication</span>();
+        }
+        <span class="keyword">return</span> instance;
+    }
+    ...
 }
-</code></pre><h1 id="重点提醒">重点提醒</h1><p>1 主题使用的style必须加入下面这行，不然背景会是黑色<br><code>&lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;</code><br>2 将你的app下最开始的<code>Activity</code>的使用背景不为透明的主题，否则在大部分android4.4的手机上会出现背景看到桌面的情况</p>
+</code></pre><p>使用大名鼎鼎的squareup公司推出的框架检测内存溢出问题<br>gradle引用：<br>    //内存泄露<br>    debugCompile ‘com.squareup.leakcanary:leakcanary-android:1.3.1’<br>    releaseCompile ‘com.squareup.leakcanary:leakcanary-android-no-op:1.3.1’</p>
+<p>  在application中注册</p>
+<pre><code> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">MultiDexApplication</span> </span>{
+    <span class="keyword">private</span> <span class="keyword">static</span> App mInstance = <span class="keyword">null</span>;
+<span class="comment">//  private List&lt;Activity&gt; activityList = new LinkedList&lt;&gt;();</span>
+
+    <span class="keyword">private</span> LinkedList&lt;WeakReference&lt;Activity&gt;&gt; activityList = <span class="keyword">new</span> LinkedList&lt;&gt;();
+    <span class="keyword">private</span> RefWatcher refWatcher;
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>{
+        <span class="keyword">super</span>.onCreate();
+        mInstance = <span class="keyword">this</span>;
+        refWatcher = LeakCanary.install(<span class="keyword">this</span>);
+    }
+
+     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RefWatcher <span class="title">getRefWatcher</span><span class="params">()</span> </span>{
+        <span class="keyword">return</span> App.getInstance().refWatcher;
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> App <span class="title">getInstance</span><span class="params">()</span> </span>{
+        <span class="keyword">return</span> mInstance;
+    }
+    ...
+}
+</code></pre><p>  在BaseActivity中的onDestroy中监听没个activity销毁时是否有内存泄露</p>
+<pre><code>@Override
+protected void onDestroy<span class="params">()</span> {
+    ButterKnife.reset<span class="params">(getActivity<span class="params">()</span>)</span>;
+    super.onDestroy<span class="params">()</span>;
+    RefWatcher refWatcher = App.getRefWatcher<span class="params">()</span>;
+    refWatcher.watch<span class="params">(getActivity<span class="params">()</span>)</span>;
+}
+</code></pre><p>具体原理及使用文档请移步<a href="https://github.com/square/leakcanary" target="_blank" rel="external">leakcanary</a></p>
 
       
     </div>
@@ -452,7 +443,7 @@ android:<span class="variable">minHeight=</span><span class="string">"?attr/acti
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fragment/">fragment</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
 	</div>
 
       
@@ -474,9 +465,63 @@ android:<span class="variable">minHeight=</span><span class="string">"?attr/acti
 
 
   
+    <article id="post-持有空的上下文错误" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/10/持有空的上下文错误/" class="article-date">
+  	<time datetime="2015-09-10T07:43:44.000Z" itemprop="datePublished">9月 10 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/10/持有空的上下文错误/">持有空的上下文错误</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>BadTokenException:Unable to add window …… is your activity running?</p>
+<p>注意在你创建dialog之后，此时dialog持有的activity上下文如果已经被finish了就会报错，所以，dialog中的操作必须在activity结束之前可用</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>
