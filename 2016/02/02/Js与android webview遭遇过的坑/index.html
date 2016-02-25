@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>yiming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Uncaught TypeError: Object [object Object] has no method可能产生该情况有几种可能1、安全限制问题如果只在4.2版本以上的机器出问题，那么就是系统处于安全限制的问题了。Android文档这样说的
+Caution: If you’ve set your targetSdkVersion to 17 or higher, you must add">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yiming">
+<meta property="og:url" content="http://fanofdemo.github.io/2016/02/02/Js与android webview遭遇过的坑/index.html">
+<meta property="og:site_name" content="yiming">
+<meta property="og:description" content="Uncaught TypeError: Object [object Object] has no method可能产生该情况有几种可能1、安全限制问题如果只在4.2版本以上的机器出问题，那么就是系统处于安全限制的问题了。Android文档这样说的
+Caution: If you’ve set your targetSdkVersion to 17 or higher, you must add">
+<meta property="og:updated_time" content="2016-02-02T02:46:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="yiming">
+<meta name="twitter:description" content="Uncaught TypeError: Object [object Object] has no method可能产生该情况有几种可能1、安全限制问题如果只在4.2版本以上的机器出问题，那么就是系统处于安全限制的问题了。Android文档这样说的
+Caution: If you’ve set your targetSdkVersion to 17 or higher, you must add">
+  
+    <link rel="alternative" href="/atom.xml" title="yiming" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">yiming</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/fragment/" style="font-size: 10px;">fragment</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">yiming</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">yiming</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Js与android webview遭遇过的坑" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/02/Js与android webview遭遇过的坑/" class="article-date">
+  	<time datetime="2016-02-02T02:48:48.000Z" itemprop="datePublished">2月 2 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Uncaught_TypeError:_Object_[object_Object]_has_no_method">Uncaught TypeError: Object [object Object] has no method</h1><h2 id="可能产生该情况有几种可能">可能产生该情况有几种可能</h2><h3 id="1、安全限制问题">1、安全限制问题</h3><p>如果只在4.2版本以上的机器出问题，那么就是系统处于安全限制的问题了。Android文档这样说的</p>
+<pre><code><span class="type">Caution</span>: <span class="type">If</span> you’ve <span class="type">set</span> your targetSdkVersion to <span class="number">17</span> <span class="keyword">or</span> higher, you must add the @<span class="type">JavascriptInterface</span> annotation to <span class="type">any</span> <span class="keyword">method</span> that you want available your web page code (the <span class="keyword">method</span> must also be public). <span class="type">If</span> you <span class="keyword">do</span> <span class="keyword">not</span> provide the annotation, then the <span class="keyword">method</span> will <span class="keyword">not</span> accessible by your web page <span class="keyword">when</span> running on <span class="type">Android</span> <span class="number">4</span>.<span class="number">2</span> <span class="keyword">or</span> higher.
+
+    中文大意为
+
+警告：如果你的程序目标平台是<span class="number">17</span>或者是更高，你必须要在暴露给网页可调用的方法（这个方法必须是公开的）加上@<span class="type">JavascriptInterface</span>注释。如果你不这样做的话，在<span class="number">4</span>.<span class="number">2</span>以以后的平台上，网页无法访问到你的方法。
+例：
+@<span class="type">JavascriptInterface</span>
+public <span class="type">void</span> testMothed(<span class="type">String</span> str) {
+}
+</code></pre><p> 解决方法</p>
+<p>将targetSdkVersion设置成17或更高，引入@JavascriptInterface注释<br>自己创建一个注释接口名字为@JavascriptInterface，然后将其引入。注意这个接口不能混淆。这种方式不推荐，大概在4.4之后有问题。<br>注，创建@JavascriptInterface代码</p>
+<h3 id="2、代码混淆问题">2、代码混淆问题</h3><p>如果在没有混淆的版本运行正常，在混淆后的版本的代码运行错误，并提示Uncaught TypeError: Object [object Object] has no method，那就是你没有做混淆例外处理。 在混淆文件加入类似这样的代码</p>
+<pre><code>-<span class="ruby">keepattributes *<span class="constant">Annotation</span>*
+</span>-<span class="ruby">keepclassmembers <span class="class"><span class="keyword">class</span> * {</span>
+</span>    @android.webkit.JavascriptInterface &lt;methods&gt;;
+}
+</code></pre><p>本人测试环境是android5.1 moto x 1085</p>
+<p>博文主要参考<br><a href="http://droidyue.com/blog/2014/09/20/interaction-between-java-and-javascript-in-android/" target="_blank" rel="external">http://droidyue.com/blog/2014/09/20/interaction-between-java-and-javascript-in-android/</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/02/用android studio将assets打包到jar文件的方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/02/悬浮控件开发笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Js与android webview遭遇过的坑" data-title="" data-url="http://fanofdemo.github.io/2016/02/02/Js与android webview遭遇过的坑/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 yiming
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
