@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/android基础知识点复习总结/" style="font-size: 10px;">android基础知识点复习总结</a> <a href="/tags/fragment/" style="font-size: 10px;">fragment</a> <a href="/tags/google推荐android代码规范/" style="font-size: 10px;">google推荐android代码规范</a>
+						<a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/android基础知识点复习总结/" style="font-size: 10px;">android基础知识点复习总结</a> <a href="/tags/fragment/" style="font-size: 10px;">fragment</a>
 					</div>
 				</section>
 				
@@ -199,66 +199,6 @@
 </nav>
 
       <div class="body-wrap">
-  
-    <article id="post-如何有效避免fragment失去状态" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/27/如何有效避免fragment失去状态/" class="article-date">
-  	<time datetime="2015-07-27T02:30:41.000Z" itemprop="datePublished">7月 27 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/27/如何有效避免fragment失去状态/">如何有效避免fragment失去状态</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="如何有效避免fragment失去状态">如何有效避免fragment失去状态</h1><p>最近开发公司项目首页使用了<code>fragment</code>，在程序进入后台，<code>fragment</code>寄托的<code>activity</code>被后台杀死，再次进入恢复时无法恢复碎片<code>fragment</code>，导致<code>fragment</code>下的所有事件失效问题：</p>
-<ul>
-<li><p><strong>避免在<code>onResume</code>中执行<code>fragment</code>的提交操作，如果必须在<code>onResume</code>中执行，建议在<code>fragmentActivity</code>或者<code>actionbarActivity</code>或者<code>AppCompatActivity</code>下的<code>onPostResume</code>方法中执行<code>commit()</code>方法</strong></p>
-</li>
-<li><p><strong>如果当前activity中只有一个<code>fragment</code>，建议弃用<code>fragment</code>，直接将布局写在当前<code>activity</code>的<code>layout</code>下，从而避免API上的bug增加代码维护困难</strong></p>
-</li>
-</ul>
-<p>参考：<a href="http://blog.jobbole.com/66117/" target="_blank" rel="external">http://blog.jobbole.com/66117/</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
   
     <article id="post-Toolbar的高级使用" class="article article-type-post" itemscope itemprop="blogPost">
   
