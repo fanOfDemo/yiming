@@ -244,6 +244,103 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/06/悬浮控件开发笔记/" itemprop="url">
+                  andorid悬浮球开发笔记（起点读书app 发现->游戏中心，下载任意一款android手游可以看到效果）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-06T22:14:47+08:00" content="Mar 6 2016">
+              Mar 6 2016
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/06/悬浮控件开发笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/06/悬浮控件开发笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>感谢以下大神的研究，顺利完成悬浮控件开发任务</p>
+<p><a href="http://www.jianshu.com/p/167fd5f47d5c" target="_blank" rel="external">http://www.jianshu.com/p/167fd5f47d5c</a><br><a href="http://www.jianshu.com/p/634cd056b90c" target="_blank" rel="external">http://www.jianshu.com/p/634cd056b90c</a><br><a href="http://www.liaohuqiu.net/cn/posts/android-windows-manager/" target="_blank" rel="external">http://www.liaohuqiu.net/cn/posts/android-windows-manager/</a><br><a href="https://github.com/pengjianbo/FloatViewFinal" target="_blank" rel="external">https://github.com/pengjianbo/FloatViewFinal</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/06/android-Launcher源码学习入门/" itemprop="url">
                   android Launcher源码学习入门
                 </a>
@@ -297,6 +394,120 @@
             <p>大神说，要学会android的动态加载什么的，先研究Launcher源码</p>
 <p>Launcher源码学习资料</p>
 <p><a href="https://github.com/fookwood/Launcher3" target="_blank" rel="external">Launcher3</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/06/用android studio将assets打包到jar文件的方法/" itemprop="url">
+                  用android studio将assets打包到jar文件的方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-06T22:14:47+08:00" content="Mar 6 2016">
+              Mar 6 2016
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/06/用android studio将assets打包到jar文件的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/06/用android studio将assets打包到jar文件的方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>在对应的app或者module的build.gradle中配置任务如下</p>
+<pre><code>    <span class="keyword">def</span> SDK_BASENAME = <span class="string">"sdk"</span>;
+    <span class="keyword">def</span> SDK_VERSION = <span class="string">"_V1.0"</span>;
+    <span class="keyword">def</span> sdkDestinationPath = <span class="string">"build"</span>;
+    <span class="keyword">def</span> zipFile = <span class="keyword">file</span>(<span class="string">'build/intermediates/bundles/release/classes.jar'</span>)
+
+
+<span class="keyword">task</span> deleteBuild(type: <span class="keyword">Delete</span>) {
+    <span class="keyword">delete</span> sdkDestinationPath + SDK_BASENAME + SDK_VERSION + <span class="string">".jar"</span>
+}
+<span class="keyword">task</span> makeJar(type: Jar) {
+    <span class="keyword">from</span> zipTree(zipFile)
+    <span class="keyword">from</span> <span class="keyword">fileTree</span>(dir: <span class="string">'src/main'</span>, <span class="keyword">includes</span>: [<span class="string">'assets/**'</span>])
+    baseName = SDK_BASENAME + SDK_VERSION
+    <span class="keyword">destinationDir</span> = <span class="keyword">file</span>(sdkDestinationPath)
+}
+makeJar.dependsOn(deleteBuild, build)
+</code></pre><p>然后在gradle中的other中找到markJar执行，生成的jar文件在build文件夹下</p>
 
           
         
@@ -446,8 +657,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/02/02/用android studio将assets打包到jar文件的方法/" itemprop="url">
-                  未命名
+                <a class="post-title-link" href="/2015/11/27/Js与android webview遭遇过的坑/" itemprop="url">
+                  Js与android webview遭遇过的坑
                 </a>
               
             
@@ -460,8 +671,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-02T10:49:11+08:00" content="Feb 2 2016">
-              Feb 2 2016
+            <time itemprop="dateCreated" datetime="2015-11-27T12:53:37+08:00" content="Nov 27 2015">
+              Nov 27 2015
             </time>
           </span>
 
@@ -471,122 +682,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/02/02/用android studio将assets打包到jar文件的方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/02/用android studio将assets打包到jar文件的方法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="用android_studio将assets打包到jar文件的方法">用android studio将assets打包到jar文件的方法</h1><hr>
-<p>在build.gradle中配置如下代码</p>
-<pre><code>    <span class="keyword">def</span> SDK_BASENAME = <span class="string">"sdk"</span>;
-    <span class="keyword">def</span> SDK_VERSION = <span class="string">"_V1.0"</span>;
-    <span class="keyword">def</span> sdkDestinationPath = <span class="string">"build"</span>;
-    <span class="keyword">def</span> zipFile = <span class="keyword">file</span>(<span class="string">'build/intermediates/bundles/release/classes.jar'</span>)
-
-
-<span class="keyword">task</span> deleteBuild(type: <span class="keyword">Delete</span>) {
-    <span class="keyword">delete</span> sdkDestinationPath + SDK_BASENAME + SDK_VERSION + <span class="string">".jar"</span>
-}
-<span class="keyword">task</span> makeJar(type: Jar) {
-    <span class="keyword">from</span> zipTree(zipFile)
-    <span class="keyword">from</span> <span class="keyword">fileTree</span>(dir: <span class="string">'src/main'</span>, <span class="keyword">includes</span>: [<span class="string">'assets/**'</span>])
-    baseName = SDK_BASENAME + SDK_VERSION
-    <span class="keyword">destinationDir</span> = <span class="keyword">file</span>(sdkDestinationPath)
-}
-makeJar.dependsOn(deleteBuild, build)
-</code></pre><p>然后在gradle中的other中找到markJar执行，生成的jar文件在build文件夹下</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/02/Js与android webview遭遇过的坑/" itemprop="url">
-                  未命名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-02T10:48:48+08:00" content="Feb 2 2016">
-              Feb 2 2016
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/02/Js与android webview遭遇过的坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/02/Js与android webview遭遇过的坑/" itemprop="commentsCount"></span>
+                <a href="/2015/11/27/Js与android webview遭遇过的坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/27/Js与android webview遭遇过的坑/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -629,103 +726,6 @@ public <span class="type">void</span> testMothed(<span class="type">String</span
 }
 </code></pre><p>本人测试环境是android5.1 moto x 1085</p>
 <p>博文主要参考<br><a href="http://droidyue.com/blog/2014/09/20/interaction-between-java-and-javascript-in-android/" target="_blank" rel="external">http://droidyue.com/blog/2014/09/20/interaction-between-java-and-javascript-in-android/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/02/悬浮控件开发笔记/" itemprop="url">
-                  未命名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-02T10:48:47+08:00" content="Feb 2 2016">
-              Feb 2 2016
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/02/悬浮控件开发笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/02/悬浮控件开发笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>感谢以下大神的研究，顺利完成悬浮控件开发任务</p>
-<p><a href="http://www.jianshu.com/p/167fd5f47d5c" target="_blank" rel="external">http://www.jianshu.com/p/167fd5f47d5c</a><br><a href="http://www.jianshu.com/p/634cd056b90c" target="_blank" rel="external">http://www.jianshu.com/p/634cd056b90c</a><br><a href="http://www.liaohuqiu.net/cn/posts/android-windows-manager/" target="_blank" rel="external">http://www.liaohuqiu.net/cn/posts/android-windows-manager/</a><br><a href="https://github.com/pengjianbo/FloatViewFinal" target="_blank" rel="external">https://github.com/pengjianbo/FloatViewFinal</a></p>
 
           
         
@@ -806,7 +806,7 @@ public <span class="type">void</span> testMothed(<span class="type">String</span
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
