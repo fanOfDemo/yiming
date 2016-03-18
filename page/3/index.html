@@ -238,6 +238,109 @@
             
               
                 
+                <a class="post-title-link" href="/2015/07/27/如何有效避免fragment失去状态/" itemprop="url">
+                  如何有效避免fragment失去状态
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-27T10:30:41+08:00" content="Jul 27 2015">
+              Jul 27 2015
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/27/如何有效避免fragment失去状态/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/27/如何有效避免fragment失去状态/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="如何有效避免fragment失去状态">如何有效避免fragment失去状态</h1><p>最近开发公司项目首页使用了<code>fragment</code>，在程序进入后台，<code>fragment</code>寄托的<code>activity</code>被后台杀死，再次进入恢复时无法恢复碎片<code>fragment</code>，导致<code>fragment</code>下的所有事件失效问题：</p>
+<ul>
+<li><p><strong>避免在<code>onResume</code>中执行<code>fragment</code>的提交操作，如果必须在<code>onResume</code>中执行，建议在<code>fragmentActivity</code>或者<code>actionbarActivity</code>或者<code>AppCompatActivity</code>下的<code>onPostResume</code>方法中执行<code>commit()</code>方法</strong></p>
+</li>
+<li><p><strong>如果当前activity中只有一个<code>fragment</code>，建议弃用<code>fragment</code>，直接将布局写在当前<code>activity</code>的<code>layout</code>下，从而避免API上的bug增加代码维护困难</strong></p>
+</li>
+</ul>
+<p>参考：<a href="http://blog.jobbole.com/66117/" target="_blank" rel="external">http://blog.jobbole.com/66117/</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/07/23/Toolbar的高级使用/" itemprop="url">
                   Toolbar的高级使用
                 </a>
@@ -566,7 +669,7 @@ android:<span class="variable">minHeight=</span><span class="string">"?attr/acti
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
