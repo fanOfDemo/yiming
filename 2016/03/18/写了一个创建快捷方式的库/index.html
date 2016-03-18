@@ -57,25 +57,37 @@
 
 
 
-<meta name="description" content="因为公司游戏产品需要，使用建造者模式设计开发了这个android 桌面快捷方式创建库，本项目简单易用
-快速使用shortcut，避免各种ROM适配导致的各种问题,兼顾各种场合下创建快捷方式。
-1 使用本地资源icon创建桌面快捷方式
-2 使用网络图片作为icon创建桌面快捷方式（二级物理缓存，第一次下载到本地sd卡，第二次直接取sd卡对应目录的图片文件，未考虑大图可能oom的情况，快捷方式的图如果">
+<meta name="description" content="因为公司游戏产品需要，使用建造者模式设计开发了这个android桌面快捷方式创建库，本项目简单易用
+项目地址：
+https://github.com/fanOfDemo/ShortcutLib
+
+
+git clone https://github.com/fanOfDemo/ShortcutLib.git
+或者直接使用gradle，在项目build.gradle配置
+allprojects {">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个多功能创建快捷方式的库">
 <meta property="og:url" content="http://fanofdemo.github.io/2016/03/18/写了一个创建快捷方式的库/index.html">
 <meta property="og:site_name" content="yiming">
-<meta property="og:description" content="因为公司游戏产品需要，使用建造者模式设计开发了这个android 桌面快捷方式创建库，本项目简单易用
-快速使用shortcut，避免各种ROM适配导致的各种问题,兼顾各种场合下创建快捷方式。
-1 使用本地资源icon创建桌面快捷方式
-2 使用网络图片作为icon创建桌面快捷方式（二级物理缓存，第一次下载到本地sd卡，第二次直接取sd卡对应目录的图片文件，未考虑大图可能oom的情况，快捷方式的图如果">
-<meta property="og:updated_time" content="2016-03-18T15:28:04.000Z">
+<meta property="og:description" content="因为公司游戏产品需要，使用建造者模式设计开发了这个android桌面快捷方式创建库，本项目简单易用
+项目地址：
+https://github.com/fanOfDemo/ShortcutLib
+
+
+git clone https://github.com/fanOfDemo/ShortcutLib.git
+或者直接使用gradle，在项目build.gradle配置
+allprojects {">
+<meta property="og:updated_time" content="2016-03-18T15:34:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个多功能创建快捷方式的库">
-<meta name="twitter:description" content="因为公司游戏产品需要，使用建造者模式设计开发了这个android 桌面快捷方式创建库，本项目简单易用
-快速使用shortcut，避免各种ROM适配导致的各种问题,兼顾各种场合下创建快捷方式。
-1 使用本地资源icon创建桌面快捷方式
-2 使用网络图片作为icon创建桌面快捷方式（二级物理缓存，第一次下载到本地sd卡，第二次直接取sd卡对应目录的图片文件，未考虑大图可能oom的情况，快捷方式的图如果">
+<meta name="twitter:description" content="因为公司游戏产品需要，使用建造者模式设计开发了这个android桌面快捷方式创建库，本项目简单易用
+项目地址：
+https://github.com/fanOfDemo/ShortcutLib
+
+
+git clone https://github.com/fanOfDemo/ShortcutLib.git
+或者直接使用gradle，在项目build.gradle配置
+allprojects {">
 
 
 
@@ -291,13 +303,29 @@
       
 
       
-        <p>因为公司游戏产品需要，使用建造者模式设计开发了这个android 桌面快捷方式创建库，本项目简单易用</p>
-<p>快速使用shortcut，避免各种ROM适配导致的各种问题,兼顾各种场合下创建快捷方式。</p>
+        <p>因为公司游戏产品需要，使用建造者模式设计开发了这个android桌面快捷方式创建库，本项目简单易用</p>
+<p>项目地址：</p>
+<pre><code><span class="string">https:</span><span class="comment">//github.com/fanOfDemo/ShortcutLib</span>
+
+
+git clone <span class="string">https:</span><span class="comment">//github.com/fanOfDemo/ShortcutLib.git</span>
+</code></pre><p>或者直接使用gradle，在项目build.gradle配置</p>
+<pre><code><span class="xml">allprojects </span><span class="expression">{
+    <span class="variable">repositories</span> {
+        <span class="variable">jcenter</span>()
+        <span class="variable">maven</span> {
+            <span class="variable">url</span> '<span class="variable">https</span>:/<span class="end-block">/dl.bintray.com</span><span class="end-block">/fanofdemo</span><span class="end-block">/maven</span>/'
+        }</span><span class="xml">
+    }
+}</span>
+</code></pre><p>在module中配置：</p>
+<pre><code><span class="keyword">compile</span> <span class="string">'cn.yw.sclib:shortcut_lib:1.0.0'</span>
+</code></pre><p>快速使用shortcut，避免各种ROM适配导致的各种问题,兼顾各种场合下创建快捷方式。</p>
 <p>1 使用本地资源icon创建桌面快捷方式</p>
 <p>2 使用网络图片作为icon创建桌面快捷方式（二级物理缓存，第一次下载到本地sd卡，第二次直接取sd卡对应目录的图片文件，未考虑大图可能oom的情况，快捷方式的图如果很大的话只能找你们产品要解释了，如果有问题建议提issues）</p>
 <p>3 使用drawble创建快捷方式</p>
 <p>4 在activity中创建（已知跳转activity，当前app中）</p>
-<p>5 在android任何场景跳转到入口activity（上下文未知，比如模块service中）</p>
+<p>5 在android任何场景跳转到入口activity（目标activity未知，比如模块service中）</p>
 <p>//在activity中使用资源logo创建：</p>
 <pre><code>new Sc.Builder<span class="params">(this, this.getClass<span class="params">()</span>)</span>.
         setName<span class="params">(<span class="string">"资源创建快捷方式"</span>)</span>.
@@ -354,7 +382,8 @@ new Sc.Builder<span class="params">(this, intent)</span>.
                 Toast.makeText<span class="params">(MainActivity.this, errorMsg, Toast.LENGTH_SHORT)</span>.show<span class="params">()</span>;
             }
         })</span>.build<span class="params">()</span>.createSc<span class="params">()</span>;
-</code></pre>
+</code></pre><p>如果有问题建议提issues，一起完善这个库<br>如果对你有帮助，可以给我点个star，谢谢</p>
+
       
     </div>
 
