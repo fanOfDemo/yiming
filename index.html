@@ -412,16 +412,7 @@
 
 
 git clone <span class="string">https:</span><span class="comment">//github.com/fanOfDemo/ShortcutLib.git</span>
-</code></pre><p>或者直接使用gradle，在项目build.gradle配置</p>
-<pre><code><span class="xml">allprojects </span><span class="expression">{
-    <span class="variable">repositories</span> {
-        <span class="variable">jcenter</span>()
-        <span class="variable">maven</span> {
-            <span class="variable">url</span> '<span class="variable">https</span>:/<span class="end-block">/dl.bintray.com</span><span class="end-block">/fanofdemo</span><span class="end-block">/maven</span>/'
-        }</span><span class="xml">
-    }
-}</span>
-</code></pre><p>在module中配置：</p>
+</code></pre><p>或者直接使用gradle，在项目module中的build.gradle配置：</p>
 <pre><code><span class="keyword">compile</span> <span class="string">'cn.yw.sclib:shortcut_lib:1.0.0'</span>
 </code></pre><p>快速使用shortcut，避免各种ROM适配导致的各种问题,兼顾各种场合下创建快捷方式。</p>
 <p>1 使用本地资源icon创建桌面快捷方式</p>
