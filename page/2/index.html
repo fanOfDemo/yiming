@@ -238,6 +238,120 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/06/用android studio将assets打包到jar文件的方法/" itemprop="url">
+                  用android studio将assets打包到jar文件的方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-06T22:14:47+08:00" content="Mar 6 2016">
+              Mar 6 2016
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/06/用android studio将assets打包到jar文件的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/06/用android studio将assets打包到jar文件的方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>在对应的app或者module的build.gradle中配置任务如下</p>
+<pre><code>    <span class="keyword">def</span> SDK_BASENAME = <span class="string">"sdk"</span>;
+    <span class="keyword">def</span> SDK_VERSION = <span class="string">"_V1.0"</span>;
+    <span class="keyword">def</span> sdkDestinationPath = <span class="string">"build"</span>;
+    <span class="keyword">def</span> zipFile = <span class="keyword">file</span>(<span class="string">'build/intermediates/bundles/release/classes.jar'</span>)
+
+
+<span class="keyword">task</span> deleteBuild(type: <span class="keyword">Delete</span>) {
+    <span class="keyword">delete</span> sdkDestinationPath + SDK_BASENAME + SDK_VERSION + <span class="string">".jar"</span>
+}
+<span class="keyword">task</span> makeJar(type: Jar) {
+    <span class="keyword">from</span> zipTree(zipFile)
+    <span class="keyword">from</span> <span class="keyword">fileTree</span>(dir: <span class="string">'src/main'</span>, <span class="keyword">includes</span>: [<span class="string">'assets/**'</span>])
+    baseName = SDK_BASENAME + SDK_VERSION
+    <span class="keyword">destinationDir</span> = <span class="keyword">file</span>(sdkDestinationPath)
+}
+makeJar.dependsOn(deleteBuild, build)
+</code></pre><p>然后在gradle中的other中找到markJar执行，生成的jar文件在build文件夹下</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/05/android基础知识点复习总结/" itemprop="url">
                   android基础知识点复习总结
                 </a>
@@ -635,149 +749,6 @@ public <span class="type">void</span> testMothed(<span class="type">String</span
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/11/内存泄露引发的血案/" itemprop="url">
-                  使用弱引用解决内存泄露问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-11T16:10:15+08:00" content="Oct 11 2015">
-              Oct 11 2015
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/11/内存泄露引发的血案/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/11/内存泄露引发的血案/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>下面是使用弱引用解决一个内存泄露的办法，过去这类自定义管理activity的代码在百度搜索结果中盛行，不知大部分这种用法都会导致内存泄露，导致android手机卡顿，产生不好的用户体验，</p>
-<pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">MultiDexApplication</span> {</span>
-
-    <span class="keyword">private</span> <span class="type">LinkedList</span>&lt;<span class="type">Activity</span>&gt; activityListTmp = <span class="keyword">new</span> <span class="type">LinkedList</span>&lt;&gt;();
-    <span class="keyword">private</span> <span class="type">LinkedList</span>&lt;<span class="type">WeakReference</span>&lt;<span class="type">Activity</span>&gt;&gt; activityList = <span class="keyword">new</span> <span class="type">LinkedList</span>&lt;&gt;();
-    <span class="keyword">private</span> static <span class="type">MyApplication</span> instance;
-   <span class="comment">// 单例</span>
-    public static <span class="type">MyApplication</span> getInstance() {
-        <span class="keyword">if</span> (<span class="literal">null</span> == instance) {
-           instance = <span class="keyword">new</span> <span class="type">MyApplication</span>();
-        }
-        <span class="keyword">return</span> instance;
-    }
-    ...
-}
-</code></pre><p>使用大名鼎鼎的squareup公司推出的框架检测内存溢出问题<br>gradle引用：<br>    //内存泄露<br>    debugCompile ‘com.squareup.leakcanary:leakcanary-android:1.3.1’<br>    releaseCompile ‘com.squareup.leakcanary:leakcanary-android-no-op:1.3.1’</p>
-<p>  在application中注册</p>
-<pre><code> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">MultiDexApplication</span> </span>{
-    <span class="keyword">private</span> <span class="keyword">static</span> App mInstance = <span class="keyword">null</span>;
-<span class="comment">//  private List&lt;Activity&gt; activityList = new LinkedList&lt;&gt;();</span>
-
-    <span class="keyword">private</span> LinkedList&lt;WeakReference&lt;Activity&gt;&gt; activityList = <span class="keyword">new</span> LinkedList&lt;&gt;();
-    <span class="keyword">private</span> RefWatcher refWatcher;
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>{
-        <span class="keyword">super</span>.onCreate();
-        mInstance = <span class="keyword">this</span>;
-        refWatcher = LeakCanary.install(<span class="keyword">this</span>);
-    }
-
-     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RefWatcher <span class="title">getRefWatcher</span><span class="params">()</span> </span>{
-        <span class="keyword">return</span> App.getInstance().refWatcher;
-    }
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> App <span class="title">getInstance</span><span class="params">()</span> </span>{
-        <span class="keyword">return</span> mInstance;
-    }
-    ...
-}
-</code></pre><p>  在BaseActivity中的onDestroy中监听没个activity销毁时是否有内存泄露</p>
-<pre><code>@Override
-protected void onDestroy<span class="params">()</span> {
-    ButterKnife.reset<span class="params">(getActivity<span class="params">()</span>)</span>;
-    super.onDestroy<span class="params">()</span>;
-    RefWatcher refWatcher = App.getRefWatcher<span class="params">()</span>;
-    refWatcher.watch<span class="params">(getActivity<span class="params">()</span>)</span>;
-}
-</code></pre><p>具体原理及使用文档请移步<a href="https://github.com/square/leakcanary" target="_blank" rel="external">leakcanary</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -823,7 +794,7 @@ protected void onDestroy<span class="params">()</span> {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -833,7 +804,7 @@ protected void onDestroy<span class="params">()</span> {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
