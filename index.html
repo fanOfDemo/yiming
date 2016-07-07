@@ -1121,7 +1121,38 @@ new Sc.Builder<span class="params">(this, intent)</span>.
 
 
   
+  <script>
+    var listView = new ListView(ListItem);
+listView.setBorder(1, 0x33000000);
+this.addView(listView);
 
+/* 构造models */
+var models = [];
+for (var i = 0; i < 100000; i++) {
+    models.add(i);
+}
+
+/* 加载models */
+listView.add(models);
+
+/* 自定义ListView中item的实现 */
+function ListItem() {
+    Button.apply(this);
+
+    var model;
+    this.setOnClickListener(function() {
+        alert(model);
+    });
+    var lp = new LayoutParams(LayoutParams.FILL_PARENT, 48);
+    this.setLayoutParams(lp);
+
+    /* ListView的item通过实现setModel来更新自身数据 */
+    this.setModel = function(m) {
+        model = m;
+        this.setText(m);
+    }
+}
+</script>
 
 
 
@@ -1129,8 +1160,10 @@ new Sc.Builder<span class="params">(this, intent)</span>.
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
-  
+
 </script>
+
+
 
 
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
@@ -1194,38 +1227,7 @@ new Sc.Builder<span class="params">(this, intent)</span>.
   </script>
 
   
-    <script>
-    var listView = new ListView(ListItem);
-listView.setBorder(1, 0x33000000);
-this.addView(listView);
-
-/* 构造models */
-var models = [];
-for (var i = 0; i < 100000; i++) {
-    models.add(i);
-}
-
-/* 加载models */
-listView.add(models);
-
-/* 自定义ListView中item的实现 */
-function ListItem() {
-    Button.apply(this);
-
-    var model;
-    this.setOnClickListener(function() {
-        alert(model);
-    });
-    var lp = new LayoutParams(LayoutParams.FILL_PARENT, 48);
-    this.setLayoutParams(lp);
-
-    /* ListView的item通过实现setModel来更新自身数据 */
-    this.setModel = function(m) {
-        model = m;
-        this.setText(m);
-    }
-}
-</script>
+  
   
 
 
