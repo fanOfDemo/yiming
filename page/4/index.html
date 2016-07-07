@@ -238,6 +238,164 @@
             
               
                 
+                <a class="post-title-link" href="/2015/07/23/Toolbar的高级使用/" itemprop="url">
+                  Toolbar的高级使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-23T08:07:18+08:00" content="Jul 23 2015">
+              Jul 23 2015
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/23/Toolbar的高级使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/23/Toolbar的高级使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Toolbar的高级使用">Toolbar的高级使用</h1><p>随着<code>android studio</code>的盛行，<code>eclipse</code>退出历史舞台，<code>material design</code>已日渐流行，本文简单介绍一下<code>toolbar</code>的基本使用方法</p>
+<p>下面是本人封装后的<code>toolbar</code>代码块<br>此处本人使用自定义的title，<code>setDisplayShowTitleEnabled</code>为<code>false</code>   ：</p>
+<pre><code>private void initToolbar<span class="params">()</span> {
+toolbar = <span class="params">(Toolbar)</span> findViewById<span class="params">(R.id.toolbar)</span>;
+<span class="keyword">if</span> <span class="params">(toolbar == null)</span>
+    return;
+title = <span class="params">(AppCompatTextView)</span> findViewById<span class="params">(R.id.title)</span>
+<span class="comment">//setup width of custom title to match in parent toolbar</span>
+toolbar.postDelayed<span class="params">(new Runnable<span class="params">()</span> {
+    @Override
+    public void run<span class="params">()</span> {
+        int maxWidth = toolbar.getWidth<span class="params">()</span>;
+        int titleWidth = title.getWidth<span class="params">()</span>;
+        int iconWidth = maxWidth - titleWidth;
+
+    if <span class="params">(iconWidth &gt; <span class="number">0</span>)</span> {
+        //icons <span class="params">(drawer, menu)</span> are on left and right side
+        int width = maxWidth - titleWidth * <span class="number">2</span>;
+        title.setMinimumWidth<span class="params">(width)</span>;
+        title.getLayoutParams<span class="params">()</span>.width = width;
+        }
+    }
+}, <span class="number">0</span>)</span>;
+toolbar.setTitle<span class="params">(null)</span>;
+setSupportActionBar<span class="params">(toolbar)</span>; getSupportActionBar<span class="params">()</span>.setDisplayShowHomeEnabled<span class="params">(<span class="literal">true</span>)</span>;    getSupportActionBar<span class="params">()</span>.setDisplayHomeAsUpEnabled<span class="params">(<span class="literal">true</span>)</span>; getSupportActionBar<span class="params">()</span>.setDisplayShowTitleEnabled<span class="params">(<span class="literal">false</span>)</span>;
+setNavigationIconColor<span class="params">(Color.WHITE, toolbar)</span>;
+toolbar.setNavigationOnClickListener<span class="params">(new View.OnClickListener<span class="params">()</span> {
+    @Override
+    public void onClick<span class="params">(View v)</span> {
+        onBackPressed<span class="params">()</span>;
+        }
+    })</span>;
+initColor<span class="params">()</span>;
+}
+</code></pre><p>initColor是一个恢复toolbar背景颜色的代码，主要用于在toolbar背景色透明度变化的界面下回到其他界面用于恢复</p>
+<pre><code>private void initColor<span class="params">()</span> {
+    <span class="keyword">if</span> <span class="params">(toolbar != null)</span> {
+        ColorDrawable background = <span class="params">(ColorDrawable)</span> toolbar.getBackground<span class="params">()</span>;
+        background.setAlpha<span class="params">(<span class="number">255</span>)</span>;
+    }
+}
+</code></pre><p>这段代码看懂了，也知道怎么动态改变toolbar的背景色了吧</p>
+<p>上文中AppCompatTextView需要在  <code>compile &#39;com.android.support:appcompat-v7:22.1.1&#39;</code> 即google自家库<code>appcompat-v7</code>22.0.0以上版本，此版本下<code>ActionBarActivity</code> 已过时，使用<code>AppCompatActivity</code>替代可以很好的兼容使用<code>Toolbar</code></p>
+<p>最后贴出本人使用的toolbar布局文件：</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;android.support.v7.widget.Toolbar
+<span class="variable">style=</span><span class="string">"@style/ToolBarStyle"</span>     xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"?attr/actionBarSize"</span>
+android:<span class="variable">background=</span><span class="string">"@color/green"</span>
+android:<span class="variable">minHeight=</span><span class="string">"?attr/actionBarSize"</span>
+&gt;
+
+&lt;android.support.v7.widget.AppCompatTextView
+    android:<span class="variable">id=</span><span class="string">"@+id/title"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_gravity=</span><span class="string">"center"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>
+    android:<span class="variable">text=</span><span class="string">"@string/app_name"</span>
+    android:<span class="variable">textColor=</span><span class="string">"@color/white"</span>
+    android:<span class="variable">textSize=</span><span class="string">"@dimen/text_navigation"</span>/&gt;
+&lt;/android.support.v7.widget.Toolbar&gt;
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/07/22/使用swipebacklayout实现ios右滑退出效果及注意事项/" itemprop="url">
                   使用swipebacklayout实现ios右滑退出效果及注意事项
                 </a>
@@ -408,7 +566,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

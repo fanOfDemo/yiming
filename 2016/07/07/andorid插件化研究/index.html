@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android基础知识点复习总结," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -57,40 +57,28 @@
 
 
 
-<meta name="description" content="本周阅读的文章和在学的技术Android 屏幕适配方案-工具
-Android Canvas总结
-Android SQLite详解
-Android动画浅析
-Android 代码风格指南和架构指南
-属性动画的概念解析—实现星星控件
-缓存网络数据—Rx和数据库
-浅谈android访问http原理
-Android插件化框架研究">
+<meta name="description" content="一、奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）
+针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS源码及hook思路讲解 
+二、百度的静态代理实现的动态加载（静态代理）
+三、利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）
+四、android-dynamical-loading疑似来自B站的组件化下载及行为规范方案，插件化未">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android基础知识点复习总结">
-<meta property="og:url" content="http://fanofdemo.github.io/2016/03/05/android基础知识点复习总结/index.html">
+<meta property="og:title" content="andorid插件化研究">
+<meta property="og:url" content="http://fanofdemo.github.io/2016/07/07/andorid插件化研究/index.html">
 <meta property="og:site_name" content="yiming">
-<meta property="og:description" content="本周阅读的文章和在学的技术Android 屏幕适配方案-工具
-Android Canvas总结
-Android SQLite详解
-Android动画浅析
-Android 代码风格指南和架构指南
-属性动画的概念解析—实现星星控件
-缓存网络数据—Rx和数据库
-浅谈android访问http原理
-Android插件化框架研究">
-<meta property="og:updated_time" content="2016-03-05T14:40:35.000Z">
+<meta property="og:description" content="一、奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）
+针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS源码及hook思路讲解 
+二、百度的静态代理实现的动态加载（静态代理）
+三、利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）
+四、android-dynamical-loading疑似来自B站的组件化下载及行为规范方案，插件化未">
+<meta property="og:updated_time" content="2016-07-07T02:26:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android基础知识点复习总结">
-<meta name="twitter:description" content="本周阅读的文章和在学的技术Android 屏幕适配方案-工具
-Android Canvas总结
-Android SQLite详解
-Android动画浅析
-Android 代码风格指南和架构指南
-属性动画的概念解析—实现星星控件
-缓存网络数据—Rx和数据库
-浅谈android访问http原理
-Android插件化框架研究">
+<meta name="twitter:title" content="andorid插件化研究">
+<meta name="twitter:description" content="一、奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）
+针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS源码及hook思路讲解 
+二、百度的静态代理实现的动态加载（静态代理）
+三、利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）
+四、android-dynamical-loading疑似来自B站的组件化下载及行为规范方案，插件化未">
 
 
 
@@ -108,7 +96,7 @@ Android插件化框架研究">
   };
 </script>
 
-  <title> android基础知识点复习总结 | yiming </title>
+  <title> andorid插件化研究 | yiming </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +248,7 @@ Android插件化框架研究">
             
             
               
-                android基础知识点复习总结
+                andorid插件化研究
               
             
           </h1>
@@ -272,8 +260,8 @@ Android插件化框架研究">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-05T22:25:00+08:00" content="Mar 5 2016">
-              Mar 5 2016
+            <time itemprop="dateCreated" datetime="2016-07-07T09:51:09+08:00" content="Jul 7 2016">
+              Jul 7 2016
             </time>
           </span>
 
@@ -283,8 +271,8 @@ Android插件化框架研究">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/05/android基础知识点复习总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/05/android基础知识点复习总结/" itemprop="commentsCount"></span>
+                <a href="/2016/07/07/andorid插件化研究/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/07/andorid插件化研究/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -306,15 +294,11 @@ Android插件化框架研究">
       
 
       
-        <h2 id="本周阅读的文章和在学的技术">本周阅读的文章和在学的技术</h2><p><a href="http://www.jianshu.com/p/dfc9d1265bc2" target="_blank" rel="external">Android 屏幕适配方案-工具</a></p>
-<p><a href="http://www.jianshu.com/p/836771e93a75" target="_blank" rel="external">Android Canvas总结</a></p>
-<p><a href="http://www.jianshu.com/p/5c33be6ce89d" target="_blank" rel="external">Android SQLite详解</a></p>
-<p><a href="http://www.jianshu.com/p/5377a5e0bbfb" target="_blank" rel="external">Android动画浅析</a></p>
-<p><a href="http://www.jianshu.com/p/3085d6afc92d" target="_blank" rel="external">Android 代码风格指南和架构指南</a></p>
-<p><a href="http://www.jianshu.com/p/520a0400aa7c" target="_blank" rel="external">属性动画的概念解析—实现星星控件</a></p>
-<p><a href="http://www.jianshu.com/p/b89d8d334683" target="_blank" rel="external">缓存网络数据—Rx和数据库</a></p>
-<p><a href="http://www.jianshu.com/p/fc1c4b24fa59" target="_blank" rel="external">浅谈android访问http原理</a></p>
-<p><a href="https://github.com/fanOfDemo/AndroidPluginFramework" target="_blank" rel="external">Android插件化框架研究</a></p>
+        <p>一、<a href="https://github.com/DroidPluginTeam/DroidPlugin" target="_blank" rel="external">奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）</a></p>
+<p><a href="https://github.com/tiann/understand-plugin-framework" target="_blank" rel="external">针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS<br>源码及hook思路讲解 </a></p>
+<p>二、<a href="https://github.com/singwhatiwanna/dynamic-load-apk" target="_blank" rel="external">百度的静态代理实现的动态加载（静态代理）</a></p>
+<p>三、<a href="https://github.com/houkx/android-pluginmgr" target="_blank" rel="external">利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）</a></p>
+<p>四、<a href="https://github.com/kaedea/android-dynamical-loading" target="_blank" rel="external">android-dynamical-loading</a><br>疑似来自B站的组件化下载及行为规范方案，插件化未完成（目前是实现了插件的下载和校验，以及尝试对插件和宿主制定统一约束和规范）</p>
 
       
     </div>
@@ -327,28 +311,18 @@ Android插件化框架研究">
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/android基础知识点复习总结/" rel="tag">#android基础知识点复习总结</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/27/Js与android webview遭遇过的坑/" rel="next" title="Js与android webview遭遇过的坑">
-                <i class="fa fa-chevron-left"></i> Js与android webview遭遇过的坑
+              <a href="/2016/06/15/android中常用的设计模式讲解（二）——解密各种单例模式/" rel="next" title="android中常用的设计模式讲解（二）——解密各种单例模式">
+                <i class="fa fa-chevron-left"></i> android中常用的设计模式讲解（二）——解密各种单例模式
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/06/用android studio将assets打包到jar文件的方法/" rel="prev" title="用android studio将assets打包到jar文件的方法">
-                用android studio将assets打包到jar文件的方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -363,10 +337,10 @@ Android插件化框架研究">
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/05/android基础知识点复习总结/"
-     data-title="android基础知识点复习总结"
+        <div class="ds-share flat" data-thread-key="2016/07/07/andorid插件化研究/"
+     data-title="andorid插件化研究"
      data-content=""
-     data-url="http://fanofdemo.github.io/2016/03/05/android基础知识点复习总结/">
+     data-url="http://fanofdemo.github.io/2016/07/07/andorid插件化研究/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -393,8 +367,8 @@ Android插件化框架研究">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/05/android基础知识点复习总结/"
-           data-title="android基础知识点复习总结" data-url="http://fanofdemo.github.io/2016/03/05/android基础知识点复习总结/">
+      <div class="ds-thread" data-thread-key="2016/07/07/andorid插件化研究/"
+           data-title="andorid插件化研究" data-url="http://fanofdemo.github.io/2016/07/07/andorid插件化研究/">
       </div>
     
   </div>
@@ -523,7 +497,7 @@ Android插件化框架研究">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本周阅读的文章和在学的技术"><span class="nav-number">1.</span> <span class="nav-text">本周阅读的文章和在学的技术</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
