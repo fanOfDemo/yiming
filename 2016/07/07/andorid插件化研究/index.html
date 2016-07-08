@@ -59,26 +59,29 @@
 
 <meta name="description" content="一、奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）
 针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS源码及hook思路讲解 
-二、百度的静态代理实现的动态加载（静态代理）
-三、利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）
-四、android-dynamical-loading疑似来自B站的组件化下载及行为规范方案，插件化未">
+优点：
+宿主插件完全分离，跨进程的沙箱环境，基于launcher的启动流程，通过欺骗系统的启动流程的思路启动插件apk，于系统来说宿主就是一个launcher，相对于代理的方式更可靠安全
+缺点：
+1、不支持插件的noti">
 <meta property="og:type" content="article">
 <meta property="og:title" content="andorid插件化研究">
 <meta property="og:url" content="http://fanofdemo.github.io/2016/07/07/andorid插件化研究/index.html">
 <meta property="og:site_name" content="yiming">
 <meta property="og:description" content="一、奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）
 针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS源码及hook思路讲解 
-二、百度的静态代理实现的动态加载（静态代理）
-三、利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）
-四、android-dynamical-loading疑似来自B站的组件化下载及行为规范方案，插件化未">
-<meta property="og:updated_time" content="2016-07-07T02:26:19.000Z">
+优点：
+宿主插件完全分离，跨进程的沙箱环境，基于launcher的启动流程，通过欺骗系统的启动流程的思路启动插件apk，于系统来说宿主就是一个launcher，相对于代理的方式更可靠安全
+缺点：
+1、不支持插件的noti">
+<meta property="og:updated_time" content="2016-07-08T12:51:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="andorid插件化研究">
 <meta name="twitter:description" content="一、奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）
 针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS源码及hook思路讲解 
-二、百度的静态代理实现的动态加载（静态代理）
-三、利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）
-四、android-dynamical-loading疑似来自B站的组件化下载及行为规范方案，插件化未">
+优点：
+宿主插件完全分离，跨进程的沙箱环境，基于launcher的启动流程，通过欺骗系统的启动流程的思路启动插件apk，于系统来说宿主就是一个launcher，相对于代理的方式更可靠安全
+缺点：
+1、不支持插件的noti">
 
 
 
@@ -296,10 +299,23 @@
       
         <p>一、<a href="https://github.com/DroidPluginTeam/DroidPlugin" target="_blank" rel="external">奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）</a></p>
 <p><a href="https://github.com/tiann/understand-plugin-framework" target="_blank" rel="external">针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS<br>源码及hook思路讲解 </a></p>
-<p>二、<a href="https://github.com/singwhatiwanna/dynamic-load-apk" target="_blank" rel="external">百度的静态代理实现的动态加载（静态代理）</a></p>
-<p>三、<a href="https://github.com/houkx/android-pluginmgr" target="_blank" rel="external">利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）</a></p>
-<p>四、<a href="https://github.com/kaedea/android-dynamical-loading" target="_blank" rel="external">android-dynamical-loading</a><br>疑似来自B站的组件化下载及行为规范方案，插件化未完成（目前是实现了插件的下载和校验，以及尝试对插件和宿主制定统一约束和规范）</p>
-
+<pre><code>优点：
+宿主插件完全分离，跨进程的沙箱环境，基于launcher的启动流程，通过欺骗系统的启动流程的思路启动插件apk，于系统来说宿主就是一个launcher，相对于代理的方式更可靠安全
+缺点：
+1、不支持插件的notifycation
+2、需要框架的使用者实现宿主和插件的路由协议，以便跨进程通讯
+</code></pre><p>二、<a href="https://github.com/singwhatiwanna/dynamic-load-apk" target="_blank" rel="external">百度的静态代理实现的动态加载（静态代理）</a></p>
+<pre><code>优点：易懂、上手简单、适合轻量级插件
+缺点：
+<span class="number">1</span>、插件代码需要支持<span class="keyword">that</span>语法以供宿主识别
+<span class="number">2</span>、不支持插件中的数据库
+<span class="number">3</span>、插件中<span class="keyword">that</span>语法在复杂的activity继承关系中难以维护
+<span class="number">4</span>、不支持activity和fragmentActivity以外的activity，手动增加其它activity的支持会造成大量的代理，额外增加大量内存消耗以及不可控性，不适合较大的插件
+</code></pre><p>三、<a href="https://github.com/houkx/android-pluginmgr" target="_blank" rel="external">利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）</a></p>
+<pre><code>原理和上面的静态代理类似，不同之处在于上面使用手动代理并加载插件中activity，此框架利用dexmaker框架实现了复制插件代码并在宿主中生成二进制的代码以实现插件化
+</code></pre><p>四、<a href="https://github.com/kaedea/android-dynamical-loading" target="_blank" rel="external">android-dynamical-loading</a><br>疑似来自B站的组件化下载及行为规范方案，插件化未完成（目前是实现了插件的下载和校验，以及尝试对插件和宿主制定统一约束和规范）</p>
+<pre><code>只做了基础的组件化方案，框架本身并不支持动态加载activity和<span class="keyword">service</span>等等，如框架作者所说，此框架适合设计自定义的组件化包，比如脱离android生命的类，无acitivty或<span class="keyword">service</span>的sdk等等，比如<span class="constant">B</span>站的播放器核心so包的频繁更新适合用于动态加载，话说回来，适不适合技术说了也没用啊，产品就要这么干也没办法
+</code></pre>
       
     </div>
 
