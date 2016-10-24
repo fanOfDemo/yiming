@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="sdk 插件化," />
 
 
 
@@ -57,15 +57,28 @@
 
 
 
-<meta name="description" content="恶补基础知识中...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yiming">
-<meta property="og:url" content="http://fanofdemo.github.io/index.html">
+<meta name="description" content="距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。
+插件化分析与研究     这篇文章写的时候只是简单的进行易用性对比，并未深入的讲解怎么应用在实际项目；
+今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了，现在的组件化研究的可以看Android业务组件化开发实践 
+造车子需要轮子和图纸：
+轮子一：ZeusPlugin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="热更新SDK的设计与实践">
+<meta property="og:url" content="http://fanofdemo.github.io/2016/10/21/热更新SDK的设计与实践/index.html">
 <meta property="og:site_name" content="yiming">
-<meta property="og:description" content="恶补基础知识中...">
+<meta property="og:description" content="距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。
+插件化分析与研究     这篇文章写的时候只是简单的进行易用性对比，并未深入的讲解怎么应用在实际项目；
+今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了，现在的组件化研究的可以看Android业务组件化开发实践 
+造车子需要轮子和图纸：
+轮子一：ZeusPlugin">
+<meta property="og:updated_time" content="2016-10-24T15:19:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yiming">
-<meta name="twitter:description" content="恶补基础知识中...">
+<meta name="twitter:title" content="热更新SDK的设计与实践">
+<meta name="twitter:description" content="距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。
+插件化分析与研究     这篇文章写的时候只是简单的进行易用性对比，并未深入的讲解怎么应用在实际项目；
+今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了，现在的组件化研究的可以看Android业务组件化开发实践 
+造车子需要轮子和图纸：
+轮子一：ZeusPlugin">
 
 
 
@@ -83,7 +96,7 @@
   };
 </script>
 
-  <title> yiming </title>
+  <title> 热更新SDK的设计与实践 | yiming </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -102,9 +115,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -215,9 +226,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -237,10 +248,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/10/21/热更新SDK的设计与实践/" itemprop="url">
-                  热更新SDK的设计与实践
-                </a>
+                热更新SDK的设计与实践
               
             
           </h1>
@@ -286,9 +294,7 @@
       
 
       
-        
-          
-            <p>距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。</p>
+        <p>距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。</p>
 <p><a href="http://wengyiming.cn/2016/07/07/andorid%E6%8F%92%E4%BB%B6%E5%8C%96%E7%A0%94%E7%A9%B6/" target="_blank" rel="external">插件化分析与研究</a>     这篇文章写的时候只是简单的进行易用性对比，并未深入的讲解怎么应用在实际项目；</p>
 <p>今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了，现在的组件化研究的可以看<a href="http://kymjs.com/code/2016/10/18/01" target="_blank" rel="external">Android业务组件化开发实践</a> </p>
 <p>造车子需要轮子和图纸：</p>
@@ -529,631 +535,70 @@
             }
 </code></pre><p> 11点了，前面提到过为什么用单例模式设计SDK的接口实现者，会有什么好处和坑点之类，还有插件的混淆，下载，签名校验，会遇到哪些坑，下次再写吧。<br>文章中的源码近期会同步到github，因为家里电脑git配置出了点问题，先等等吧</p>
 
-          
-        
       
     </div>
 
     <div>
       
+        
+      
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/07/andorid插件化研究/" itemprop="url">
-                  andorid插件化研究
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-07T09:51:09+08:00" content="Jul 7 2016">
-              Jul 7 2016
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/sdk-插件化/" rel="tag">#sdk 插件化</a>
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/07/andorid插件化研究/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/07/andorid插件化研究/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>一、<a href="https://github.com/DroidPluginTeam/DroidPlugin" target="_blank" rel="external">奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）</a></p>
-<p><a href="https://github.com/tiann/understand-plugin-framework" target="_blank" rel="external">针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS<br>源码及hook思路讲解 </a></p>
-<pre><code>优点：
-宿主插件完全分离，跨进程的沙箱环境，基于launcher的启动流程，通过欺骗系统的启动流程的思路启动插件apk，于系统来说宿主就是一个launcher，相对于代理的方式更可靠安全
-缺点：
-1、不支持插件的notifycation
-2、需要框架的使用者实现宿主和插件的路由协议，以便跨进程通讯
-</code></pre><p>二、<a href="https://github.com/singwhatiwanna/dynamic-load-apk" target="_blank" rel="external">百度的静态代理实现的动态加载（静态代理）</a></p>
-<pre><code>优点：易懂、上手简单、适合轻量级插件
-缺点：
-<span class="number">1</span>、插件代码需要支持<span class="keyword">that</span>语法以供宿主识别
-<span class="number">2</span>、不支持插件中的数据库
-<span class="number">3</span>、插件中<span class="keyword">that</span>语法在复杂的activity继承关系中难以维护
-<span class="number">4</span>、不支持activity和fragmentActivity以外的activity，手动增加其它activity的支持会造成大量的代理，额外增加大量内存消耗以及不可控性，不适合较大的插件
-</code></pre><p>三、<a href="https://github.com/houkx/android-pluginmgr" target="_blank" rel="external">利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）</a></p>
-<pre><code>原理和上面的静态代理类似，不同之处在于上面使用手动代理并加载插件中activity，此框架利用dexmaker框架实现了复制插件代码并在宿主中生成二进制的代码以实现插件化
-</code></pre><p>四、<a href="https://github.com/kaedea/android-dynamical-loading" target="_blank" rel="external">android-dynamical-loading</a><br>疑似来自B站的组件化下载及行为规范方案，插件化未完成（目前是实现了插件的下载和校验，以及尝试对插件和宿主制定统一约束和规范）</p>
-<pre><code>只做了基础的组件化方案，框架本身并不支持动态加载activity和<span class="keyword">service</span>等等，如框架作者所说，此框架适合设计自定义的组件化包，比如脱离android生命的类，无acitivty或<span class="keyword">service</span>的sdk等等，比如<span class="constant">B</span>站的播放器核心so包的频繁更新适合用于动态加载，话说回来，适不适合技术说了也没用啊，产品就要这么干也没办法
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/07/07/andorid插件化研究/" rel="next" title="andorid插件化研究">
+                <i class="fa fa-chevron-left"></i> andorid插件化研究
+              </a>
             
-              
-                
-                <a class="post-title-link" href="/2016/06/15/android中常用的设计模式讲解（二）——解密各种单例模式/" itemprop="url">
-                  android中常用的设计模式讲解（二）——解密各种单例模式
-                </a>
-              
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-15T10:58:11+08:00" content="Jun 15 2016">
-              Jun 15 2016
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/15/android中常用的设计模式讲解（二）——解密各种单例模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/android中常用的设计模式讲解（二）——解密各种单例模式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <hr>
-<p><a href="http://fanofdemo.github.io/2016/06/14/%E4%BC%81%E4%B8%9Asdk%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AE%9E%E8%B7%B5/">上一节回顾：策略模式</a></p>
-<p>本节主要讲解各种单例模式的使用以及优缺点</p>
-<h2 id="1懒汉单例：">1懒汉单例：</h2><p>特点：<br>1、线程不安全<br>2、类加载时不创建实例，运行时获取单例，类加载快，运行时慢</p>
-<pre><code>public class Singleton1 {
-   <span class="keyword"> private</span><span class="keyword"> static</span> Singleton1 instance;
-   <span class="keyword"> private</span><span class="function"> Singleton1(</span><span class="function">)</span>{}
-
-   <span class="keyword"> public</span><span class="keyword"> static</span> Singleton1<span class="function"> getInstance(</span><span class="function">)</span> {
-          <span class="instruction"> if </span>(instance == null<span class="function">)</span> {
-           <span class="instruction"> instance </span>=<span class="instruction"> new </span>Singleton1(<span class="function">)</span>;
-        }
-       <span class="instruction"> return </span>instance;
-    }
-}
-</code></pre><h2 id="2饿汉单例">2饿汉单例</h2><p>特点：<br>1、线程不安全<br>2、类加载时创建实例，加载时慢，运营时快</p>
-<pre><code>public class Singleton2 {
-   <span class="keyword"> private</span> Singleton2<span class="function"> (</span><span class="function">)</span> {
-    }
-
-   <span class="keyword"> private</span><span class="keyword"> static</span> Singleton2<span class="instruction"> instance </span>=<span class="instruction"> new </span>Singleton2<span class="function"> (</span><span class="function">)</span>;
-
-   <span class="keyword"> public</span><span class="keyword"> static</span> Singleton2 getInstance<span class="function"> (</span><span class="function">)</span> {
-       <span class="instruction"> return </span>instance;
-    }
-}
-</code></pre><h2 id="3双重校验锁">3双重校验锁</h2><p>特点：1、线程安全</p>
-<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton4</span> </span>{
-    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton4 singleton;
-    <span class="function"><span class="keyword">private</span> <span class="title">Singleton4</span><span class="params">()</span></span>{}
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton4 <span class="title">getSingleton</span><span class="params">()</span> </span>{
-        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) {
-            <span class="keyword">synchronized</span> (Singleton4.class) {
-                <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) {
-                    singleton = <span class="keyword">new</span> Singleton4();
-                }
-        }
-    }
-    <span class="keyword">return</span> singleton;
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
+
+    <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2016/10/21/热更新SDK的设计与实践/"
+     data-title="热更新SDK的设计与实践"
+     data-content=""
+     data-url="http://fanofdemo.github.io/2016/10/21/热更新SDK的设计与实践/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
 
-  
-  
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/14/android中常用的设计模式讲解（一）——策略者模式/" itemprop="url">
-                  android中常用的设计模式讲解（一）——策略者模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-14T22:57:54+08:00" content="Jun 14 2016">
-              Jun 14 2016
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/14/android中常用的设计模式讲解（一）——策略者模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/14/android中常用的设计模式讲解（一）——策略者模式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h2 id="第一章_背景及行情介绍">第一章  背景及行情介绍</h2><ul>
-<li><p>国内这方面的产品做的最大的就是友盟了，服务包含移动应用统计分析以及细分行业的移动游戏统计分析、社会化分享组件、消息推送、自动更新、用户反馈、错误分析等产品。</p>
-</li>
-<li><p>国外最为开发者熟悉的主要是square公司：<a href="https://github.com/square，(主要开发者有android开源明星程序员" target="_blank" rel="external">https://github.com/square，(主要开发者有android开源明星程序员</a> <a href="https://github.com/JakeWharton)。" target="_blank" rel="external">https://github.com/JakeWharton)。</a></p>
-<p>当然如果从学习如何开发sdk的角度来看，最应该看的还是google的android源码以及google的support库，比如V4库，v7库</p>
-</li>
-</ul>
-<hr>
-<h2 id="第二章_优秀的库有哪些特点：">第二章 优秀的库有哪些特点：</h2><pre><code> 俗话说，麻雀虽小，五脏俱全，一个优秀的android库普遍都有以下几个特点：
-<span class="comment">* 1、易用性，易扩展（架构）</span>
-<span class="comment">* 2、高内聚低耦合(分包，设计模式)</span>
-<span class="comment">* 3、轻量（以最低的文件大小，最少量的api支持，最少的其它依赖实现）</span>
-<span class="comment">* 4、资源和代码剥离（代码需要混淆后发布，资源作为整体库和混淆代码一并发布(主要是为了照顾使        </span>
-    用eclipse开发者，这里主要是指游戏开发商，<span class="keyword">app</span>开发可以直接发布混淆了代码的aar文件)
-<span class="comment">* 5、api的使用与兼容性</span>
-<span class="comment">* 6、版本控制</span>
-</code></pre><hr>
-<h3 id="第三章_如何灵活使用设计模式设计sdk">第三章 如何灵活使用设计模式设计sdk</h3><h4 id="策略模式的应用">策略模式的应用</h4><p>阅文游戏sdk分为起点游戏sdk和qq阅读游戏sdk的策略模式使用</p>
-<p>首先需要抽象出业务，一个正常的游戏sdk一般有以下基本流程</p>
-<ul>
-<li>1、初始化(必要参数)</li>
-<li>2、平台的登录(必要参数，以及回调方式)（注册、其它登录形式）</li>
-<li>3、平台支付(必要参数，回调参数)</li>
-</ul>
-<p>公共业务抽离后，我们先设计一个接口</p>
-<pre><code><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IYWGameAPI</span> {
-    <span class="function"><span class="keyword">void</span> <span class="title">init</span>(<span class="params">Context context,String gameId</span>)</span>;
-       <span class="function"><span class="keyword">void</span> <span class="title">login</span>(<span class="params">String...<span class="keyword">params</span></span>)</span>;
-    <span class="function"><span class="keyword">void</span> <span class="title">charge</span>(<span class="params">String...<span class="keyword">params</span></span>)</span>;
-}
-</code></pre><hr>
-<p>先设置两个具体实现类；</p>
-<p>QDRGameAPI:</p>
-<pre><code><span class="tag">public</span> <span class="tag">class</span> <span class="tag">QDRGameAPI</span> <span class="tag">implements</span> <span class="tag">IYWGameAPI</span> {
-    <span class="variable">@Override</span>
-    public void init (Context context, String gameId){
-
-    }
-
-    <span class="variable">@Override</span>
-    public void login (String... params) {
-
-    }
-
-    <span class="variable">@Override</span>
-    public void charge (String... params) {
-
-    }
-}
-</code></pre><hr>
-<p>QQRGameAPI:</p>
-<pre><code><span class="tag">public</span> <span class="tag">class</span> <span class="tag">QQRGameAPI</span> <span class="tag">implements</span> <span class="tag">IYWGameAPI</span> {
-    <span class="variable">@Override</span>
-    public void init (Context context, String gameId) {
-
-    }
-
-    <span class="variable">@Override</span>
-    public void login (String... params) {
-
-    }    
-
-    <span class="variable">@Override</span>
-    public void charge (String... params) {
-
-    }
-}
-</code></pre><hr>
-<p>然后我们设置一个装载类<br>YWGameAPI：</p>
-<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">YWGameAPI</span> {
-    <span class="keyword">private</span> IYWGameAPI mIYWGameAPI;
-
-    <span class="function"><span class="keyword">public</span> IYWGameAPI <span class="title">getIYWGameAPI</span> (<span class="params"></span>) </span>{
-        <span class="keyword">return</span> mIYWGameAPI;
-    }
-
-    <span class="function"><span class="keyword">public</span> <span class="title">YWGameAPI</span> (<span class="params">IYWGameAPI IYWGameAPI</span>) </span>{
-        mIYWGameAPI = IYWGameAPI;
-    }
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIYWGameAPI</span> (<span class="params">IYWGameAPI IYWGameAPI</span>) </span>{
-        mIYWGameAPI = IYWGameAPI;
-    }
-
-    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">init</span> (<span class="params">Context context, String gameId</span>) </span>{
-
-        mIYWGameAPI.init (context, gameId);
-    }
-
-    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">login</span> (<span class="params">String... <span class="keyword">params</span></span>) </span>{
-        mIYWGameAPI.login (<span class="keyword">params</span>);
-    }
-
-    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">charge</span> (<span class="params">String... <span class="keyword">params</span></span>) </span>{
-        mIYWGameAPI.charge (<span class="keyword">params</span>);
-    }
-}
-
-
-
-这样我们就使用策略模式将起点游戏sdk的入口和qq阅读游戏sdk的入口合并成了阅文sdk入口，只需要在用的时候分别传入不同的api实例，自动切换了内部的调用。下面看一下如何使用：
-
-
-
-
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MainActivity</span> <span class="title">extends</span> <span class="title">AppCompatActivity</span> {
-
-    <span class="keyword">private</span> YWGameAPI mQDGameAPI;
-    <span class="keyword">private</span> YWGameAPI mQQRGameAPI;
-
-    @<span class="function">Override
-    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span> (<span class="params">Bundle savedInstanceState</span>) </span>{
-        super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_main);
-        mQDGameAPI = <span class="keyword">new</span> YWGameAPI (<span class="keyword">new</span> QDRGameAPI ());
-        mQQRGameAPI = <span class="keyword">new</span> YWGameAPI (<span class="keyword">new</span> QQRGameAPI ());
-
-
-        mQDGameAPI.init (<span class="keyword">this</span>.getApplicationContext (),<span class="string">"qdgameid"</span>);
-        mQQRGameAPI.init (<span class="keyword">this</span>.getApplicationContext (),<span class="string">"qqrgameid"</span>);
-
-        mQDGameAPI.login (<span class="string">"account"</span>,<span class="string">"pwd"</span>,<span class="string">"serverid"</span>);
-        mQQRGameAPI.login (<span class="string">"openId"</span>,<span class="string">"appkey"</span>);
-
-
-        mQDGameAPI.charge (<span class="string">"money"</span>,<span class="string">"orderid"</span>,<span class="string">"callbackurl"</span>);
-        mQQRGameAPI.charge (<span class="string">"money"</span>,<span class="string">"orderid"</span>,<span class="string">"callbackurl"</span>);
-
-    }
-}
-</code></pre><hr>
-<p><a href="https://github.com/fanOfDemo/SDKLessenDemo/tree/master" target="_blank" rel="external">戳我查看github源码</a></p>
-
-          
-        
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/29/非常漂亮的mvp架构/" itemprop="url">
-                  非常漂亮的mvp架构
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-29T23:10:43+08:00" content="Mar 29 2016">
-              Mar 29 2016
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/29/非常漂亮的mvp架构/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/非常漂亮的mvp架构/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>包结构图</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/mvp.jpg" alt="分包"></p>
-<h2 id="mvp之model优化：">mvp之model优化：</h2><ul>
-<li>优化前</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/model1.jpg" alt="优化前"></p>
-<ul>
-<li>优化1</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/model2.jpg" alt="优化1"></p>
-<ul>
-<li>最后 </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/model3.jpg" alt="最后"></p>
-<h2 id="mvp之model复用：">mvp之model复用：</h2><h3 id="用mvp后，model复用model非常方便">用mvp后，model复用model非常方便</h3><p>比如service中没有view,直接使用service当做P去复用model<br>model作为模块化的移动，模块化的删除添加修改，对其它不相干的模块丝毫不影响 </p>
-<ul>
-<li>service无view时作为P直接复用model </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/mvp_service.jpg" alt="service"></p>
-<p>分分钟将一个600行的activity拆成了一个180行的activity和一个300行的service </p>
-<h3 id="可以参考我的mvp项目">可以参考我的mvp项目</h3><p><a href="https://github.com/fanOfDemo/railtool" target="_blank" rel="external">railtool</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+  </div>
 
 
           </div>
@@ -1161,6 +606,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/21/热更新SDK的设计与实践/"
+           data-title="热更新SDK的设计与实践" data-url="http://fanofdemo.github.io/2016/10/21/热更新SDK的设计与实践/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -1180,8 +633,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://cdn.duitang.com/uploads/item/201601/11/20160111142548_z8xfV.jpeg"
@@ -1266,6 +728,23 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
       
 
     </div>
@@ -1357,6 +836,167 @@
 
 
   
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
 
   
 

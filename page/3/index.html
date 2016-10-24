@@ -238,6 +238,120 @@
             
               
                 
+                <a class="post-title-link" href="/2015/11/27/Js与android webview遭遇过的坑/" itemprop="url">
+                  Js与android webview遭遇过的坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-27T12:53:37+08:00" content="Nov 27 2015">
+              Nov 27 2015
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/27/Js与android webview遭遇过的坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/27/Js与android webview遭遇过的坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Uncaught_TypeError:_Object_[object_Object]_has_no_method">Uncaught TypeError: Object [object Object] has no method</h1><h2 id="可能产生该情况有几种可能">可能产生该情况有几种可能</h2><h3 id="1、安全限制问题">1、安全限制问题</h3><p>如果只在4.2版本以上的机器出问题，那么就是系统处于安全限制的问题了。Android文档这样说的</p>
+<pre><code><span class="type">Caution</span>: <span class="type">If</span> you’ve <span class="type">set</span> your targetSdkVersion to <span class="number">17</span> <span class="keyword">or</span> higher, you must add the @<span class="type">JavascriptInterface</span> annotation to <span class="type">any</span> <span class="keyword">method</span> that you want available your web page code (the <span class="keyword">method</span> must also be public). <span class="type">If</span> you <span class="keyword">do</span> <span class="keyword">not</span> provide the annotation, then the <span class="keyword">method</span> will <span class="keyword">not</span> accessible by your web page <span class="keyword">when</span> running on <span class="type">Android</span> <span class="number">4</span>.<span class="number">2</span> <span class="keyword">or</span> higher.
+
+    中文大意为
+
+警告：如果你的程序目标平台是<span class="number">17</span>或者是更高，你必须要在暴露给网页可调用的方法（这个方法必须是公开的）加上@<span class="type">JavascriptInterface</span>注释。如果你不这样做的话，在<span class="number">4</span>.<span class="number">2</span>以以后的平台上，网页无法访问到你的方法。
+例：
+@<span class="type">JavascriptInterface</span>
+public <span class="type">void</span> testMothed(<span class="type">String</span> str) {
+}
+</code></pre><p> 解决方法</p>
+<p>将targetSdkVersion设置成17或更高，引入@JavascriptInterface注释<br>自己创建一个注释接口名字为@JavascriptInterface，然后将其引入。注意这个接口不能混淆。这种方式不推荐，大概在4.4之后有问题。<br>注，创建@JavascriptInterface代码</p>
+<h3 id="2、代码混淆问题">2、代码混淆问题</h3><p>如果在没有混淆的版本运行正常，在混淆后的版本的代码运行错误，并提示Uncaught TypeError: Object [object Object] has no method，那就是你没有做混淆例外处理。 在混淆文件加入类似这样的代码</p>
+<pre><code>-<span class="ruby">keepattributes *<span class="constant">Annotation</span>*
+</span>-<span class="ruby">keepclassmembers <span class="class"><span class="keyword">class</span> * {</span>
+</span>    @android.webkit.JavascriptInterface &lt;methods&gt;;
+}
+</code></pre><p>本人测试环境是android5.1 moto x 1085</p>
+<p>博文主要参考<br><a href="http://droidyue.com/blog/2014/09/20/interaction-between-java-and-javascript-in-android/" target="_blank" rel="external">http://droidyue.com/blog/2014/09/20/interaction-between-java-and-javascript-in-android/</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/11/17/换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app/" itemprop="url">
                   无聊写了个demo【混合了别人的第三方B站后导致代码混乱已停更】
                 </a>
@@ -657,109 +771,6 @@ protected void onDestroy<span class="params">()</span> {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/27/如何有效避免fragment失去状态/" itemprop="url">
-                  如何有效避免fragment失去状态
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-07-27T10:30:41+08:00" content="Jul 27 2015">
-              Jul 27 2015
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/27/如何有效避免fragment失去状态/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/27/如何有效避免fragment失去状态/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="如何有效避免fragment失去状态">如何有效避免fragment失去状态</h1><p>最近开发公司项目首页使用了<code>fragment</code>，在程序进入后台，<code>fragment</code>寄托的<code>activity</code>被后台杀死，再次进入恢复时无法恢复碎片<code>fragment</code>，导致<code>fragment</code>下的所有事件失效问题：</p>
-<ul>
-<li><p><strong>避免在<code>onResume</code>中执行<code>fragment</code>的提交操作，如果必须在<code>onResume</code>中执行，建议在<code>fragmentActivity</code>或者<code>actionbarActivity</code>或者<code>AppCompatActivity</code>下的<code>onPostResume</code>方法中执行<code>commit()</code>方法</strong></p>
-</li>
-<li><p><strong>如果当前activity中只有一个<code>fragment</code>，建议弃用<code>fragment</code>，直接将布局写在当前<code>activity</code>的<code>layout</code>下，从而避免API上的bug增加代码维护困难</strong></p>
-</li>
-</ul>
-<p>参考：<a href="http://blog.jobbole.com/66117/" target="_blank" rel="external">http://blog.jobbole.com/66117/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -805,7 +816,7 @@ protected void onDestroy<span class="params">()</span> {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -815,7 +826,7 @@ protected void onDestroy<span class="params">()</span> {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
