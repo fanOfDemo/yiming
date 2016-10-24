@@ -59,26 +59,23 @@
 
 <meta name="description" content="距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。
 插件化分析与研究     这篇文章写的时候只是简单的进行易用性对比，并未深入的讲解怎么应用在实际项目；
-今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了，现在的组件化研究的可以看Android业务组件化开发实践 
-造车子需要轮子和图纸：
-轮子一：ZeusPlugin">
+今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了
+现在的组件化研究可以看Android业务组件化开发实践 ，大帅的从零开始的Android新项目11 - 组件化实">
 <meta property="og:type" content="article">
 <meta property="og:title" content="热更新SDK的设计与实践">
 <meta property="og:url" content="http://fanofdemo.github.io/2016/10/21/热更新SDK的设计与实践/index.html">
 <meta property="og:site_name" content="yiming">
 <meta property="og:description" content="距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。
 插件化分析与研究     这篇文章写的时候只是简单的进行易用性对比，并未深入的讲解怎么应用在实际项目；
-今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了，现在的组件化研究的可以看Android业务组件化开发实践 
-造车子需要轮子和图纸：
-轮子一：ZeusPlugin">
-<meta property="og:updated_time" content="2016-10-24T15:19:36.000Z">
+今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了
+现在的组件化研究可以看Android业务组件化开发实践 ，大帅的从零开始的Android新项目11 - 组件化实">
+<meta property="og:updated_time" content="2016-10-24T16:17:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="热更新SDK的设计与实践">
 <meta name="twitter:description" content="距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。
 插件化分析与研究     这篇文章写的时候只是简单的进行易用性对比，并未深入的讲解怎么应用在实际项目；
-今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了，现在的组件化研究的可以看Android业务组件化开发实践 
-造车子需要轮子和图纸：
-轮子一：ZeusPlugin">
+今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了
+现在的组件化研究可以看Android业务组件化开发实践 ，大帅的从零开始的Android新项目11 - 组件化实">
 
 
 
@@ -296,8 +293,9 @@
       
         <p>距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。</p>
 <p><a href="http://wengyiming.cn/2016/07/07/andorid%E6%8F%92%E4%BB%B6%E5%8C%96%E7%A0%94%E7%A9%B6/" target="_blank" rel="external">插件化分析与研究</a>     这篇文章写的时候只是简单的进行易用性对比，并未深入的讲解怎么应用在实际项目；</p>
-<p>今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了，现在的组件化研究的可以看<a href="http://kymjs.com/code/2016/10/18/01" target="_blank" rel="external">Android业务组件化开发实践</a> </p>
-<p>造车子需要轮子和图纸：</p>
+<p>今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了</p>
+<p>现在的组件化研究可以看<a href="http://kymjs.com/code/2016/10/18/01" target="_blank" rel="external">Android业务组件化开发实践</a> ，大帅的<a href="https://zhuanlan.zhihu.com/p/23147164?from=timeline&amp;isappinstalled=1" target="_blank" rel="external">从零开始的Android新项目11 - 组件化实践（1）</a></p>
+<p>回到我的话题，造车子需要轮子和图纸：</p>
 <p>轮子一：<a href="http://www.jianshu.com/p/b1e7b6326330" target="_blank" rel="external">ZeusPlugin:掌阅Android App插件补丁实践</a>史上最易上手的插件化轮子</p>
 <p>图纸二：策略者模式的应用<br>,之前博客我介绍过策略者模式和单例模式在SDK的应用，<a href="http://wengyiming.cn/2016/06/14/android%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%AE%B2%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_blank" rel="external">android中常用的设计模式讲解（一）——策略者模式.md</a></p>
 <p><a href="http://wengyiming.cn/2016/06/15/android%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%AE%B2%E8%A7%A3%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E8%A7%A3%E5%AF%86%E5%90%84%E7%A7%8D%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" target="_blank" rel="external">android中常用的设计模式讲解（二）——解密各种单例模式</a></p>
@@ -323,7 +321,8 @@
     <span class="keyword">void</span> logout (<span class="keyword">JSONObject</span> jsonObject, ValueCallback&lt;<span class="keyword">JSONObject</span>&gt; valueCallback);
 
 }
-</code></pre><p>然后再写实现公共接口的同时，增加静态类单例模式（为什么使用单例、有什么坑稍后再讲），<br>A/B两个平台的游戏SDK的业务实现:</p>
+</code></pre><p>公共接口一开始可以写在sdk的实现module中，代码写完后将该接口文件移到zeusPlugin中，将zeusPlugin打包成jar，提供给SDK module以provided形式依赖（只参与编译不参与打包），同时作为宿主的compile(可作为编译及打包),这样插件和宿主都能识别使用共同的接口，之后可以将sdkmodule中的相关公共接口代码注释或删除，并将接口的实现改成jar中的接口，宿主负责调用，插件负责实现，从而实现了SDK的热更新，注意这个接口要保证尽可能兼容到所有的业务功能，不然这个热更新就没什么意义了。</p>
+<p>然后再写实现公共接口的同时，增加静态类单例模式（为什么使用单例、有什么坑稍后再讲），<br>A/B两个平台的游戏SDK的业务实现:</p>
 <p>AGameAPI</p>
 <pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AGameAPI</span> <span class="keyword">implements</span> <span class="title">IGameAPI</span> </span>{
 
@@ -533,7 +532,7 @@
             } catch <span class="params">(IllegalAccessException e)</span> {
                 e.printStackTrace <span class="params">()</span>;
             }
-</code></pre><p> 11点了，前面提到过为什么用单例模式设计SDK的接口实现者，会有什么好处和坑点之类，还有插件的混淆，下载，签名校验，会遇到哪些坑，下次再写吧。<br>文章中的源码近期会同步到github，因为家里电脑git配置出了点问题，先等等吧</p>
+</code></pre><p> 前面提到过为什么用单例模式设计SDK的接口实现者，会有什么好处和坑点之类，还有插件的混淆，下载，签名校验，会遇到哪些坑，下次再写吧。<br>文章中的源码近期会同步到github，因为家里电脑git配置出了点问题，先等等吧</p>
 
       
     </div>
