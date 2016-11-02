@@ -238,6 +238,135 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/02/使用System-nanoTime测试代码执行时间/" itemprop="url">
+                  使用System.nanoTime测试代码执行时间
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-02T23:09:35+08:00" content="Nov 2 2016">
+              Nov 2 2016
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/02/使用System-nanoTime测试代码执行时间/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/使用System-nanoTime测试代码执行时间/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前写一个插件下载过程中，当用户网速很慢时的下载计时问题，因为我的插件化是在APP启动后的第一时刻做的事，如果这个时间太长，比如当前网速是每秒20k，而插件的大小是600K,意味着需要30s用户才能做下一步操作，很明显这是不可取的。</p>
+<p>而API级别的网络超时只有connectTimeOut以及readTimeOut，这两个一个是链接到服务器的时间，一个是读取服务器流的时间，不能满足需求。</p>
+<p>于是，我在开始下载的地方做了一个系统时间获取的代码,</p>
+<pre><code><span class="keyword">long</span> startTime = System.currentTimeMillis;
+</code></pre><p>在下载进行时，做了一个减法计算，</p>
+<pre><code>long delyTime = System<span class="class">.currentTimeMillis</span> - startTime
+</code></pre><p>判断delyTime是否大于20s，如果大于20s，触发一个下载超时，取消本次更新。</p>
+<p>OK，从上文看，没有任何问题，非常完美解决了问题。</p>
+<p>回去看Picasso的源码，看into（），里面有构造RequestCreator的fetch()方法有这么一行，</p>
+<pre><code><span class="keyword">long</span> started = System.nanoTime();
+</code></pre><p>然后request有这么一个方法</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> TOO_LONG_LOG = TimeUnit.SECONDS.toNanos(<span class="number">5</span>);
+
+<span class="function">String <span class="title">logId</span><span class="params">()</span> </span>{
+    <span class="keyword">long</span> delta = System.nanoTime() - started;
+    <span class="keyword">if</span> (delta &gt; TOO_LONG_LOG) {
+          <span class="keyword">return</span> plainId() + <span class="string">'+'</span> + TimeUnit.NANOSECONDS.toSeconds(delta) + <span class="string">'s'</span>;
+    }
+    <span class="keyword">return</span> plainId() + <span class="string">'+'</span> + TimeUnit.NANOSECONDS.toMillis(delta) + <span class="string">"ms"</span>;
+
+  }
+</code></pre><p> 通过阅读java API发现：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> nanoTime()
+</code></pre><p>返回最准确的可用系统计时器的当前值，以毫微秒为单位。<br>此方法只能用于测量已过的时间，与系统或钟表时间的其他任何时间概念无关。返回值表示从某一固定但任意的时间算起的毫微秒数（或许从以后算起，所以该值可能为负）。此方法提供毫微秒的精度，但不是必要的毫微秒的准确度。它对于值的更改频率没有作出保证。在取值范围大于约 292 年（263 毫微秒）的连续调用的不同点在于：由于数字溢出，将无法准确计算已过的时间。</p>
+<p>例如，测试某些代码执行的时间长度：</p>
+<pre><code><span class="keyword">long</span> startTime = System.nanoTime();
+<span class="comment">// ... the code being measured ...</span>
+<span class="keyword">long</span> estimatedTime = System.nanoTime() - startTime;
+</code></pre><p>返回：<br>系统计时器的当前值，以毫微秒为单位。注意这里说的豪微秒，也就是纳秒，</p>
+<p>到这里发现前面觉得完美的代码有什么问题了吗，没错将日期对应的毫秒时间戳改成精确计时的微秒时间能更准确计算出代码执行的耗时。</p>
+<p>参考：</p>
+<p><a href="https://github.com/fanOfDemo/picasso/blob/master/picasso/src/main/java/com/squareup/picasso/RequestCreator.java" target="_blank" rel="external">picasso/RequestCreator.java</a></p>
+<p><a href="https://github.com/fanOfDemo/picasso/blob/master/picasso/src/main/java/com/squareup/picasso/Request.java" target="_blank" rel="external">picasso/Request.java</a></p>
+<p><a href="http://www.cnblogs.com/_programmer/p/3396933.html" target="_blank" rel="external">java中的System.nanoTime与System.currentTime的区别</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/21/热更新SDK的设计与实践/" itemprop="url">
                   热更新SDK的设计与实践
                 </a>
@@ -1031,124 +1160,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/29/非常漂亮的mvp架构/" itemprop="url">
-                  非常漂亮的mvp架构
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-29T23:10:43+08:00" content="Mar 29 2016">
-              Mar 29 2016
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/29/非常漂亮的mvp架构/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/非常漂亮的mvp架构/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>包结构图</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/mvp.jpg" alt="分包"></p>
-<h2 id="mvp之model优化：">mvp之model优化：</h2><ul>
-<li>优化前</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/model1.jpg" alt="优化前"></p>
-<ul>
-<li>优化1</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/model2.jpg" alt="优化1"></p>
-<ul>
-<li>最后 </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/model3.jpg" alt="最后"></p>
-<h2 id="mvp之model复用：">mvp之model复用：</h2><h3 id="用mvp后，model复用model非常方便">用mvp后，model复用model非常方便</h3><p>比如service中没有view,直接使用service当做P去复用model<br>model作为模块化的移动，模块化的删除添加修改，对其它不相干的模块丝毫不影响 </p>
-<ul>
-<li>service无view时作为P直接复用model </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/mvp_service.jpg" alt="service"></p>
-<p>分分钟将一个600行的activity拆成了一个180行的activity和一个300行的service </p>
-<h3 id="可以参考我的mvp项目">可以参考我的mvp项目</h3><p><a href="https://github.com/fanOfDemo/railtool" target="_blank" rel="external">railtool</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1194,7 +1205,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

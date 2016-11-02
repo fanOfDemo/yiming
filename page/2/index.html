@@ -238,6 +238,124 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/29/非常漂亮的mvp架构/" itemprop="url">
+                  非常漂亮的mvp架构
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-29T23:10:43+08:00" content="Mar 29 2016">
+              Mar 29 2016
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/29/非常漂亮的mvp架构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/非常漂亮的mvp架构/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>包结构图</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/mvp.jpg" alt="分包"></p>
+<h2 id="mvp之model优化：">mvp之model优化：</h2><ul>
+<li>优化前</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/model1.jpg" alt="优化前"></p>
+<ul>
+<li>优化1</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/model2.jpg" alt="优化1"></p>
+<ul>
+<li>最后 </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/model3.jpg" alt="最后"></p>
+<h2 id="mvp之model复用：">mvp之model复用：</h2><h3 id="用mvp后，model复用model非常方便">用mvp后，model复用model非常方便</h3><p>比如service中没有view,直接使用service当做P去复用model<br>model作为模块化的移动，模块化的删除添加修改，对其它不相干的模块丝毫不影响 </p>
+<ul>
+<li>service无view时作为P直接复用model </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/fanOfDemo/railtool/master/capture/mvp_service.jpg" alt="service"></p>
+<p>分分钟将一个600行的activity拆成了一个180行的activity和一个300行的service </p>
+<h3 id="可以参考我的mvp项目">可以参考我的mvp项目</h3><p><a href="https://github.com/fanOfDemo/railtool" target="_blank" rel="external">railtool</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/18/写了一个创建快捷方式的库/" itemprop="url">
                   一个多功能创建快捷方式的库
                 </a>
@@ -502,120 +620,6 @@ new Sc.Builder<span class="params">(this, intent)</span>.
             
               
                 
-                <a class="post-title-link" href="/2016/03/06/用android studio将assets打包到jar文件的方法/" itemprop="url">
-                  用android studio将assets打包到jar文件的方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-06T22:14:47+08:00" content="Mar 6 2016">
-              Mar 6 2016
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/06/用android studio将assets打包到jar文件的方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/06/用android studio将assets打包到jar文件的方法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p>在对应的app或者module的build.gradle中配置任务如下</p>
-<pre><code>    <span class="keyword">def</span> SDK_BASENAME = <span class="string">"sdk"</span>;
-    <span class="keyword">def</span> SDK_VERSION = <span class="string">"_V1.0"</span>;
-    <span class="keyword">def</span> sdkDestinationPath = <span class="string">"build"</span>;
-    <span class="keyword">def</span> zipFile = <span class="keyword">file</span>(<span class="string">'build/intermediates/bundles/release/classes.jar'</span>)
-
-
-<span class="keyword">task</span> deleteBuild(type: <span class="keyword">Delete</span>) {
-    <span class="keyword">delete</span> sdkDestinationPath + SDK_BASENAME + SDK_VERSION + <span class="string">".jar"</span>
-}
-<span class="keyword">task</span> makeJar(type: Jar) {
-    <span class="keyword">from</span> zipTree(zipFile)
-    <span class="keyword">from</span> <span class="keyword">fileTree</span>(dir: <span class="string">'src/main'</span>, <span class="keyword">includes</span>: [<span class="string">'assets/**'</span>])
-    baseName = SDK_BASENAME + SDK_VERSION
-    <span class="keyword">destinationDir</span> = <span class="keyword">file</span>(sdkDestinationPath)
-}
-makeJar.dependsOn(deleteBuild, build)
-</code></pre><p>然后在gradle中的other中找到markJar执行，生成的jar文件在build文件夹下</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/03/06/悬浮控件开发笔记/" itemprop="url">
                   andorid悬浮球开发笔记（起点读书app 发现->游戏中心，下载任意一款android手游可以看到效果）
                 </a>
@@ -713,8 +717,8 @@ makeJar.dependsOn(deleteBuild, build)
             
               
                 
-                <a class="post-title-link" href="/2016/03/05/android基础知识点复习总结/" itemprop="url">
-                  android基础知识点复习总结
+                <a class="post-title-link" href="/2016/03/06/用android studio将assets打包到jar文件的方法/" itemprop="url">
+                  用android studio将assets打包到jar文件的方法
                 </a>
               
             
@@ -727,8 +731,8 @@ makeJar.dependsOn(deleteBuild, build)
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-05T22:25:00+08:00" content="Mar 5 2016">
-              Mar 5 2016
+            <time itemprop="dateCreated" datetime="2016-03-06T22:14:47+08:00" content="Mar 6 2016">
+              Mar 6 2016
             </time>
           </span>
 
@@ -738,8 +742,8 @@ makeJar.dependsOn(deleteBuild, build)
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/05/android基础知识点复习总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/05/android基础知识点复习总结/" itemprop="commentsCount"></span>
+                <a href="/2016/03/06/用android studio将assets打包到jar文件的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/06/用android studio将assets打包到jar文件的方法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -763,15 +767,25 @@ makeJar.dependsOn(deleteBuild, build)
       
         
           
-            <h2 id="本周阅读的文章和在学的技术">本周阅读的文章和在学的技术</h2><p><a href="http://www.jianshu.com/p/dfc9d1265bc2" target="_blank" rel="external">Android 屏幕适配方案-工具</a></p>
-<p><a href="http://www.jianshu.com/p/836771e93a75" target="_blank" rel="external">Android Canvas总结</a></p>
-<p><a href="http://www.jianshu.com/p/5c33be6ce89d" target="_blank" rel="external">Android SQLite详解</a></p>
-<p><a href="http://www.jianshu.com/p/5377a5e0bbfb" target="_blank" rel="external">Android动画浅析</a></p>
-<p><a href="http://www.jianshu.com/p/3085d6afc92d" target="_blank" rel="external">Android 代码风格指南和架构指南</a></p>
-<p><a href="http://www.jianshu.com/p/520a0400aa7c" target="_blank" rel="external">属性动画的概念解析—实现星星控件</a></p>
-<p><a href="http://www.jianshu.com/p/b89d8d334683" target="_blank" rel="external">缓存网络数据—Rx和数据库</a></p>
-<p><a href="http://www.jianshu.com/p/fc1c4b24fa59" target="_blank" rel="external">浅谈android访问http原理</a></p>
-<p><a href="https://github.com/fanOfDemo/AndroidPluginFramework" target="_blank" rel="external">Android插件化框架研究</a></p>
+            <hr>
+<p>在对应的app或者module的build.gradle中配置任务如下</p>
+<pre><code>    <span class="keyword">def</span> SDK_BASENAME = <span class="string">"sdk"</span>;
+    <span class="keyword">def</span> SDK_VERSION = <span class="string">"_V1.0"</span>;
+    <span class="keyword">def</span> sdkDestinationPath = <span class="string">"build"</span>;
+    <span class="keyword">def</span> zipFile = <span class="keyword">file</span>(<span class="string">'build/intermediates/bundles/release/classes.jar'</span>)
+
+
+<span class="keyword">task</span> deleteBuild(type: <span class="keyword">Delete</span>) {
+    <span class="keyword">delete</span> sdkDestinationPath + SDK_BASENAME + SDK_VERSION + <span class="string">".jar"</span>
+}
+<span class="keyword">task</span> makeJar(type: Jar) {
+    <span class="keyword">from</span> zipTree(zipFile)
+    <span class="keyword">from</span> <span class="keyword">fileTree</span>(dir: <span class="string">'src/main'</span>, <span class="keyword">includes</span>: [<span class="string">'assets/**'</span>])
+    baseName = SDK_BASENAME + SDK_VERSION
+    <span class="keyword">destinationDir</span> = <span class="keyword">file</span>(sdkDestinationPath)
+}
+makeJar.dependsOn(deleteBuild, build)
+</code></pre><p>然后在gradle中的other中找到markJar执行，生成的jar文件在build文件夹下</p>
 
           
         
@@ -841,7 +855,7 @@ makeJar.dependsOn(deleteBuild, build)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
