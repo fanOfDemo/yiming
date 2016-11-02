@@ -57,22 +57,22 @@
 
 
 
-<meta name="description" content="之前写一个插件下载过程中，当用户网速很慢时的下载计时问题，因为我的插件化是在APP启动后的第一时刻做的事，如果这个时间太长，比如当前网速是每秒20k，而插件的大小是600K,意味着需要30s用户才能做下一步操作，很明显这是不可取的。
-而API级别的网络超时只有connectTimeOut以及readTimeOut，这两个一个是链接到服务器的时间，一个是读取服务器流的时间，不能满足需求。
-于是，我在">
+<meta name="description" content="之前写插件下载的过程中遇到过一个很细节的知识点。
+业务场景是这样的，APP启动后的第一时间做检查并下载新版插件，比如当前网速是每秒20k而插件的大小是600K,意味着需要等待30s用户才能做下一步操作，很明显这个时间是非常不合理的。有什么办法做一个超时触发？当然有！
+于是，我在开始下载的位置获取了系统的时间戳，这个时间戳是从1970年开始算的毫秒时间戳，并且众所周知这个时间戳可以转换成对应的日期小">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用System.nanoTime测试代码执行时间">
 <meta property="og:url" content="http://fanofdemo.github.io/2016/11/02/使用System-nanoTime测试代码执行时间/index.html">
 <meta property="og:site_name" content="yiming">
-<meta property="og:description" content="之前写一个插件下载过程中，当用户网速很慢时的下载计时问题，因为我的插件化是在APP启动后的第一时刻做的事，如果这个时间太长，比如当前网速是每秒20k，而插件的大小是600K,意味着需要30s用户才能做下一步操作，很明显这是不可取的。
-而API级别的网络超时只有connectTimeOut以及readTimeOut，这两个一个是链接到服务器的时间，一个是读取服务器流的时间，不能满足需求。
-于是，我在">
-<meta property="og:updated_time" content="2016-11-02T15:32:04.000Z">
+<meta property="og:description" content="之前写插件下载的过程中遇到过一个很细节的知识点。
+业务场景是这样的，APP启动后的第一时间做检查并下载新版插件，比如当前网速是每秒20k而插件的大小是600K,意味着需要等待30s用户才能做下一步操作，很明显这个时间是非常不合理的。有什么办法做一个超时触发？当然有！
+于是，我在开始下载的位置获取了系统的时间戳，这个时间戳是从1970年开始算的毫秒时间戳，并且众所周知这个时间戳可以转换成对应的日期小">
+<meta property="og:updated_time" content="2016-11-02T15:43:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用System.nanoTime测试代码执行时间">
-<meta name="twitter:description" content="之前写一个插件下载过程中，当用户网速很慢时的下载计时问题，因为我的插件化是在APP启动后的第一时刻做的事，如果这个时间太长，比如当前网速是每秒20k，而插件的大小是600K,意味着需要30s用户才能做下一步操作，很明显这是不可取的。
-而API级别的网络超时只有connectTimeOut以及readTimeOut，这两个一个是链接到服务器的时间，一个是读取服务器流的时间，不能满足需求。
-于是，我在">
+<meta name="twitter:description" content="之前写插件下载的过程中遇到过一个很细节的知识点。
+业务场景是这样的，APP启动后的第一时间做检查并下载新版插件，比如当前网速是每秒20k而插件的大小是600K,意味着需要等待30s用户才能做下一步操作，很明显这个时间是非常不合理的。有什么办法做一个超时触发？当然有！
+于是，我在开始下载的位置获取了系统的时间戳，这个时间戳是从1970年开始算的毫秒时间戳，并且众所周知这个时间戳可以转换成对应的日期小">
 
 
 
@@ -288,17 +288,17 @@
       
 
       
-        <p>之前写一个插件下载过程中，当用户网速很慢时的下载计时问题，因为我的插件化是在APP启动后的第一时刻做的事，如果这个时间太长，比如当前网速是每秒20k，而插件的大小是600K,意味着需要30s用户才能做下一步操作，很明显这是不可取的。</p>
-<p>而API级别的网络超时只有connectTimeOut以及readTimeOut，这两个一个是链接到服务器的时间，一个是读取服务器流的时间，不能满足需求。</p>
-<p>于是，我在开始下载的地方做了一个系统时间获取的代码,</p>
+        <p>之前写插件下载的过程中遇到过一个很细节的知识点。</p>
+<p>业务场景是这样的，APP启动后的第一时间做检查并下载新版插件，比如当前网速是每秒20k而插件的大小是600K,意味着需要等待30s用户才能做下一步操作，很明显这个时间是非常不合理的。有什么办法做一个超时触发？当然有！</p>
+<p>于是，我在开始下载的位置获取了系统的时间戳，这个时间戳是从1970年开始算的毫秒时间戳，并且众所周知这个时间戳可以转换成对应的日期小时分钟秒毫秒</p>
 <pre><code><span class="keyword">long</span> startTime = System.currentTimeMillis;
-</code></pre><p>在下载进行时，做了一个减法计算，</p>
+</code></pre><p>在每次读取服务器文件流时，做了一个减法计算耗时，</p>
 <pre><code>long delyTime = System<span class="class">.currentTimeMillis</span> - startTime
 </code></pre><p>判断delyTime是否大于20s，如果大于20s，触发一个下载超时，取消本次更新。</p>
 <p>OK，从上文看，没有任何问题，非常完美解决了问题。</p>
-<p>回去看Picasso的源码，看into（），里面有构造RequestCreator的fetch()方法有这么一行，</p>
+<p>大神说了，看优秀框架的源码才能真正进步。前些天不小心看了Picasso的源码，看到<code>into(Callback callback)</code>方法里，<code>RequestCreator</code>的<code>fetch()</code>方法有这么一行，奇怪这玩意是啥，</p>
 <pre><code><span class="keyword">long</span> started = System.nanoTime();
-</code></pre><p>然后request有这么一个方法</p>
+</code></pre><p>然后<code>Request</code>有这么一个方法， 差不多懂了</p>
 <pre><code><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> TOO_LONG_LOG = TimeUnit.SECONDS.toNanos(<span class="number">5</span>);
 
 <span class="function">String <span class="title">logId</span><span class="params">()</span> </span>{
@@ -309,15 +309,16 @@
     <span class="keyword">return</span> plainId() + <span class="string">'+'</span> + TimeUnit.NANOSECONDS.toMillis(delta) + <span class="string">"ms"</span>;
 
   }
-</code></pre><p> 通过阅读java API发现：</p>
+</code></pre><p> 进一步阅读java API发现：</p>
 <pre><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> nanoTime()
-</code></pre><p>返回最准确的可用系统计时器的当前值，以毫微秒为单位。<br>此方法只能用于测量已过的时间，与系统或钟表时间的其他任何时间概念无关。返回值表示从某一固定但任意的时间算起的毫微秒数（或许从以后算起，所以该值可能为负）。此方法提供毫微秒的精度，但不是必要的毫微秒的准确度。它对于值的更改频率没有作出保证。在取值范围大于约 292 年（263 毫微秒）的连续调用的不同点在于：由于数字溢出，将无法准确计算已过的时间。</p>
+</code></pre><p>返回最准确的可用系统计时器的当前值，以毫微秒为单位。</p>
+<p>此方法只能用于测量已过的时间，与系统或钟表时间的其他任何时间概念无关。返回值表示从某一固定但任意的时间算起的毫微秒数（或许从以后算起，所以该值可能为负）。此方法提供毫微秒的精度，但不是必要的毫微秒的准确度。它对于值的更改频率没有作出保证。在取值范围大于约 292 年（263 毫微秒）的连续调用的不同点在于：由于数字溢出，将无法准确计算已过的时间。</p>
 <p>例如，测试某些代码执行的时间长度：</p>
 <pre><code><span class="keyword">long</span> startTime = System.nanoTime();
 <span class="comment">// ... the code being measured ...</span>
 <span class="keyword">long</span> estimatedTime = System.nanoTime() - startTime;
 </code></pre><p>返回：<br>系统计时器的当前值，以毫微秒为单位。注意这里说的豪微秒，也就是纳秒，</p>
-<p>到这里发现前面觉得完美的代码有什么问题了吗，没错将日期对应的毫秒时间戳改成精确计时的微秒时间能更准确计算出代码执行的耗时。</p>
+<p>到这里发现前面觉得完美的代码有什么问题了吗，没错将日期对应的毫秒时间戳改成精确计时的纳秒时间能更准确计算出代码执行的耗时。</p>
 <p>参考：</p>
 <p><a href="https://github.com/fanOfDemo/picasso/blob/master/picasso/src/main/java/com/squareup/picasso/RequestCreator.java" target="_blank" rel="external">picasso/RequestCreator.java</a></p>
 <p><a href="https://github.com/fanOfDemo/picasso/blob/master/picasso/src/main/java/com/squareup/picasso/Request.java" target="_blank" rel="external">picasso/Request.java</a></p>
