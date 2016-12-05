@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="classloader插件化 基于插件化的组件化," />
 
 
 
@@ -57,19 +57,28 @@
 
 
 
-<meta name="description" content="BadTokenException:Unable to add window …… is your activity running?
-注意在你创建dialog之后，此时dialog持有的activity上下文如果已经被finish了就会报错，所以，dialog中的操作必须在activity结束之前可用">
+<meta name="description" content="一、使用插件化对app模块拆分的背景上次写了一篇SDK热更新的设计与实践，和本文插件化技术点是一样的，不过热更新SDK是独立产品，并没有通用性，部分同学看建议我写篇通用性的文章讲讲插件化技术在APP业务模块解耦的设计与实践。
+一个app随着业务增大，代码量，都无可避免的会遇到新的问题。
+常见的问题主要有：
+
+一、在兼容android低版本（anroid4.4以下）时出现方法书爆棚，这个此处不做过多">
 <meta property="og:type" content="article">
-<meta property="og:title" content="持有空的上下文错误">
-<meta property="og:url" content="http://fanofdemo.github.io/2015/09/10/持有空的上下文错误/index.html">
+<meta property="og:title" content="手摸手教做APP插件化业务解耦一">
+<meta property="og:url" content="http://fanofdemo.github.io/2016/12/05/手摸手教做APP插件化业务解耦一/index.html">
 <meta property="og:site_name" content="yiming">
-<meta property="og:description" content="BadTokenException:Unable to add window …… is your activity running?
-注意在你创建dialog之后，此时dialog持有的activity上下文如果已经被finish了就会报错，所以，dialog中的操作必须在activity结束之前可用">
-<meta property="og:updated_time" content="2015-09-10T07:46:38.000Z">
+<meta property="og:description" content="一、使用插件化对app模块拆分的背景上次写了一篇SDK热更新的设计与实践，和本文插件化技术点是一样的，不过热更新SDK是独立产品，并没有通用性，部分同学看建议我写篇通用性的文章讲讲插件化技术在APP业务模块解耦的设计与实践。
+一个app随着业务增大，代码量，都无可避免的会遇到新的问题。
+常见的问题主要有：
+
+一、在兼容android低版本（anroid4.4以下）时出现方法书爆棚，这个此处不做过多">
+<meta property="og:updated_time" content="2016-12-05T16:23:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="持有空的上下文错误">
-<meta name="twitter:description" content="BadTokenException:Unable to add window …… is your activity running?
-注意在你创建dialog之后，此时dialog持有的activity上下文如果已经被finish了就会报错，所以，dialog中的操作必须在activity结束之前可用">
+<meta name="twitter:title" content="手摸手教做APP插件化业务解耦一">
+<meta name="twitter:description" content="一、使用插件化对app模块拆分的背景上次写了一篇SDK热更新的设计与实践，和本文插件化技术点是一样的，不过热更新SDK是独立产品，并没有通用性，部分同学看建议我写篇通用性的文章讲讲插件化技术在APP业务模块解耦的设计与实践。
+一个app随着业务增大，代码量，都无可避免的会遇到新的问题。
+常见的问题主要有：
+
+一、在兼容android低版本（anroid4.4以下）时出现方法书爆棚，这个此处不做过多">
 
 
 
@@ -87,7 +96,7 @@
   };
 </script>
 
-  <title> 持有空的上下文错误 | yiming </title>
+  <title> 手摸手教做APP插件化业务解耦一 | yiming </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -239,7 +248,7 @@
             
             
               
-                持有空的上下文错误
+                手摸手教做APP插件化业务解耦一
               
             
           </h1>
@@ -251,8 +260,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-10T15:43:44+08:00" content="Sep 10 2015">
-              Sep 10 2015
+            <time itemprop="dateCreated" datetime="2016-12-05T23:10:36+08:00" content="Dec 5 2016">
+              Dec 5 2016
             </time>
           </span>
 
@@ -262,8 +271,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/09/10/持有空的上下文错误/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/10/持有空的上下文错误/" itemprop="commentsCount"></span>
+                <a href="/2016/12/05/手摸手教做APP插件化业务解耦一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/手摸手教做APP插件化业务解耦一/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -285,8 +294,51 @@
       
 
       
-        <p>BadTokenException:Unable to add window …… is your activity running?</p>
-<p>注意在你创建dialog之后，此时dialog持有的activity上下文如果已经被finish了就会报错，所以，dialog中的操作必须在activity结束之前可用</p>
+        <h2 id="一、使用插件化对app模块拆分的背景">一、使用插件化对app模块拆分的背景</h2><p>上次写了一篇SDK热更新的设计与实践，和本文插件化技术点是一样的，不过热更新SDK是独立产品，并没有通用性，部分同学看建议我写篇通用性的文章讲讲插件化技术在APP业务模块解耦的设计与实践。</p>
+<p>一个app随着业务增大，代码量，都无可避免的会遇到新的问题。</p>
+<p>常见的问题主要有：</p>
+<ul>
+<li><p>一、在兼容android低版本（anroid4.4以下）时出现方法书爆棚，这个此处不做过多解释。</p>
+</li>
+<li><p>二、在遇到上述问题后采用android官方提供的mutildex方案时，各业务模块依赖复杂，堪称依赖地狱，早期架构设计并没有考虑到这种复杂的承载量后期新业务太多没有时间重构导致解耦设计太差，代码shit一样不堪入目更不堪维护</p>
+</li>
+<li><p>三、基于第二条的解决方案是基于module的常规组件化，依赖和解耦做到了，模块也独立了，业务上做到了解耦，但重复依赖的本质问题依赖没有解决。</p>
+</li>
+<li><p>四、基于常规组件化后大部分工作仍然依赖解析的工作依然是交给了buildTools（此处虽有办法优化，但成本较高，最后可能得不偿失），势必还是卡卡卡，使用组件化后依赖难以避免宿主编译时间的魔咒，项目代码量过大，项目编译时间从1分钟编程2-5分钟，即使开启了install run速度依然没有显著提升</p>
+</li>
+</ul>
+<p>PS:小道消息，听说新版的install run和android studio2.3推出后编译速度会得到显著改善（以我经验看，自as1.5之后越来越卡的尿性，并不太看好）</p>
+<p>基于此，插件化能解决上述所有问题，达到的最终效果是</p>
+<ul>
+<li><p>一、无需关心方法数，无缝兼容android低级版本</p>
+</li>
+<li><p>二、无需关心模块的内部实现，只需要了解如何输入如何输出（路由跳转）</p>
+</li>
+<li><p>三、无需关心重复依赖，和常规开发基本无异</p>
+</li>
+<li><p>四、绝杀技！！！产品经理最爱：修BUG，动态发布版本</p>
+</li>
+</ul>
+<h2 id="二、什么是插件化，什么是组件化，宿主插件分别是啥">二、什么是插件化，什么是组件化，宿主插件分别是啥</h2><p>1、插件化技术中有什么术语？搞清楚宿主和插件的关系，</p>
+<pre><code>宿主：需要编译打包发布的
+
+插件：需要内置或者动态下载，动态安装的
+</code></pre><p>2、模块解耦有什么术语</p>
+<pre><code>插件化：插件化是一种技术术语，android系统的设计就是完全的C/S架构，应用层是完全的插件化设计的，比如launcher是宿主，所有安装的<span class="keyword">app</span>都是插件，系统自带的<span class="keyword">app</span>就是内置插件，用户安装的<span class="keyword">app</span>就是运行时安装的插件。
+
+组件化：组件化在android技术发展过程中还属于新词，主要是业内大佬因为android官方的支持愈发给力而对黑科技的插件化的嗤之以鼻产生的新的解耦思路，其实和插件化是不冲突的，这里我把这个组件化叫做常规组件化，就是不使用任何黑科技手段达到的解耦的一种思路，本文后期说的组件化都是指常规手段的组件化。
+</code></pre><h2 id="三、手摸手教你解耦第一步：使用常规组件化思想进行解耦">三、手摸手教你解耦第一步：使用常规组件化思想进行解耦</h2><p>2、常规的app有哪些业务模块呢？</p>
+<p>我先举个🌰，常见的app一般有：登录、支付、分享、推送、业务1，业务2等，看看你的app有没有这些模块，</p>
+<ul>
+<li><p>确定模块入口activity或者service的包名和class名，并最好永远都不要改这个名字</p>
+</li>
+<li><p>确定通讯协议，尽可能使用android系统自带的通讯协议，非跨进程的建议使用intent传值作为入参，使用startActivityForResult作为回调，如果使用了跨进程通讯，将server的service放在app的moudle的manifest进行预埋，实现可以放在宿主也可以放在插件，建议放在有内置版本的插件中，将client放在各lib的moudle实现。</p>
+</li>
+<li><p>使用mutildex方案作为过渡办法进行常规组件化</p>
+</li>
+<li><p>最后使用反射少量系统API和少量代理实现的插件化框架，容易上手的比如<a href="https://github.com/iReaderAndroid/ZeusPlugin" target="_blank" rel="external">zeusPlugin</a>对组件化后的子模块进行插件化，本文后续文章会基于zeusPlugin进行讲解</p>
+</li>
+</ul>
 
       
     </div>
@@ -299,22 +351,24 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/classloader插件化-基于插件化的组件化/" rel="tag">#classloader插件化 基于插件化的组件化</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/27/如何有效避免fragment失去状态/" rel="next" title="如何有效避免fragment失去状态">
-                <i class="fa fa-chevron-left"></i> 如何有效避免fragment失去状态
+              <a href="/2016/11/02/使用System-nanoTime测试代码执行时间/" rel="next" title="使用System.nanoTime测试代码执行时间">
+                <i class="fa fa-chevron-left"></i> 使用System.nanoTime测试代码执行时间
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/10/11/内存泄露引发的血案/" rel="prev" title="使用弱引用解决内存泄露问题">
-                使用弱引用解决内存泄露问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -329,10 +383,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/09/10/持有空的上下文错误/"
-     data-title="持有空的上下文错误"
+        <div class="ds-share flat" data-thread-key="2016/12/05/手摸手教做APP插件化业务解耦一/"
+     data-title="手摸手教做APP插件化业务解耦一"
      data-content=""
-     data-url="http://fanofdemo.github.io/2015/09/10/持有空的上下文错误/">
+     data-url="http://fanofdemo.github.io/2016/12/05/手摸手教做APP插件化业务解耦一/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -359,8 +413,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/09/10/持有空的上下文错误/"
-           data-title="持有空的上下文错误" data-url="http://fanofdemo.github.io/2015/09/10/持有空的上下文错误/">
+      <div class="ds-thread" data-thread-key="2016/12/05/手摸手教做APP插件化业务解耦一/"
+           data-title="手摸手教做APP插件化业务解耦一" data-url="http://fanofdemo.github.io/2016/12/05/手摸手教做APP插件化业务解耦一/">
       </div>
     
   </div>
@@ -489,7 +543,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、使用插件化对app模块拆分的背景"><span class="nav-number">1.</span> <span class="nav-text">一、使用插件化对app模块拆分的背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、什么是插件化，什么是组件化，宿主插件分别是啥"><span class="nav-number">2.</span> <span class="nav-text">二、什么是插件化，什么是组件化，宿主插件分别是啥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、手摸手教你解耦第一步：使用常规组件化思想进行解耦"><span class="nav-number">3.</span> <span class="nav-text">三、手摸手教你解耦第一步：使用常规组件化思想进行解耦</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
