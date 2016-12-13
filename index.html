@@ -238,8 +238,192 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/05/手摸手教做APP插件化业务解耦一/" itemprop="url">
-                  手摸手教做APP插件化业务解耦一
+                <a class="post-title-link" href="/2016/12/13/APP插件化模块解耦二/" itemprop="url">
+                  APP插件化模块解耦二
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-13T16:12:13+08:00" content="Dec 13 2016">
+              Dec 13 2016
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/13/APP插件化模块解耦二/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/13/APP插件化模块解耦二/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://wengyiming.cn/2016/12/05/%E6%89%8B%E6%91%B8%E6%89%8B%E6%95%99%E5%81%9AAPP%E6%8F%92%E4%BB%B6%E5%8C%96%E4%B8%9A%E5%8A%A1%E8%A7%A3%E8%80%A6%E4%B8%80/" target="_blank" rel="external">系列博客，APP插件化业务解耦一</a></p>
+<p>基于上篇不系统的理论说完后，这篇是实践篇.</p>
+<p>我们先分析一下常规app结构，</p>
+<p>正常app模块结构：</p>
+<ul>
+<li>root gradle<ul>
+<li>app</li>
+<li>librarya</li>
+<li>libraryb</li>
+</ul>
+</li>
+</ul>
+<p>插件化后的结构</p>
+<ul>
+<li>app<ul>
+<li>assets    <ul>
+<li>plugina-&gt;librarya  </li>
+<li>pluginb-&gt;libraryb</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>plugina-wrap </p>
+<ul>
+<li>librarya</li>
+</ul>
+</li>
+<li><p>pluginb-wrap</p>
+<ul>
+<li>libraryb</li>
+</ul>
+</li>
+</ul>
+<p>参考下图：</p>
+<p><img src="https://github.com/fanOfDemo/PluginApp/blob/master/pic/app_module.png" width="640"></p>
+<p>废话不说了，直接上代码<br>将gradle.properties中isDebug设置为true，</p>
+<pre><code><span class="setting">isDebug = <span class="value"><span class="keyword">true</span></span></span>
+</code></pre><p>pluginAWrap和pluginBWrap是独立的application，可以直接运行安装运行，测试插件模块，也就是对应的library的功能</p>
+<p>将gradle.properties中isDebug设置为false，</p>
+<pre><code><span class="setting">isDebug = <span class="value"><span class="keyword">false</span></span></span>
+</code></pre><p>只需要执行对应的build task，直接输出<code>扩展名为jar的apk</code>到app的assets下作为宿主的插件运行</p>
+<p>核心配置只有几行代码，<a href="https://github.com/fanOfDemo/PluginApp/blob/master/plugina_wrap/build.gradle" target="_blank" rel="external">plugina_wrap 项目的gradle关键配置</a>：</p>
+<pre><code><span class="keyword">import</span> com.android.build.gradle.api.ApkVariant
+
+apply plugin: <span class="string">'com.android.application'</span>
+
+android {
+
+    <span class="keyword">sourceSets</span> {
+        main {
+            <span class="keyword">if</span> (isDebug.toBoolean()) {
+                manifest.srcFile <span class="string">'src/main/debug/AndroidManifest.xml'</span>
+                java.srcDirs = [<span class="string">'src/main/java'</span>]
+            } <span class="keyword">else</span> {
+                manifest.srcFile <span class="string">'src/main/release/AndroidManifest.xml'</span>
+                java.srcDirs = [<span class="string">'src/main/plugin/'</span>]
+            }
+            assets.srcDirs = [<span class="string">'src/main/assets'</span>, <span class="string">'src/main/assets/'</span>]
+        }
+    }
+
+    aaptOptions.additionalParameters <span class="string">'--PLUG-resoure-id'</span>, <span class="string">'0x42'</span>
+}
+
+
+<span class="keyword">dependencies</span> {
+    <span class="keyword">if</span> (isDebug.toBoolean()) {
+        <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])
+    } <span class="keyword">else</span> {
+        provided <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])
+    }
+    <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':librarya'</span>)
+}
+
+
+<span class="keyword">def</span> nameMap = <span class="string">'pluginA.jar'</span>
+<span class="keyword">if</span> (!isDebug.toBoolean()) {
+    android.applicationVariants.all { ApkVariant variant -&gt;
+        <span class="keyword">def</span> buildTypeName = variant.buildType.name
+        <span class="keyword">def</span> <span class="keyword">task</span> = <span class="keyword">project</span>.tasks.create <span class="string">"jar${buildTypeName.capitalize()}"</span>, Jar
+        <span class="keyword">task</span>.archiveName = nameMap
+        <span class="keyword">println</span> <span class="string">'______________________________\n__\n\n__________'</span> + <span class="keyword">task</span>.archivePath
+        <span class="keyword">task</span>.dependsOn variant.javaCompiler
+        <span class="keyword">task</span>.outputs.upToDateWhen { <span class="keyword">false</span> }
+        <span class="keyword">task</span>.<span class="keyword">from</span> variant.javaCompiler.<span class="keyword">destinationDir</span>
+        <span class="keyword">task</span>.<span class="keyword">destinationDir</span> = <span class="keyword">file</span>(<span class="string">'../'</span> + <span class="string">'app/src/main/assets'</span>)
+        <span class="keyword">artifacts</span>.add(<span class="string">'archives'</span>, <span class="keyword">task</span>)
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/05/APP插件化模块解耦一/" itemprop="url">
+                  APP插件化模块解耦一
                 </a>
               
             
@@ -263,8 +447,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/05/手摸手教做APP插件化业务解耦一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/手摸手教做APP插件化业务解耦一/" itemprop="commentsCount"></span>
+                <a href="/2016/12/05/APP插件化模块解耦一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/APP插件化模块解耦一/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -943,147 +1127,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/15/android中常用的设计模式讲解（二）——解密各种单例模式/" itemprop="url">
-                  android中常用的设计模式讲解（二）——解密各种单例模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-15T10:58:11+08:00" content="Jun 15 2016">
-              Jun 15 2016
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/15/android中常用的设计模式讲解（二）——解密各种单例模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/android中常用的设计模式讲解（二）——解密各种单例模式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p><a href="http://fanofdemo.github.io/2016/06/14/%E4%BC%81%E4%B8%9Asdk%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AE%9E%E8%B7%B5/">上一节回顾：策略模式</a></p>
-<p>本节主要讲解各种单例模式的使用以及优缺点</p>
-<h2 id="1懒汉单例：">1懒汉单例：</h2><p>特点：<br>1、线程不安全<br>2、类加载时不创建实例，运行时获取单例，类加载快，运行时慢</p>
-<pre><code>public class Singleton1 {
-   <span class="keyword"> private</span><span class="keyword"> static</span> Singleton1 instance;
-   <span class="keyword"> private</span><span class="function"> Singleton1(</span><span class="function">)</span>{}
-
-   <span class="keyword"> public</span><span class="keyword"> static</span> Singleton1<span class="function"> getInstance(</span><span class="function">)</span> {
-          <span class="instruction"> if </span>(instance == null<span class="function">)</span> {
-           <span class="instruction"> instance </span>=<span class="instruction"> new </span>Singleton1(<span class="function">)</span>;
-        }
-       <span class="instruction"> return </span>instance;
-    }
-}
-</code></pre><h2 id="2饿汉单例">2饿汉单例</h2><p>特点：<br>1、线程不安全<br>2、类加载时创建实例，加载时慢，运营时快</p>
-<pre><code>public class Singleton2 {
-   <span class="keyword"> private</span> Singleton2<span class="function"> (</span><span class="function">)</span> {
-    }
-
-   <span class="keyword"> private</span><span class="keyword"> static</span> Singleton2<span class="instruction"> instance </span>=<span class="instruction"> new </span>Singleton2<span class="function"> (</span><span class="function">)</span>;
-
-   <span class="keyword"> public</span><span class="keyword"> static</span> Singleton2 getInstance<span class="function"> (</span><span class="function">)</span> {
-       <span class="instruction"> return </span>instance;
-    }
-}
-</code></pre><h2 id="3双重校验锁">3双重校验锁</h2><p>特点：1、线程安全</p>
-<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton4</span> </span>{
-    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton4 singleton;
-    <span class="function"><span class="keyword">private</span> <span class="title">Singleton4</span><span class="params">()</span></span>{}
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton4 <span class="title">getSingleton</span><span class="params">()</span> </span>{
-        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) {
-            <span class="keyword">synchronized</span> (Singleton4.class) {
-                <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) {
-                    singleton = <span class="keyword">new</span> Singleton4();
-                }
-        }
-    }
-    <span class="keyword">return</span> singleton;
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1124,7 +1172,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="classloader插件化 基于插件化的组件化," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -57,28 +57,89 @@
 
 
 
-<meta name="description" content="一、使用插件化对app模块拆分的背景上次写了一篇SDK热更新的设计与实践，和本文插件化技术点是一样的，不过热更新SDK是独立产品，并没有通用性，部分同学看完后建议我写篇通用性的文章讲讲插件化技术在APP业务模块解耦的实践。
-一个app随着业务代码量剧增，都无可避免的会遇到新的问题。
-常见的问题主要有：
+<meta name="description" content="系列博客，APP插件化业务解耦一
+基于上篇不系统的理论说完后，这篇是实践篇.
+我们先分析一下常规app结构，
+正常app模块结构：
 
-一、在兼容android低版本（anroid4.4以下）时出现方法书爆棚，这个此处不做过多解释">
+root gradle
+app
+librarya
+libraryb
+
+
+
+插件化后的结构
+
+app
+assets    
+plugina-&amp;gt;librarya  
+pluginb-&amp;gt;libraryb
+
+
+
+
+plugina-wrap 
+
+librarya">
 <meta property="og:type" content="article">
-<meta property="og:title" content="手摸手教做APP插件化业务解耦一">
-<meta property="og:url" content="http://fanofdemo.github.io/2016/12/05/手摸手教做APP插件化业务解耦一/index.html">
+<meta property="og:title" content="APP插件化模块解耦二">
+<meta property="og:url" content="http://fanofdemo.github.io/2016/12/13/APP插件化模块解耦二/index.html">
 <meta property="og:site_name" content="yiming">
-<meta property="og:description" content="一、使用插件化对app模块拆分的背景上次写了一篇SDK热更新的设计与实践，和本文插件化技术点是一样的，不过热更新SDK是独立产品，并没有通用性，部分同学看完后建议我写篇通用性的文章讲讲插件化技术在APP业务模块解耦的实践。
-一个app随着业务代码量剧增，都无可避免的会遇到新的问题。
-常见的问题主要有：
+<meta property="og:description" content="系列博客，APP插件化业务解耦一
+基于上篇不系统的理论说完后，这篇是实践篇.
+我们先分析一下常规app结构，
+正常app模块结构：
 
-一、在兼容android低版本（anroid4.4以下）时出现方法书爆棚，这个此处不做过多解释">
-<meta property="og:updated_time" content="2016-12-05T16:42:31.000Z">
+root gradle
+app
+librarya
+libraryb
+
+
+
+插件化后的结构
+
+app
+assets    
+plugina-&amp;gt;librarya  
+pluginb-&amp;gt;libraryb
+
+
+
+
+plugina-wrap 
+
+librarya">
+<meta property="og:image" content="https://github.com/fanOfDemo/PluginApp/blob/master/pic/app_module.png">
+<meta property="og:updated_time" content="2016-12-13T08:17:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="手摸手教做APP插件化业务解耦一">
-<meta name="twitter:description" content="一、使用插件化对app模块拆分的背景上次写了一篇SDK热更新的设计与实践，和本文插件化技术点是一样的，不过热更新SDK是独立产品，并没有通用性，部分同学看完后建议我写篇通用性的文章讲讲插件化技术在APP业务模块解耦的实践。
-一个app随着业务代码量剧增，都无可避免的会遇到新的问题。
-常见的问题主要有：
+<meta name="twitter:title" content="APP插件化模块解耦二">
+<meta name="twitter:description" content="系列博客，APP插件化业务解耦一
+基于上篇不系统的理论说完后，这篇是实践篇.
+我们先分析一下常规app结构，
+正常app模块结构：
 
-一、在兼容android低版本（anroid4.4以下）时出现方法书爆棚，这个此处不做过多解释">
+root gradle
+app
+librarya
+libraryb
+
+
+
+插件化后的结构
+
+app
+assets    
+plugina-&amp;gt;librarya  
+pluginb-&amp;gt;libraryb
+
+
+
+
+plugina-wrap 
+
+librarya">
 
 
 
@@ -96,7 +157,7 @@
   };
 </script>
 
-  <title> 手摸手教做APP插件化业务解耦一 | yiming </title>
+  <title> APP插件化模块解耦二 | yiming </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +309,7 @@
             
             
               
-                手摸手教做APP插件化业务解耦一
+                APP插件化模块解耦二
               
             
           </h1>
@@ -260,8 +321,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-05T23:10:36+08:00" content="Dec 5 2016">
-              Dec 5 2016
+            <time itemprop="dateCreated" datetime="2016-12-13T16:12:13+08:00" content="Dec 13 2016">
+              Dec 13 2016
             </time>
           </span>
 
@@ -271,8 +332,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/05/手摸手教做APP插件化业务解耦一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/手摸手教做APP插件化业务解耦一/" itemprop="commentsCount"></span>
+                <a href="/2016/12/13/APP插件化模块解耦二/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/13/APP插件化模块解耦二/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -294,58 +355,96 @@
       
 
       
-        <h2 id="一、使用插件化对app模块拆分的背景">一、使用插件化对app模块拆分的背景</h2><p>上次写了一篇SDK热更新的设计与实践，和本文插件化技术点是一样的，不过热更新SDK是独立产品，并没有通用性，部分同学看完后建议我写篇通用性的文章讲讲插件化技术在APP业务模块解耦的实践。</p>
-<p>一个app随着业务代码量剧增，都无可避免的会遇到新的问题。</p>
-<p>常见的问题主要有：</p>
+        <p><a href="http://wengyiming.cn/2016/12/05/%E6%89%8B%E6%91%B8%E6%89%8B%E6%95%99%E5%81%9AAPP%E6%8F%92%E4%BB%B6%E5%8C%96%E4%B8%9A%E5%8A%A1%E8%A7%A3%E8%80%A6%E4%B8%80/" target="_blank" rel="external">系列博客，APP插件化业务解耦一</a></p>
+<p>基于上篇不系统的理论说完后，这篇是实践篇.</p>
+<p>我们先分析一下常规app结构，</p>
+<p>正常app模块结构：</p>
 <ul>
-<li><p>一、在兼容android低版本（anroid4.4以下）时出现方法书爆棚，这个此处不做过多解释。</p>
-</li>
-<li><p>二、在遇到上述问题后采用android官方提供的mutildex方案时，各业务模块依赖复杂，堪称依赖地狱，早期架构设计并没有考虑到这种复杂的承载量后期新业务太多没有时间重构导致解耦设计太差，代码shit一样不堪入目更不堪维护</p>
-</li>
-<li><p>三、基于第二条的解决方案是基于module的常规组件化，依赖和解耦做到了，模块也独立了，业务上做到了解耦，但重复依赖的本质问题依赖没有解决。</p>
-</li>
-<li><p>四、基于常规组件化后，大部分复杂依赖关系的解析工作依然是交给了buildTools，势必还是卡卡卡（此处虽有办法优化一部分，但成本较高，得不偿失），使用组件化后依然难以避免宿主编译时间的魔咒，项目代码量过大，项目编译时间从1分钟编程2-5分钟，即使开启了install run速度依然没有显著提升</p>
+<li>root gradle<ul>
+<li>app</li>
+<li>librarya</li>
+<li>libraryb</li>
+</ul>
 </li>
 </ul>
-<p>PS:小道消息，听说新版的install run和android studio2.3推出后编译速度会得到显著改善（依我经验看，自as1.5之后越来越卡的尿性，并不太看好）</p>
-<p>基于以上原因，插件化能完美的解决上述所有问题，达到最终效果是</p>
+<p>插件化后的结构</p>
 <ul>
-<li><p>一、无需关心方法数，无缝兼容android低级版本</p>
-</li>
-<li><p>二、无需关心模块的内部实现，只需要了解如何输入如何输出（路由跳转）</p>
-</li>
-<li><p>三、无需关心重复依赖，和常规开发基本无异</p>
-</li>
-<li><p>四、绝杀技！！！产品经理最爱：修BUG，动态发布版本</p>
+<li>app<ul>
+<li>assets    <ul>
+<li>plugina-&gt;librarya  </li>
+<li>pluginb-&gt;libraryb</li>
+</ul>
 </li>
 </ul>
-<h2 id="二、插件化、组件化、宿主、插件分别是啥">二、插件化、组件化、宿主、插件分别是啥</h2><p>1、插件化技术中有什么术语？搞清楚宿主和插件的关系，</p>
-<pre><code>宿主：需要编译打包发布的
+</li>
+<li><p>plugina-wrap </p>
+<ul>
+<li>librarya</li>
+</ul>
+</li>
+<li><p>pluginb-wrap</p>
+<ul>
+<li>libraryb</li>
+</ul>
+</li>
+</ul>
+<p>参考下图：</p>
+<p><img src="https://github.com/fanOfDemo/PluginApp/blob/master/pic/app_module.png" width="640"></p>
+<p>废话不说了，直接上代码<br>将gradle.properties中isDebug设置为true，</p>
+<pre><code><span class="setting">isDebug = <span class="value"><span class="keyword">true</span></span></span>
+</code></pre><p>pluginAWrap和pluginBWrap是独立的application，可以直接运行安装运行，测试插件模块，也就是对应的library的功能</p>
+<p>将gradle.properties中isDebug设置为false，</p>
+<pre><code><span class="setting">isDebug = <span class="value"><span class="keyword">false</span></span></span>
+</code></pre><p>只需要执行对应的build task，直接输出<code>扩展名为jar的apk</code>到app的assets下作为宿主的插件运行</p>
+<p>核心配置只有几行代码，<a href="https://github.com/fanOfDemo/PluginApp/blob/master/plugina_wrap/build.gradle" target="_blank" rel="external">plugina_wrap 项目的gradle关键配置</a>：</p>
+<pre><code><span class="keyword">import</span> com.android.build.gradle.api.ApkVariant
 
-插件：需要内置或者动态下载，动态安装的
-</code></pre><p>2、模块解耦有什么术语</p>
-<ul>
-<li><p>插件化：插件化是一种技术术语，android系统的设计就是完全的C/S架构，应用层是完全的插件化设计的，比如launcher是宿主，所有安装的app都是插件，系统自带的app就是内置插件，用户安装的app就是运行时安装的插件。</p>
-</li>
-<li><p>常规组件化：组件化在android技术发展过程中还属于新词，主要是业内大佬因为android官方的支持愈发给力而对黑科技的插件化的嗤之以鼻产生的新的解耦思路，其实和插件化是不冲突的，这里我把这个组件化叫做常规组件化，就是不使用任何黑科技手段达到的解耦的一种思路，本文后期说的组件化都是指常规手段的组件化。</p>
-</li>
-<li><p>基于插件化的组件化：就是在常规组件化后对模块组件进行插件化</p>
-</li>
-</ul>
-<h2 id="三、手摸手教你解耦第一步：使用常规组件化思想进行解耦">三、手摸手教你解耦第一步：使用常规组件化思想进行解耦</h2><p>2、常规的app有哪些业务模块呢？</p>
-<p>我先举个🌰，常见的app一般有：登录、支付、分享、推送、业务1，业务2等，看看你的app有没有这些模块，</p>
-<ul>
-<li><p>确定模块入口activity或者service的包名和class名，并最好永远都不要改这个名字</p>
-</li>
-<li><p>确定通讯协议，尽可能使用android系统自带的通讯协议，非跨进程的建议使用intent传值作为入参，使用startActivityForResult作为回调，如果使用了跨进程通讯，将server的service放在app的moudle的manifest进行预埋，实现可以放在宿主也可以放在插件，建议放在有内置版本的插件中，将client放在各lib的moudle实现。</p>
-</li>
-<li><p>使用mutildex方案作为过渡办法进行常规组件化，这里可以参考魔都三帅的系列文章，后面我也会将，并分享一些gradle的小插件帮助组件化自动化</p>
-</li>
-<li><p>最后使用反射少量系统API和少量代理实现的插件化框架，容易上手的比如<a href="https://github.com/iReaderAndroid/ZeusPlugin" target="_blank" rel="external">zeusPlugin</a>对组件化后的子模块进行插件化，本文后续文章会基于zeusPlugin进行讲解</p>
-</li>
-</ul>
-<p>不好意思，这篇就当给新人普及一下基础理论知识，我们下一篇再手摸手从代码上讲解怎么将登录模块进行常规组件化并插件化吧,这篇纯文字我都写了一小时，写文章很花时间的,所以想看代码的再等等了</p>
+apply plugin: <span class="string">'com.android.application'</span>
 
+android {
+
+    <span class="keyword">sourceSets</span> {
+        main {
+            <span class="keyword">if</span> (isDebug.toBoolean()) {
+                manifest.srcFile <span class="string">'src/main/debug/AndroidManifest.xml'</span>
+                java.srcDirs = [<span class="string">'src/main/java'</span>]
+            } <span class="keyword">else</span> {
+                manifest.srcFile <span class="string">'src/main/release/AndroidManifest.xml'</span>
+                java.srcDirs = [<span class="string">'src/main/plugin/'</span>]
+            }
+            assets.srcDirs = [<span class="string">'src/main/assets'</span>, <span class="string">'src/main/assets/'</span>]
+        }
+    }
+
+    aaptOptions.additionalParameters <span class="string">'--PLUG-resoure-id'</span>, <span class="string">'0x42'</span>
+}
+
+
+<span class="keyword">dependencies</span> {
+    <span class="keyword">if</span> (isDebug.toBoolean()) {
+        <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])
+    } <span class="keyword">else</span> {
+        provided <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])
+    }
+    <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':librarya'</span>)
+}
+
+
+<span class="keyword">def</span> nameMap = <span class="string">'pluginA.jar'</span>
+<span class="keyword">if</span> (!isDebug.toBoolean()) {
+    android.applicationVariants.all { ApkVariant variant -&gt;
+        <span class="keyword">def</span> buildTypeName = variant.buildType.name
+        <span class="keyword">def</span> <span class="keyword">task</span> = <span class="keyword">project</span>.tasks.create <span class="string">"jar${buildTypeName.capitalize()}"</span>, Jar
+        <span class="keyword">task</span>.archiveName = nameMap
+        <span class="keyword">println</span> <span class="string">'______________________________\n__\n\n__________'</span> + <span class="keyword">task</span>.archivePath
+        <span class="keyword">task</span>.dependsOn variant.javaCompiler
+        <span class="keyword">task</span>.outputs.upToDateWhen { <span class="keyword">false</span> }
+        <span class="keyword">task</span>.<span class="keyword">from</span> variant.javaCompiler.<span class="keyword">destinationDir</span>
+        <span class="keyword">task</span>.<span class="keyword">destinationDir</span> = <span class="keyword">file</span>(<span class="string">'../'</span> + <span class="string">'app/src/main/assets'</span>)
+        <span class="keyword">artifacts</span>.add(<span class="string">'archives'</span>, <span class="keyword">task</span>)
+    }
+}
+</code></pre>
       
     </div>
 
@@ -357,19 +456,13 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/classloader插件化-基于插件化的组件化/" rel="tag">#classloader插件化 基于插件化的组件化</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/02/使用System-nanoTime测试代码执行时间/" rel="next" title="使用System.nanoTime测试代码执行时间">
-                <i class="fa fa-chevron-left"></i> 使用System.nanoTime测试代码执行时间
+              <a href="/2016/12/05/APP插件化模块解耦一/" rel="next" title="APP插件化模块解耦一">
+                <i class="fa fa-chevron-left"></i> APP插件化模块解耦一
               </a>
             
           </div>
@@ -389,10 +482,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/12/05/手摸手教做APP插件化业务解耦一/"
-     data-title="手摸手教做APP插件化业务解耦一"
+        <div class="ds-share flat" data-thread-key="2016/12/13/APP插件化模块解耦二/"
+     data-title="APP插件化模块解耦二"
      data-content=""
-     data-url="http://fanofdemo.github.io/2016/12/05/手摸手教做APP插件化业务解耦一/">
+     data-url="http://fanofdemo.github.io/2016/12/13/APP插件化模块解耦二/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -419,8 +512,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/05/手摸手教做APP插件化业务解耦一/"
-           data-title="手摸手教做APP插件化业务解耦一" data-url="http://fanofdemo.github.io/2016/12/05/手摸手教做APP插件化业务解耦一/">
+      <div class="ds-thread" data-thread-key="2016/12/13/APP插件化模块解耦二/"
+           data-title="APP插件化模块解耦二" data-url="http://fanofdemo.github.io/2016/12/13/APP插件化模块解耦二/">
       </div>
     
   </div>
@@ -465,7 +558,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -549,7 +642,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、使用插件化对app模块拆分的背景"><span class="nav-number">1.</span> <span class="nav-text">一、使用插件化对app模块拆分的背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、插件化、组件化、宿主、插件分别是啥"><span class="nav-number">2.</span> <span class="nav-text">二、插件化、组件化、宿主、插件分别是啥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、手摸手教你解耦第一步：使用常规组件化思想进行解耦"><span class="nav-number">3.</span> <span class="nav-text">三、手摸手教你解耦第一步：使用常规组件化思想进行解耦</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

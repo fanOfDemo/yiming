@@ -60,7 +60,7 @@
 <meta name="description" content="恶补基础知识中...">
 <meta property="og:type" content="website">
 <meta property="og:title" content="yiming">
-<meta property="og:url" content="http://fanofdemo.github.io/tags/androidsdk/index.html">
+<meta property="og:url" content="http://fanofdemo.github.io/page/5/index.html">
 <meta property="og:site_name" content="yiming">
 <meta property="og:description" content="恶补基础知识中...">
 <meta name="twitter:card" content="summary">
@@ -83,7 +83,7 @@
   };
 </script>
 
-  <title> 标签: android	sdk | yiming </title>
+  <title> yiming </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -102,7 +102,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -213,47 +215,161 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        android	sdk
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <section id="posts" class="posts-expand">
     
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
 
-      <h1 class="post-title">
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2016/06/15/android中常用的设计模式讲解（二）——解密各种单例模式/" itemprop="url">
-              
-                <span itemprop="name">android中常用的设计模式讲解（二）——解密各种单例模式</span>
-              
-            </a>
         
-      </h1>
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/22/使用swipebacklayout实现ios右滑退出效果及注意事项/" itemprop="url">
+                  使用swipebacklayout实现ios右滑退出效果及注意事项
+                </a>
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-15T10:58:11+08:00"
-              content="Jun 15 2016" >
-          06-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-22T11:47:05+08:00" content="Jul 22 2015">
+              Jul 22 2015
+            </time>
+          </span>
 
-    </header>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/22/使用swipebacklayout实现ios右滑退出效果及注意事项/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/22/使用swipebacklayout实现ios右滑退出效果及注意事项/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用swipebacklayout实现ios右滑退出效果及注意事项">使用swipebacklayout实现ios右滑退出效果及注意事项</h1><p>android和ios的趋同化，导致android需要实现大量API未提供的功能，<br>本文简单介绍一个简单流畅的swipebacklayout第三方库的使用</p>
+<p>首先在你的gradle中引用：<br>    <code>compile&#39;me.imid.swipebacklayout.lib:library:1.0.0&#39;</code><br>最新版</p>
+<blockquote>
+<p>1 在你的activity基类中实现：</p>
+</blockquote>
+<pre><code><span class="escape">`S</span>wipeBackActivityBase<span class="escape">`接</span>口
+</code></pre><blockquote>
+<p>2   申明一个helper类</p>
+</blockquote>
+<pre><code><span class="keyword">private</span> SwipeBackActivityHelper mHelper;
+</code></pre><blockquote>
+<p>3 初始化基类，并设置为右滑：</p>
+</blockquote>
+<pre><code><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">initSwipeBackLayout</span><span class="params">()</span> </span>{
+    mHelper = <span class="keyword">new</span> SwipeBackActivityHelper(<span class="keyword">this</span>);
+    mHelper.onActivityCreate();
+    getSwipeBackLayout().setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+}
+</code></pre><blockquote>
+<p>4 实现 SwipeBackActivityBase接口</p>
+</blockquote>
+<pre><code><span class="annotation">@Override</span>
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onPostCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onPostCreate(savedInstanceState);
+    mHelper.onPostCreate();
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">View <span class="title">findViewById</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
+    View v = <span class="keyword">super</span>.findViewById(id);
+    <span class="keyword">if</span> (v == <span class="keyword">null</span> &amp;&amp; mHelper != <span class="keyword">null</span>)
+    <span class="function"><span class="keyword">return</span> mHelper.<span class="title">findViewById</span><span class="params">(id)</span></span>;
+    <span class="keyword">return</span> v;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">SwipeBackLayout <span class="title">getSwipeBackLayout</span><span class="params">()</span> </span>{
+    <span class="function"><span class="keyword">return</span> mHelper.<span class="title">getSwipeBackLayout</span><span class="params">()</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setSwipeBackEnable</span><span class="params">(<span class="keyword">boolean</span> enable)</span> </span>{
+    getSwipeBackLayout().setEnableGesture(enable);
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">scrollToFinishActivity</span><span class="params">()</span> </span>{
+    Utils.convertActivityToTranslucent(getActivity());
+    getSwipeBackLayout().scrollToFinishActivity();
+}
+</code></pre><h1 id="重点提醒">重点提醒</h1><p>1 主题使用的style必须加入下面这行，不然背景会是黑色<br><code>&lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;</code><br>2 将你的app下最开始的<code>Activity</code>的使用背景不为透明的主题，否则在大部分android4.4的手机上会出现背景看到桌面的情况</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
     
-  </div>
+  </section>
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+  </nav>
+
 
 
           </div>
