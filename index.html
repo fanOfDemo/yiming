@@ -269,6 +269,262 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2017/01/06/android插件化研究与实践/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="yiming">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://tc.sinaimg.cn/maxwidth.2048/tc.service.weibo.com/p/mmbiz_qpic_cn/1f005a6a2af0cfd626f3b5cefb3e4617.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="yiming">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="yiming" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/06/android插件化研究与实践/" itemprop="url">
+                  android插件化研究与实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2017-01-06T02:14:10+08:00">
+                Jan 6 2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/06/android插件化研究与实践/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/06/android插件化研究与实践/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="why——插件化需求背景">why——插件化需求背景</h3><h3 id="带着目的看源码——插件化实现原理">带着目的看源码——插件化实现原理</h3><p>特点介绍：极少的反射，几乎入侵的静态代理</p>
+<h4 id="烂大街的C/S架构——android系统的C/S架构">烂大街的C/S架构——android系统的C/S架构</h4><p>系统framework中提供了大量的S，而framework层底层是linux内核，以及各种硬件驱动，linux内核一切皆文件,framework中的S负责将底层功能包装成可被调用的接口，比如AMS,PMS，应用层可以通过Ibind调用S的接口从而可以为所欲为操纵底层为其所用。</p>
+<h4 id="插件化无处不在——android系统的插件化机制">插件化无处不在——android系统的插件化机制</h4><p>系统的应用层宿主是launcher，系统内置app是内置插件，用户安装的app是外置动态插件，可安装卸载。</p>
+<h4 id="一切皆文件——linux内核">一切皆文件——linux内核</h4><p>android中的一切皆文件，class也是文件，文件就是路径，classloader加载是对应apk中的能被android虚拟机识别的二进制文件路径，那class是靠什么查找的呢？那就要提下一个知识点了。</p>
+<h4 id="双亲委派机制——classloader">双亲委派机制——classloader</h4><p>根据android系统的插件化机制，系统的入口app launch提供了一个classloader，每次启动应用时会产生一个新的classloader，这个classloader加载了当前app的class，那么如何做到当前app能够查找到系统的class,这就是android的classloader的双亲委派机制发挥作用的关键处，根据系统源码我们发现，classloader的findclass方法会优先遍历launch提供的class，查找不到时会再次查找当前app的classloader中的class,这就是classloader的双亲委派机制，根据这个思路，我们可以重写launch的classloader的findclass方法，优先从原有的classloader中查找，查找不到再查找我们自己插件中的class</p>
+<h4 id="欺上瞒下——普通class和android组件">欺上瞒下——普通class和android组件</h4><p>普通的java class只要能被查找到就能使用open jdk的能力，而android 组件比如activity则还需要被系统触发多个生命周期方法，其实就是我们所说的回调，那组件class还需要和系统建立关联，这里的原理可以用四个字概括：欺上瞒下。主要有两个方法，一是宿主预埋，二是占坑，欺骗过系统的检查位置后掉包，欺上瞒下，上指的是系统，下指的是我们的插件，我们知道activity的生命周期回调是由 类操作的，通过简单的继承重写反射替换，我们可以做到activity占坑，同理也可以做到其他组件比如service的占坑，从性价比角度考虑，service的占坑实现过程需要的反射以及兼容处理较为复杂，暂时只实现了activity的占坑处理</p>
+<h4 id="无痛入侵——静态代理低入侵解决插件资源识别">无痛入侵——静态代理低入侵解决插件资源识别</h4><p>这里我们仍然行的是欺上瞒下的勾当，我们将插件的资源和宿主的资源合并成新的实例，在关键的组件方法中使用静态代理进行掉包动作，插件拿到的是我们掉包过的资源实例，这里会有一个新的问题，就是资源id冲突，这个分开再讲</p>
+<h3 id="小试牛刀——游戏SDK的插件化的应用">小试牛刀——游戏SDK的插件化的应用</h3><p>保障运行的内置插件</p>
+<p>随时更新的动态插件，</p>
+<p>游戏SDK的插件化设计与实践</p>
+<h3 id="举一反三——游戏融合SDK的插件化应用">举一反三——游戏融合SDK的插件化应用</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2016/12/16/APP插件化模块解耦三/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="yiming">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://tc.sinaimg.cn/maxwidth.2048/tc.service.weibo.com/p/mmbiz_qpic_cn/1f005a6a2af0cfd626f3b5cefb3e4617.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="yiming">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="yiming" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/16/APP插件化模块解耦三/" itemprop="url">
+                  APP插件化模块解耦三
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2016-12-16T23:01:57+08:00">
+                Dec 16 2016
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/16/APP插件化模块解耦三/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/16/APP插件化模块解耦三/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2016/12/13/APP插件化模块解耦二/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -808,512 +1064,6 @@ android {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2016/10/21/热更新SDK的设计与实践/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="yiming">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://tc.sinaimg.cn/maxwidth.2048/tc.service.weibo.com/p/mmbiz_qpic_cn/1f005a6a2af0cfd626f3b5cefb3e4617.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="yiming">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="yiming" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/21/热更新SDK的设计与实践/" itemprop="url">
-                  热更新SDK的设计与实践
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2016-10-21T23:45:22+08:00">
-                Oct 21 2016
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/10/21/热更新SDK的设计与实践/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/热更新SDK的设计与实践/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>距离上次写文章有好一段时间了，之前讲过设计模式和插件化，今天来分享个实用的东西。</p>
-<p><a href="http://wengyiming.cn/2016/07/07/andorid%E6%8F%92%E4%BB%B6%E5%8C%96%E7%A0%94%E7%A9%B6/" target="_blank" rel="external">插件化分析与研究</a>     这篇文章写的时候只是简单的进行易用性对比，并未深入的讲解怎么应用在实际项目；</p>
-<p>今天我们用一个新的项目结合策略者模式开发一个热更新的SDK功能，在早之前这就是android组件化了</p>
-<p>现在的组件化研究可以看<a href="http://kymjs.com/code/2016/10/18/01" target="_blank" rel="external">Android业务组件化开发实践</a> ，大帅的<a href="https://zhuanlan.zhihu.com/p/23147164?from=timeline&amp;isappinstalled=1" target="_blank" rel="external">从零开始的Android新项目11 - 组件化实践（1）</a></p>
-<p>回到我的话题，造车子需要轮子和图纸：</p>
-<p>轮子一：<a href="http://www.jianshu.com/p/b1e7b6326330" target="_blank" rel="external">ZeusPlugin:掌阅Android App插件补丁实践</a>史上最易上手的插件化轮子</p>
-<p>图纸二：策略者模式的应用<br>,之前博客我介绍过策略者模式和单例模式在SDK的应用，<a href="http://wengyiming.cn/2016/06/14/android%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%AE%B2%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E7%AD%96%E7%95%A5%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_blank" rel="external">android中常用的设计模式讲解（一）——策略者模式.md</a></p>
-<p><a href="http://wengyiming.cn/2016/06/15/android%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%AE%B2%E8%A7%A3%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E8%A7%A3%E5%AF%86%E5%90%84%E7%A7%8D%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" target="_blank" rel="external">android中常用的设计模式讲解（二）——解密各种单例模式</a></p>
-<p>首先先设计出SDK和宿主的公共部分，目前ZeusPlugin插件化只能得到插件的MainClass,ZeusPlugin的这个class是个activity，可我的SDK不是activity怎么调用这个类以及这个类的方法内，有两个办法，</p>
-<ul>
-<li>1：通过反射调用这个类的方法，然后使用反射传参</li>
-<li><p>2：使用公共接口，宿主和插件都能识别的接口（interface）</p>
-</li>
-<li><p>反射：缺点和解决方法：假如我们的SDK的接口方法比较多，使用反射明显是非常低效的，代码量大（工具类可以减少代码量），性能不高（做点cache），插件容易不小心改动接口代码。</p>
-</li>
-<li><p>接口：只需要一行代码就可以获取到接口的实例，无反射直接调用实例方法，接口固定难以更改。</p>
-</li>
-</ul>
-<p>以上是准备框架和理论工作，现在回到业务，假如我们现在有两个游戏平台的业务，这里叫A游戏，B游戏<br>，他们都有固定的接口对外，但是内部实现不一样，这个时候，我们先抽象一个接口</p>
-<pre><code><span class="keyword">public</span> interface IGameAPI {
-
-    <span class="keyword">void</span> init (<span class="keyword">JSONObject</span> jsonObject, ValueCallback&lt;<span class="keyword">JSONObject</span>&gt; valueCallback);
-
-    <span class="keyword">void</span> login (<span class="keyword">JSONObject</span> jsonObject, ValueCallback&lt;<span class="keyword">JSONObject</span>&gt; valueCallback);
-
-    <span class="keyword">void</span> pay (<span class="keyword">JSONObject</span> jsonObject, ValueCallback&lt;<span class="keyword">JSONObject</span>&gt; valueCallback);
-
-    <span class="keyword">void</span> logout (<span class="keyword">JSONObject</span> jsonObject, ValueCallback&lt;<span class="keyword">JSONObject</span>&gt; valueCallback);
-
-}
-</code></pre><p>公共接口一开始可以写在sdk的实现module中，代码写完后将该接口文件移到zeusPlugin中，将zeusPlugin打包成jar，提供给SDK module以provided形式依赖（只参与编译不参与打包），同时作为宿主的compile(可作为编译及打包),这样插件和宿主都能识别使用共同的接口，之后可以将sdkmodule中的相关公共接口代码注释或删除，并将接口的实现改成jar中的接口，宿主负责调用，插件负责实现，从而实现了SDK的热更新，注意这个接口要保证尽可能兼容到所有的业务功能，不然这个热更新就没什么意义了。</p>
-<p>然后再写实现公共接口的同时，增加静态类单例模式（为什么使用单例、有什么坑稍后再讲），<br>A/B两个平台的游戏SDK的业务实现:</p>
-<p>AGameAPI</p>
-<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AGameAPI</span> <span class="keyword">implements</span> <span class="title">IGameAPI</span> </span>{
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AGameAPI <span class="title">getAPI</span> <span class="params">()</span> </span>{
-        <span class="keyword">return</span> APIHolder.single;
-    }
-
-    <span class="function"><span class="keyword">public</span> <span class="title">AGameAPI</span> <span class="params">()</span> </span>{
-
-    }
-
-    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">APIHolder</span> </span>{
-        <span class="keyword">static</span> AGameAPI single = <span class="keyword">new</span> AGameAPI ();
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pay</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">logout</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-
-}
-</code></pre><p>BGameAPI</p>
-<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BGameAPI</span> <span class="keyword">implements</span> <span class="title">IGameAPI</span> </span>{
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AGameAPI <span class="title">getAPI</span> <span class="params">()</span> </span>{
-        <span class="keyword">return</span> BGameAPI.APIHolder.single;
-    }
-
-    <span class="function"><span class="keyword">public</span> <span class="title">BGameAPI</span> <span class="params">()</span> </span>{
-
-    }
-
-    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">APIHolder</span> </span>{
-        <span class="keyword">static</span> AGameAPI single = <span class="keyword">new</span> AGameAPI ();
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pay</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">logout</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-}
-</code></pre><p>下一步是基于策略者模式做一下包装,这个类就是策略者模式中装载类，根据业务选择装载不同的实例，这里我们伪代码实现加载渠道号，<br>apk二次打包写入渠道号实践<br><a href="http://tech.meituan.com/mt-apk-packaging.html" target="_blank" rel="external">美团Android自动化之旅—生成渠道包</a><br><a href="https://github.com/GavinCT/AndroidMultiChannelBuildTool" target="_blank" rel="external">AndroidMultiChannelBuildTool</a></p>
-<p>GameAPILoader</p>
-<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameAPILoader</span> <span class="keyword">implements</span> <span class="title">IGameAPI</span> </span>{
-
-    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">IGameAPI <span class="title">loadGameAPI</span> <span class="params">()</span> </span>{
-        <span class="keyword">switch</span> (readChannel ()) {
-            <span class="keyword">case</span> <span class="number">1</span>:
-                mAPI = AGameAPI.getAPI ();
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="number">2</span>:
-                mAPI = BGameAPI.getAPI ();
-                <span class="keyword">break</span>;
-        }
-
-        <span class="keyword">return</span> mAPI;
-    }
-
-    <span class="keyword">private</span> <span class="keyword">static</span> <span class="function"><span class="keyword">int</span> <span class="title">readChannel</span> <span class="params">()</span> </span>{
-        <span class="keyword">return</span> <span class="number">1</span>;
-    }
-
-    <span class="keyword">private</span> <span class="keyword">static</span> IGameAPI mAPI;
-
-
-    <span class="annotation">@Override</span>
-    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">init</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">login</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">pay</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">logout</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-
-    }
-}
-</code></pre><p>插件接口实现的最后一步，你猜是干嘛，没错就是策略者模式的真正的老大</p>
-<p>GameAPI</p>
-<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameAPI</span> <span class="keyword">implements</span> <span class="title">IGameAPI</span> </span>{
-    <span class="keyword">private</span> IGameAPI mAPI;
-
-    <span class="function"><span class="keyword">public</span> <span class="title">GameAPI</span> <span class="params">()</span> </span>{
-        mAPI = GameAPILoader.loadGameAPI ();
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-        mAPI.init (jsonObject, valueCallback);
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-        mAPI.login (jsonObject, valueCallback);
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pay</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-        mAPI.pay (jsonObject, valueCallback);
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">logout</span> <span class="params">(JSONObject jsonObject, ValueCallback&lt;JSONObject&gt; valueCallback)</span> </span>{
-        mAPI.logout (jsonObject, valueCallback);
-    }
-}
-</code></pre><p>以上代码全部都在SDK的module中，到这里我们的插件的接口实现部分就写完了，写到这里大牛们已经看懂了下一步要干啥了。没关系这篇文章不是给大神看的，你们一边玩去，写点高级的带带我就好。</p>
-<p>回到非业务的技术上来，现在我们新建一个application的module，不是默认app的module啊，这个application的module负责打包之前的SDK的module，以及配置assets中配置zeusplugin.meta中的内容，以供宿主识别版本和mainclass</p>
-<ul>
-<li><p>1、首先将插件的mainclass指定为你的class</p>
-<ul>
-<li><p>比如我这的meta配置改成，其中com.ym.game.sdk.GameAPI就是上文提到的接口的具体实现者</p>
-<pre><code>{
-    "<span class="attribute">name</span>": <span class="value"><span class="string">"zeusplugin_asset"</span></span>,
-    "<span class="attribute">minVersion</span>": <span class="value"><span class="string">"1"</span></span>,
-    "<span class="attribute">version</span>": <span class="value"><span class="string">"1"</span></span>,
-    "<span class="attribute">mainClass</span>": <span class="value"><span class="string">"com.ym.game.sdk.GameAPI"</span>
-</span>}
-</code></pre></li>
-</ul>
-</li>
-</ul>
-<p>使用zeus提供的aapt制定packageId打包跑起来<br>已知默认的app的packageId是0x7f，这里我们随便用一个不冲突的</p>
-<pre><code> //<span class="operator"><span class="keyword">start</span><span class="comment">-----插件相关-------------------</span>
-    aaptOptions.additionalParameters <span class="string">'--PLUG-resoure-        proguard'</span>, <span class="string">'--PLUG-resoure-id'</span>, <span class="string">'0x7d'</span>
-//<span class="keyword">end</span><span class="comment">-------插件相关-------------------</span></span>
-</code></pre><p>打包成apk之后拷贝到宿主，我这里就是默认的application的module app的assets下，把文件名改成ZeusPlugin项目中的PluginConfig类下制定的名字，比如zeusplugin_test.apk</p>
-<pre><code> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">String</span> PLUGIN_TEST = <span class="string">"zeusplugin_test"</span>;                             <span class="comment">//插件测试demo</span>
-    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">String</span> HOTFIX_TEST = <span class="string">"zeushotfix_test"</span>;                             <span class="comment">//热修复补丁测试demo</span>
-
-    <span class="comment">/**
-     * apk自带的插件的列表，每次添加内置插件的时候需要添加到这里，格式(pluginName,pluginVersion)
-     * pluginVersion一定要与插件中PLUGINWEB_MAINIFEST_FILE文件里的version保持一致。
-     * 对于插件还可以使用diff补丁的形式下载增量包，这样可以降低文件下载的大小。
-     */</span>
-    <span class="keyword">static</span> {
-        <span class="comment">//插件必须以PluginUtil.EXP_PLUG_PREFIX开头，否则不会识别为插件</span>
-        mDefaultList.put(PLUGIN_TEST, <span class="number">1</span>);
-        <span class="comment">//补丁必须以EXP_PLUG_HOT_FIX_PREFIX开头</span>
-        <span class="comment">//这里是演示如何使用，一般都不会内置热修复<span class="doctag"><span class="keyword">bug</span></span> fix插件，热修复插件都是网上下载，下载完成后执行安装方法</span>
-        <span class="comment">//然后启动的时候就自动会加载热修复的补丁，热修复补丁不支持运行时动态更新，必须软件重启后才能生效</span>
-        <span class="comment">//否则会出现未知异常，反正没试过，感兴趣可以试试</span>
-<span class="comment">//        mDefaultList.put(HOTFIX_TEST, 1);</span>
-    }
-</code></pre><p>   到这里热更新SDK基本做完了，下一步是怎么调用了，直接看代码：</p>
-<pre><code>String className = PluginManager.getPlugin <span class="params">(PluginConfig.PLUGIN_TEST)</span>.getPluginMeta <span class="params">()</span>
-                    .mainClass;
-    PluginManager.loadLastVersionPlugin <span class="params">(PluginConfig.PLUGIN_TEST)</span>;
-        try {
-                Class cl = PluginManager.mNowClassLoader.loadClass <span class="params">(className)</span>;
-                IGameAPI gameAPI = <span class="params">(IGameA<span class="literal">PI</span>)</span> cl.newInstance <span class="params">()</span>;
-
-                gameAPI.init <span class="params">(null, new ValueCallback&lt;JSONObject&gt; <span class="params">()</span> {
-                    @Override
-                    public void onReceiveValue <span class="params">(JSONObject value)</span> {
-
-                    }
-                })</span>;
-
-                gameAPI.login <span class="params">(null, new ValueCallback&lt;JSONObject&gt; <span class="params">()</span> {
-                    @Override
-                    public void onReceiveValue <span class="params">(JSONObject value)</span> {
-
-                    }
-                })</span>;
-            } catch <span class="params">(ClassNotFoundException e)</span> {
-                e.printStackTrace <span class="params">()</span>;
-            } catch <span class="params">(InstantiationException e)</span> {
-                e.printStackTrace <span class="params">()</span>;
-            } catch <span class="params">(IllegalAccessException e)</span> {
-                e.printStackTrace <span class="params">()</span>;
-            }
-</code></pre><p> 本博客源码地址:<a href="https://github.com/fanOfDemo/HotUpdateSDK" target="_blank" rel="external">HotUpdateSDK</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2016/07/07/andorid插件化研究/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="yiming">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://tc.sinaimg.cn/maxwidth.2048/tc.service.weibo.com/p/mmbiz_qpic_cn/1f005a6a2af0cfd626f3b5cefb3e4617.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="yiming">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="yiming" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/07/andorid插件化研究/" itemprop="url">
-                  andorid插件化研究
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2016-07-07T09:51:09+08:00">
-                Jul 7 2016
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/07/07/andorid插件化研究/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/07/andorid插件化研究/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一、<a href="https://github.com/DroidPluginTeam/DroidPlugin" target="_blank" rel="external">奇虎开源插件化框架（基于Hook PMS AMS的launcher思路）</a></p>
-<p><a href="https://github.com/tiann/understand-plugin-framework" target="_blank" rel="external">针对奇虎开源插件化框架的基础讲解Hook 静态代理，动态代理，PMS，AMS<br>源码及hook思路讲解 </a></p>
-<pre><code>优点：
-宿主插件完全分离，跨进程的沙箱环境，基于launcher的启动流程，通过欺骗系统的启动流程的思路启动插件apk，于系统来说宿主就是一个launcher，相对于代理的方式更可靠安全
-缺点：
-1、不支持插件的notifycation
-2、需要框架的使用者实现宿主和插件的路由协议，以便跨进程通讯
-</code></pre><p>二、<a href="https://github.com/singwhatiwanna/dynamic-load-apk" target="_blank" rel="external">百度的静态代理实现的动态加载（静态代理）</a></p>
-<pre><code>优点：易懂、上手简单、适合轻量级插件
-缺点：
-<span class="number">1</span>、插件代码需要支持<span class="keyword">that</span>语法以供宿主识别
-<span class="number">2</span>、不支持插件中的数据库
-<span class="number">3</span>、插件中<span class="keyword">that</span>语法在复杂的activity继承关系中难以维护
-<span class="number">4</span>、不支持activity和fragmentActivity以外的activity，手动增加其它activity的支持会造成大量的代理，额外增加大量内存消耗以及不可控性，不适合较大的插件
-</code></pre><p>三、<a href="https://github.com/houkx/android-pluginmgr" target="_blank" rel="external">利用代码生成机制动态生成代码的插件化方案（动态代理及动态代码生成）</a></p>
-<pre><code>原理和上面的静态代理类似，不同之处在于上面使用手动代理并加载插件中activity，此框架利用dexmaker框架实现了复制插件代码并在宿主中生成二进制的代码以实现插件化
-</code></pre><p>四、<a href="https://github.com/kaedea/android-dynamical-loading" target="_blank" rel="external">android-dynamical-loading</a><br>疑似来自B站的组件化下载及行为规范方案，插件化未完成（目前是实现了插件的下载和校验，以及尝试对插件和宿主制定统一约束和规范）</p>
-<pre><code>只做了基础的组件化方案，框架本身并不支持动态加载activity和<span class="keyword">service</span>等等，如框架作者所说，此框架适合设计自定义的组件化包，比如脱离android生命的类，无acitivty或<span class="keyword">service</span>的sdk等等，比如<span class="constant">B</span>站的播放器核心so包的频繁更新适合用于动态加载，话说回来，适不适合技术说了也没用啊，产品就要这么干也没办法
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1359,7 +1109,7 @@ android {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1459,7 +1209,7 @@ android {
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

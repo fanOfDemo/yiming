@@ -269,6 +269,276 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2015/11/27/Js与android webview遭遇过的坑/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="yiming">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://tc.sinaimg.cn/maxwidth.2048/tc.service.weibo.com/p/mmbiz_qpic_cn/1f005a6a2af0cfd626f3b5cefb3e4617.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="yiming">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="yiming" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/27/Js与android webview遭遇过的坑/" itemprop="url">
+                  Js与android webview遭遇过的坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-11-27T12:53:37+08:00">
+                Nov 27 2015
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/11/27/Js与android webview遭遇过的坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/27/Js与android webview遭遇过的坑/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Uncaught_TypeError:_Object_[object_Object]_has_no_method">Uncaught TypeError: Object [object Object] has no method</h1><h2 id="可能产生该情况有几种可能">可能产生该情况有几种可能</h2><h3 id="1、安全限制问题">1、安全限制问题</h3><p>如果只在4.2版本以上的机器出问题，那么就是系统处于安全限制的问题了。Android文档这样说的</p>
+<pre><code><span class="type">Caution</span>: <span class="type">If</span> you’ve <span class="type">set</span> your targetSdkVersion to <span class="number">17</span> <span class="keyword">or</span> higher, you must add the @<span class="type">JavascriptInterface</span> annotation to <span class="type">any</span> <span class="keyword">method</span> that you want available your web page code (the <span class="keyword">method</span> must also be public). <span class="type">If</span> you <span class="keyword">do</span> <span class="keyword">not</span> provide the annotation, then the <span class="keyword">method</span> will <span class="keyword">not</span> accessible by your web page <span class="keyword">when</span> running on <span class="type">Android</span> <span class="number">4</span>.<span class="number">2</span> <span class="keyword">or</span> higher.
+
+    中文大意为
+
+警告：如果你的程序目标平台是<span class="number">17</span>或者是更高，你必须要在暴露给网页可调用的方法（这个方法必须是公开的）加上@<span class="type">JavascriptInterface</span>注释。如果你不这样做的话，在<span class="number">4</span>.<span class="number">2</span>以以后的平台上，网页无法访问到你的方法。
+例：
+@<span class="type">JavascriptInterface</span>
+public <span class="type">void</span> testMothed(<span class="type">String</span> str) {
+}
+</code></pre><p> 解决方法</p>
+<p>将targetSdkVersion设置成17或更高，引入@JavascriptInterface注释<br>自己创建一个注释接口名字为@JavascriptInterface，然后将其引入。注意这个接口不能混淆。这种方式不推荐，大概在4.4之后有问题。<br>注，创建@JavascriptInterface代码</p>
+<h3 id="2、代码混淆问题">2、代码混淆问题</h3><p>如果在没有混淆的版本运行正常，在混淆后的版本的代码运行错误，并提示Uncaught TypeError: Object [object Object] has no method，那就是你没有做混淆例外处理。 在混淆文件加入类似这样的代码</p>
+<pre><code>-<span class="ruby">keepattributes *<span class="constant">Annotation</span>*
+</span>-<span class="ruby">keepclassmembers <span class="class"><span class="keyword">class</span> * {</span>
+</span>    @android.webkit.JavascriptInterface &lt;methods&gt;;
+}
+</code></pre><p>本人测试环境是android5.1 moto x 1085</p>
+<p>博文主要参考<br><a href="http://droidyue.com/blog/2014/09/20/interaction-between-java-and-javascript-in-android/" target="_blank" rel="external">http://droidyue.com/blog/2014/09/20/interaction-between-java-and-javascript-in-android/</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2015/11/17/换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="yiming">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://tc.sinaimg.cn/maxwidth.2048/tc.service.weibo.com/p/mmbiz_qpic_cn/1f005a6a2af0cfd626f3b5cefb3e4617.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="yiming">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="yiming" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/17/换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app/" itemprop="url">
+                  无聊写了个demo【混合了别人的第三方B站后导致代码混乱已停更】
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-11-17T23:54:48+08:00">
+                Nov 17 2015
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/11/17/换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/17/换了个公司，终于从劳碌的工作中解脱出来，于是一开心写了个app/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>  [简悦]  (<a href="https://github.com/fanOfDemo/jianyue" target="_blank" rel="external">https://github.com/fanOfDemo/jianyue</a>)</p>
+<p>数据使用的是聚合数据的免费API，之所以选择聚合是因为聚合最近有大量的API正在免费，方便后期扩展功能吧</p>
+<p>框架及基础功能完善后大概会提交了我们的装逼协会<a href="https://github.com/XXApple" target="_blank" rel="external">XXApple</a>中</p>
+<p>框架方面主要使用的都是比较流行但国内企业又尝试不多的框架</p>
+<p><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">rxjava</a><br><a href="https://github.com/square/retrofit" target="_blank" rel="external">retrofit2.0</a><br><a href="https://github.com/square/okhttp" target="_blank" rel="external">okhttp</a><br><a href="http://developer.android.com/" target="_blank" rel="external">design</a><br><a href="https://github.com/bumptech/glide" target="_blank" rel="external">glide</a><br><a href="https://github.com/square/leakcanary" target="_blank" rel="external">leakcanary</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2015/10/27/比swift的playgroundg更加强大的android代码即使预览功能/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -684,323 +954,6 @@ protected void onDestroy<span class="params">()</span> {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2015/07/27/如何有效避免fragment失去状态/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="yiming">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://tc.sinaimg.cn/maxwidth.2048/tc.service.weibo.com/p/mmbiz_qpic_cn/1f005a6a2af0cfd626f3b5cefb3e4617.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="yiming">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="yiming" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/27/如何有效避免fragment失去状态/" itemprop="url">
-                  如何有效避免fragment失去状态
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-07-27T10:30:41+08:00">
-                Jul 27 2015
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/07/27/如何有效避免fragment失去状态/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/27/如何有效避免fragment失去状态/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="如何有效避免fragment失去状态">如何有效避免fragment失去状态</h1><p>最近开发公司项目首页使用了<code>fragment</code>，在程序进入后台，<code>fragment</code>寄托的<code>activity</code>被后台杀死，再次进入恢复时无法恢复碎片<code>fragment</code>，导致<code>fragment</code>下的所有事件失效问题：</p>
-<ul>
-<li><p><strong>避免在<code>onResume</code>中执行<code>fragment</code>的提交操作，如果必须在<code>onResume</code>中执行，建议在<code>fragmentActivity</code>或者<code>actionbarActivity</code>或者<code>AppCompatActivity</code>下的<code>onPostResume</code>方法中执行<code>commit()</code>方法</strong></p>
-</li>
-<li><p><strong>如果当前activity中只有一个<code>fragment</code>，建议弃用<code>fragment</code>，直接将布局写在当前<code>activity</code>的<code>layout</code>下，从而避免API上的bug增加代码维护困难</strong></p>
-</li>
-</ul>
-<p>参考：<a href="http://blog.jobbole.com/66117/" target="_blank" rel="external">http://blog.jobbole.com/66117/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2015/07/23/Toolbar的高级使用/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="yiming">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://tc.sinaimg.cn/maxwidth.2048/tc.service.weibo.com/p/mmbiz_qpic_cn/1f005a6a2af0cfd626f3b5cefb3e4617.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="yiming">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="yiming" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/23/Toolbar的高级使用/" itemprop="url">
-                  Toolbar的高级使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-07-23T08:07:18+08:00">
-                Jul 23 2015
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/07/23/Toolbar的高级使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/23/Toolbar的高级使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Toolbar的高级使用">Toolbar的高级使用</h1><p>随着<code>android studio</code>的盛行，<code>eclipse</code>退出历史舞台，<code>material design</code>已日渐流行，本文简单介绍一下<code>toolbar</code>的基本使用方法</p>
-<p>下面是本人封装后的<code>toolbar</code>代码块<br>此处本人使用自定义的title，<code>setDisplayShowTitleEnabled</code>为<code>false</code>   ：</p>
-<pre><code>private void initToolbar<span class="params">()</span> {
-toolbar = <span class="params">(Toolbar)</span> findViewById<span class="params">(R.id.toolbar)</span>;
-<span class="keyword">if</span> <span class="params">(toolbar == null)</span>
-    return;
-title = <span class="params">(AppCompatTextView)</span> findViewById<span class="params">(R.id.title)</span>
-<span class="comment">//setup width of custom title to match in parent toolbar</span>
-toolbar.postDelayed<span class="params">(new Runnable<span class="params">()</span> {
-    @Override
-    public void run<span class="params">()</span> {
-        int maxWidth = toolbar.getWidth<span class="params">()</span>;
-        int titleWidth = title.getWidth<span class="params">()</span>;
-        int iconWidth = maxWidth - titleWidth;
-
-    if <span class="params">(iconWidth &gt; <span class="number">0</span>)</span> {
-        //icons <span class="params">(drawer, menu)</span> are on left and right side
-        int width = maxWidth - titleWidth * <span class="number">2</span>;
-        title.setMinimumWidth<span class="params">(width)</span>;
-        title.getLayoutParams<span class="params">()</span>.width = width;
-        }
-    }
-}, <span class="number">0</span>)</span>;
-toolbar.setTitle<span class="params">(null)</span>;
-setSupportActionBar<span class="params">(toolbar)</span>; getSupportActionBar<span class="params">()</span>.setDisplayShowHomeEnabled<span class="params">(<span class="literal">true</span>)</span>;    getSupportActionBar<span class="params">()</span>.setDisplayHomeAsUpEnabled<span class="params">(<span class="literal">true</span>)</span>; getSupportActionBar<span class="params">()</span>.setDisplayShowTitleEnabled<span class="params">(<span class="literal">false</span>)</span>;
-setNavigationIconColor<span class="params">(Color.WHITE, toolbar)</span>;
-toolbar.setNavigationOnClickListener<span class="params">(new View.OnClickListener<span class="params">()</span> {
-    @Override
-    public void onClick<span class="params">(View v)</span> {
-        onBackPressed<span class="params">()</span>;
-        }
-    })</span>;
-initColor<span class="params">()</span>;
-}
-</code></pre><p>initColor是一个恢复toolbar背景颜色的代码，主要用于在toolbar背景色透明度变化的界面下回到其他界面用于恢复</p>
-<pre><code>private void initColor<span class="params">()</span> {
-    <span class="keyword">if</span> <span class="params">(toolbar != null)</span> {
-        ColorDrawable background = <span class="params">(ColorDrawable)</span> toolbar.getBackground<span class="params">()</span>;
-        background.setAlpha<span class="params">(<span class="number">255</span>)</span>;
-    }
-}
-</code></pre><p>这段代码看懂了，也知道怎么动态改变toolbar的背景色了吧</p>
-<p>上文中AppCompatTextView需要在  <code>compile &#39;com.android.support:appcompat-v7:22.1.1&#39;</code> 即google自家库<code>appcompat-v7</code>22.0.0以上版本，此版本下<code>ActionBarActivity</code> 已过时，使用<code>AppCompatActivity</code>替代可以很好的兼容使用<code>Toolbar</code></p>
-<p>最后贴出本人使用的toolbar布局文件：</p>
-<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
-&lt;android.support.v7.widget.Toolbar
-<span class="variable">style=</span><span class="string">"@style/ToolBarStyle"</span>     xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
-android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
-android:<span class="variable">layout_height=</span><span class="string">"?attr/actionBarSize"</span>
-android:<span class="variable">background=</span><span class="string">"@color/green"</span>
-android:<span class="variable">minHeight=</span><span class="string">"?attr/actionBarSize"</span>
-&gt;
-
-&lt;android.support.v7.widget.AppCompatTextView
-    android:<span class="variable">id=</span><span class="string">"@+id/title"</span>
-    android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_gravity=</span><span class="string">"center"</span>
-    android:<span class="variable">gravity=</span><span class="string">"center"</span>
-    android:<span class="variable">text=</span><span class="string">"@string/app_name"</span>
-    android:<span class="variable">textColor=</span><span class="string">"@color/white"</span>
-    android:<span class="variable">textSize=</span><span class="string">"@dimen/text_navigation"</span>/&gt;
-&lt;/android.support.v7.widget.Toolbar&gt;
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1046,7 +999,7 @@ android:<span class="variable">minHeight=</span><span class="string">"?attr/acti
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1146,7 +1099,7 @@ android:<span class="variable">minHeight=</span><span class="string">"?attr/acti
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
