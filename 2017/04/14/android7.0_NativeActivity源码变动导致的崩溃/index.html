@@ -84,15 +84,25 @@
 
 
 
-<meta name="description" content="恶补基础知识中...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yiming">
-<meta property="og:url" content="http://fanofdemo.github.io/archives/page/2/index.html">
+<meta name="description" content="最近遇到了一个插件化框架在android7.0崩溃的问题，
+报错内容
+b cannot cast to BaseDexClassloader
+其中b是项目中的自定义classloader，继承自Classloader，测试发现android7.0未出现相关问题，有部分游戏在同一台7.0设备上并未出现异常，经过反编译不同游戏发现，只有游戏主activity继承自NatieActivity才会在7.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NativeActivity在API24源码改动导致插件化不兼容问题">
+<meta property="og:url" content="http://fanofdemo.github.io/2017/04/14/android7.0_NativeActivity源码变动导致的崩溃/index.html">
 <meta property="og:site_name" content="yiming">
-<meta property="og:description" content="恶补基础知识中...">
+<meta property="og:description" content="最近遇到了一个插件化框架在android7.0崩溃的问题，
+报错内容
+b cannot cast to BaseDexClassloader
+其中b是项目中的自定义classloader，继承自Classloader，测试发现android7.0未出现相关问题，有部分游戏在同一台7.0设备上并未出现异常，经过反编译不同游戏发现，只有游戏主activity继承自NatieActivity才会在7.0">
+<meta property="og:updated_time" content="2017-04-14T09:01:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yiming">
-<meta name="twitter:description" content="恶补基础知识中...">
+<meta name="twitter:title" content="NativeActivity在API24源码改动导致插件化不兼容问题">
+<meta name="twitter:description" content="最近遇到了一个插件化框架在android7.0崩溃的问题，
+报错内容
+b cannot cast to BaseDexClassloader
+其中b是项目中的自定义classloader，继承自Classloader，测试发现android7.0未出现相关问题，有部分游戏在同一台7.0设备上并未出现异常，经过反编译不同游戏发现，只有游戏主activity继承自NatieActivity才会在7.0">
 
 
 
@@ -120,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://fanofdemo.github.io/archives/page/2/"/>
+  <link rel="canonical" href="http://fanofdemo.github.io/2017/04/14/android7.0_NativeActivity源码变动导致的崩溃/"/>
 
 
 
 
 
-  <title> 归档 | yiming </title>
+  <title> NativeActivity在API24源码改动导致插件化不兼容问题 | yiming </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -147,7 +157,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,218 +267,197 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 24 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2017/04/14/android7.0_NativeActivity源码变动导致的崩溃/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="yiming">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://tc.sinaimg.cn/maxwidth.2048/tc.service.weibo.com/p/mmbiz_qpic_cn/1f005a6a2af0cfd626f3b5cefb3e4617.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="yiming">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="yiming" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                NativeActivity在API24源码改动导致插件化不兼容问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2017-04-14T16:51:57+08:00">
+                Apr 14 2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/04/14/android7.0_NativeActivity源码变动导致的崩溃/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/14/android7.0_NativeActivity源码变动导致的崩溃/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <p>最近遇到了一个插件化框架在android7.0崩溃的问题，</p>
+<p>报错内容</p>
+<pre><code><span class="tag">b</span> cannot cast to BaseDexClassloader
+</code></pre><p>其中b是项目中的自定义classloader，继承自Classloader，<br>测试发现android7.0未出现相关问题，有部分游戏在同一台7.0设备上并未出现异常，经过反编译不同游戏发现，只有游戏主activity继承自NatieActivity才会在7.0崩溃，通过对比api23/24的NativeActivity的源码发现</p>
+<p>在onCreate中方法中API24有细微改动</p>
+<pre><code><span class="keyword">BaseDexClassLoader </span>classLoader = (<span class="keyword">BaseDexClassLoader) </span>getClassLoader()<span class="comment">;</span>
+    <span class="keyword">String </span>path = classLoader.findLibrary(libname)<span class="comment">;</span>
+</code></pre><p>由此基本定位崩溃的原因来自这段代码</p>
+<p>为此，为了兼容使用NatvieActivity的游戏在API24的系统设备上兼容，<br>我们将之前的b类改成了继承DexClassloader，成功解决了这个兼容性的问题。</p>
+<p>比较麻烦的是，这个改动在宿主中依赖了，没有办法动态更新，只能重新打包发布了</p>
+
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward.png" alt="yiming WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.png" alt="yiming Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/02/使用System-nanoTime测试代码执行时间/" itemprop="url">
-              
-                <span itemprop="name">使用System.nanoTime测试代码执行时间</span>
-              
-            </a>
-        
-      </h1>
+    <footer class="post-footer">
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-02T23:09:35+08:00"
-              content="Nov 2 2016" >
-          11-02
-        </time>
-      </div>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/14/内存泄漏解决笔记/" rel="next" title="内存泄漏解决笔记">
+                <i class="fa fa-chevron-left"></i> 内存泄漏解决笔记
+              </a>
+            
+          </div>
 
-    </header>
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2017/04/14/android7.0_NativeActivity源码变动导致的崩溃/"
+     data-title="NativeActivity在API24源码改动导致插件化不兼容问题"
+     data-content=""
+     data-url="http://fanofdemo.github.io/2017/04/14/android7.0_NativeActivity源码变动导致的崩溃/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
       
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/10/21/热更新SDK的设计与实践/" itemprop="url">
-              
-                <span itemprop="name">热更新SDK的设计与实践</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-21T23:45:22+08:00"
-              content="Oct 21 2016" >
-          10-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/07/andorid插件化研究/" itemprop="url">
-              
-                <span itemprop="name">andorid插件化研究</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-07T09:51:09+08:00"
-              content="Jul 7 2016" >
-          07-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/06/15/android中常用的设计模式讲解（二）——解密各种单例模式/" itemprop="url">
-              
-                <span itemprop="name">android中常用的设计模式讲解（二）——解密各种单例模式</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-15T10:58:11+08:00"
-              content="Jun 15 2016" >
-          06-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/06/14/android中常用的设计模式讲解（一）——策略者模式/" itemprop="url">
-              
-                <span itemprop="name">android中常用的设计模式讲解（一）——策略者模式</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-14T22:57:54+08:00"
-              content="Jun 14 2016" >
-          06-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/3/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
+    </div>
+  </div>
 
 
           </div>
@@ -476,6 +465,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/14/android7.0_NativeActivity源码变动导致的崩溃/"
+           data-title="NativeActivity在API24源码改动导致插件化不兼容问题" data-url="http://fanofdemo.github.io/2017/04/14/android7.0_NativeActivity源码变动导致的崩溃/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -697,11 +694,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   
