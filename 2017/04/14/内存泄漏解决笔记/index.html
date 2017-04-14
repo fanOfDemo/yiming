@@ -84,16 +84,31 @@
 
 
 
-<meta name="description" content="恶补基础知识中...">
+<meta name="description" content="1、解决了webview的内存泄露
+ViewParent parent = contetentWebView.getParent();
+           if (parent != null) {
+               ((ViewGroup) parent).removeView(webView);
+           }
+           webView.stopLoadin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="APP插件化模块解耦三">
-<meta property="og:url" content="http://fanofdemo.github.io/2016/12/16/APP插件化模块解耦三/index.html">
+<meta property="og:title" content="内存泄漏解决笔记">
+<meta property="og:url" content="http://fanofdemo.github.io/2017/04/14/内存泄漏解决笔记/index.html">
 <meta property="og:site_name" content="yiming">
-<meta property="og:description" content="恶补基础知识中...">
-<meta property="og:updated_time" content="2016-12-16T15:01:57.000Z">
+<meta property="og:description" content="1、解决了webview的内存泄露
+ViewParent parent = contetentWebView.getParent();
+           if (parent != null) {
+               ((ViewGroup) parent).removeView(webView);
+           }
+           webView.stopLoadin">
+<meta property="og:updated_time" content="2017-04-14T08:16:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="APP插件化模块解耦三">
-<meta name="twitter:description" content="恶补基础知识中...">
+<meta name="twitter:title" content="内存泄漏解决笔记">
+<meta name="twitter:description" content="1、解决了webview的内存泄露
+ViewParent parent = contetentWebView.getParent();
+           if (parent != null) {
+               ((ViewGroup) parent).removeView(webView);
+           }
+           webView.stopLoadin">
 
 
 
@@ -121,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://fanofdemo.github.io/2016/12/16/APP插件化模块解耦三/"/>
+  <link rel="canonical" href="http://fanofdemo.github.io/2017/04/14/内存泄漏解决笔记/"/>
 
 
 
 
 
-  <title> APP插件化模块解耦三 | yiming </title>
+  <title> 内存泄漏解决笔记 | yiming </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -268,7 +283,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2016/12/16/APP插件化模块解耦三/">
+  <link itemprop="mainEntityOfPage" href="http://fanofdemo.github.io/2017/04/14/内存泄漏解决笔记/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="yiming">
@@ -292,7 +307,7 @@
             
             
               
-                APP插件化模块解耦三
+                内存泄漏解决笔记
               
             
           </h1>
@@ -305,8 +320,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2016-12-16T23:01:57+08:00">
-                Dec 16 2016
+              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2017-04-14T16:13:16+08:00">
+                Apr 14 2017
               </time>
             
 
@@ -321,8 +336,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/16/APP插件化模块解耦三/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/16/APP插件化模块解耦三/" itemprop="commentCount"></span>
+                <a href="/2017/04/14/内存泄漏解决笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/14/内存泄漏解决笔记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -348,7 +363,54 @@
       
 
       
-        
+        <p>1、解决了webview的内存泄露</p>
+<pre><code>ViewParent parent = contetentWebView.getParent<span class="params">()</span>;
+           <span class="keyword">if</span> <span class="params">(parent != null)</span> {
+               <span class="params">(<span class="params">(ViewGroup)</span> parent)</span>.removeView<span class="params">(webView)</span>;
+           }
+           webView.stopLoading<span class="params">()</span>;
+           <span class="comment">// 退出时调用此方法，移除绑定的服务，否则某些特定系统会报错</span>
+           webView.removeJavascriptInterface<span class="params">(<span class="string">"xxx"</span>)</span>;
+           webView.getSettings<span class="params">()</span>.setJavaScriptEnabled<span class="params">(<span class="literal">false</span>)</span>;
+           webView.destroyDrawingCache<span class="params">()</span>;
+           webView.clearHistory<span class="params">()</span>;
+           webView.removeAllViews<span class="params">()</span>;
+           try {
+               contetentWebView.destroy<span class="params">()</span>;
+           } catch <span class="params">(Throwable ex)</span> {
+
+           }
+</code></pre><p>2、解决了ConnectivityManager的内存泄露，类似的泄露还有WifiManager</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isNetworkAvailable</span><span class="params">(Context ctx)</span> </span>{
+      <span class="keyword">try</span> {
+          <span class="comment">//user activity to get ConnectivityManager will cause memory leak,so here use ApplicationContext instead</span>
+          <span class="keyword">if</span> (ctx <span class="keyword">instanceof</span> Activity) {
+              ctx = ctx.getApplicationContext();
+          }
+          ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+          NetworkInfo info = cm.getActiveNetworkInfo();
+          <span class="keyword">return</span> (info != <span class="keyword">null</span> &amp;&amp; info.isAvailable());
+      } <span class="keyword">catch</span> (Exception e) {
+          e.printStackTrace();
+          <span class="keyword">return</span> <span class="keyword">false</span>;
+      }
+  }
+</code></pre><p>3、内存静态类单例 导致的内存泄露，暂未解决</p>
+<pre><code><span class="comment">/**
+ * JVM内部的机制能够保证当一个类被加载的时候，这个类的加载过程是线程互斥的。
+ * 这样当我们第一次调用getInstance的时候，JVM能够帮我们保证instance只被创建一次，并且会保证把赋值给instance的内存初始化完毕。
+ * 测试发现，single被装载到jvm后，无法被GC回收，此处会造成内存泄露，因为游戏在运行的任何时候都可能调当前类的实例，
+ * 目前还没想到好的办法释放这个内存
+ */</span>
+
+ <span class="keyword">public</span> <span class="keyword">static</span> A getInstance() {
+      <span class="keyword">return</span> AAPIHolder.single;
+  }
+
+  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">AAPIHolder</span></span>{
+      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> A single = <span class="keyword">new</span> A ();
+  }
+</code></pre>
       
     </div>
 
@@ -395,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/13/APP插件化模块解耦二/" rel="next" title="APP插件化模块解耦二">
-                <i class="fa fa-chevron-left"></i> APP插件化模块解耦二
+              <a href="/2017/01/06/APP插件化模块解耦三/" rel="next" title="android插件化研究与实践">
+                <i class="fa fa-chevron-left"></i> android插件化研究与实践
               </a>
             
           </div>
@@ -404,10 +466,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/06/android插件化研究与实践/" rel="prev" title="android插件化研究与实践">
-                android插件化研究与实践 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -422,10 +480,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/12/16/APP插件化模块解耦三/"
-     data-title="APP插件化模块解耦三"
+        <div class="ds-share flat" data-thread-key="2017/04/14/内存泄漏解决笔记/"
+     data-title="内存泄漏解决笔记"
      data-content=""
-     data-url="http://fanofdemo.github.io/2016/12/16/APP插件化模块解耦三/">
+     data-url="http://fanofdemo.github.io/2017/04/14/内存泄漏解决笔记/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -452,8 +510,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/16/APP插件化模块解耦三/"
-           data-title="APP插件化模块解耦三" data-url="http://fanofdemo.github.io/2016/12/16/APP插件化模块解耦三/">
+      <div class="ds-thread" data-thread-key="2017/04/14/内存泄漏解决笔记/"
+           data-title="内存泄漏解决笔记" data-url="http://fanofdemo.github.io/2017/04/14/内存泄漏解决笔记/">
       </div>
     
   </div>
