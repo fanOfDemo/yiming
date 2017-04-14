@@ -357,7 +357,7 @@
             <p>最近遇到了一个插件化框架在android7.0崩溃的问题，</p>
 <p>报错内容</p>
 <pre><code><span class="tag">b</span> cannot cast to BaseDexClassloader
-</code></pre><p>其中b是项目中的自定义classloader，继承自Classloader，<br>测试发现android7.0未出现相关问题，有部分游戏在同一台7.0设备上并未出现异常，经过反编译不同游戏发现，只有游戏主activity继承自NatieActivity才会在7.0崩溃，通过对比api23/24的NativeActivity的源码发现</p>
+</code></pre><p>其中b是项目中的自定义classloader，继承自Classloader，<br>测试发现android6.0未出现相关问题，有部分游戏在同一台7.0设备上并未出现异常，经过反编译不同游戏发现，只有游戏主activity继承自NatieActivity才会在7.0崩溃，通过对比api23/24的NativeActivity的源码发现</p>
 <p>在onCreate中方法中API24有细微改动</p>
 <pre><code><span class="keyword">BaseDexClassLoader </span>classLoader = (<span class="keyword">BaseDexClassLoader) </span>getClassLoader()<span class="comment">;</span>
     <span class="keyword">String </span>path = classLoader.findLibrary(libname)<span class="comment">;</span>
@@ -1150,7 +1150,7 @@ android {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
