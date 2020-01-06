@@ -2,7 +2,7 @@
   "name": "myblogapp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://wengyiming.cn/",
+  "homepage": "https://fanOfDemo.github.io/",
   "dependencies": {
     "@babel/core": "7.7.4",
     "@svgr/webpack": "4.3.3",
