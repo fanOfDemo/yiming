@@ -1,4 +1,9 @@
-'use strict';
+/*
+ * @Description: 
+ * @Author: wengyiming
+ * @Date: 2020-01-06 19:20:50
+ */
+
 
 const path = require('path');
 const fs = require('fs');
