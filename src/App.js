@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/*
+ * @Description:
+ * @Author: wengyiming
+ * @Date: 2020-01-06 13:46:48
+ */
+import React, { Component } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const routes = [
+  { path: "/", component: Home },
+  { path: "/about", component: About }
+];
+
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          {routes.map((page, index) =>
+            page.component ? (
+              <Route
+                key={index}
+                exact
+                path={page.path}
+                component={page.component}
+              />
+            ) : (
+                ""
+              )
+          )}
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
