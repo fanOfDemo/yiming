@@ -1,7 +1,19 @@
 import React from "react";
+import FishChart from '../component/FishChart';
+import ProductChart from "../component/ProductChart";
 class Home extends React.Component {
+  componentDidMount(){
+    
+  }
+
+  
   render() {
-    return <h1>Hello Home</h1>;
+    return (
+      <div>
+        <FishChart />
+        <ProductChart />
+      </div>
+    );
   }
 }
 
