@@ -1,6 +1,7 @@
 import React from "react";
 import FishChart from '../component/FishChart';
 import ProductChart from "../component/ProductChart";
+import HelloTypeScript from "../pages/HelloTypeScript.tsx"
 class Home extends React.Component {
   componentDidMount(){
     
@@ -12,6 +13,8 @@ class Home extends React.Component {
       <div>
         <FishChart />
         <ProductChart />
+        <HelloTypeScript/>
+        
       </div>
     );
   }

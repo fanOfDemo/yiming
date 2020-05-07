@@ -7,11 +7,14 @@ import React, { Component } from "react";
 import { HashRouter, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import HelloTypeScript from "./pages/HelloTypeScript.tsx";
+
 import "./App.css";
 
 const routes = [
   { path: "/", component: Home },
-  { path: "/about", component: About }
+  { path: "/about", component: About },
+  { path: "/ty", component: HelloTypeScript },
 ];
 
 class App extends Component {
